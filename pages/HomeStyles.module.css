@@ -1,0 +1,94 @@
+  /* Header styles */
+  .header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .search_form {
+    display: flex;
+  }
+  
+  .search_input {
+    flex: 1;
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .search_input:focus {
+    outline: none;
+  }
+  
+  .search_form button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  /* Main section styles */
+  .main {
+    padding: 20px;
+  }
+  
+  .h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .resultsList {
+    list-style-type: none;
+  }
+  
+  .resultItem {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .resultItem img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+  }
+  
+  .resultItem h3 {
+    font-size: 18px;
+  }
+
+  .service_description {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .service_description div {
+    margin-left: 20px;
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .service_image {
+    border-radius: 20px;
+    max-width: 800px;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Footer styles */
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+  }
