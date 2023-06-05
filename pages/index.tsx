@@ -8,8 +8,13 @@ export default function Home() {
     const router = useRouter();
     const [name, setName] = useState<string>("");
 
-    function search() {
-        name && router.push(`/search?q=${name}`);
+    function search(e: any) {
+        e.preventDefault();
+        if(name.trim() == "") {
+            alert("Name must not be empty!");
+            return;
+        }
+        router.push(`/search/${name}`);
     }
 
     return (
@@ -21,12 +26,12 @@ export default function Home() {
             <h1>People Search</h1>
             <form className={styles.search_form} action="#">
             <input type="text" className={styles.search_input} value={name} onChange={(e:any) => setName(e.target.value)} placeholder="Search your teacher..." />
-            <button type="submit" onClick={search}>Search</button>
+            <button type="submit" onClick={(e: any) => search(e)}>Search</button>
             </form>
         </header>
         <main className={styles.main}>
             <section className={styles.service_description}>
-                <img className={styles.service_image} src='/photos/teacherWithStudent.jpg'alt="A teacher with her student"/>
+                <img className={styles.service_image} src='/photos/teacherWithStudent.jpg' alt="A teacher with her student"/>
                 <div>
                     <h2>
                         What is this for?
