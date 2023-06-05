@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 import { useState } from "react";
 import styles from "./HomeStyles.module.css"
 import Image from "next/legacy/image";
+import Head from "next/head";
 
 export default function Home() {
     const router = useRouter();
@@ -13,6 +14,9 @@ export default function Home() {
 
     return (
     <>
+    <Head>
+        <title>Know ur teacher - home</title>
+    </Head>
         <header className={styles.header}>
             <h1>People Search</h1>
             <form className={styles.search_form} action="#">
