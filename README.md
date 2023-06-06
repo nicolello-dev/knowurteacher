@@ -1,38 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Know ur teacher
 
-## Getting Started
+[https://knowurteacher.com](https://www.knowurteacher.com)
 
-First, run the development server:
+A website where you can chat about your teachers to discuss about how to better perform in an exa.
+
+Does your teacher prefer concise responses, technical terms, or would they prefer a more general discourse?
+
+## For developers
+
+This project makes use of various frameworks:
+
+- NextJS, a frontend framework developed by Vercel
+- Firebase*, used for managing credentials
+- RDS*, an AWS database service. Using PostgreSQL
+
+<sup>* will be added later</sup>
+
+## How to run
+
+To run the development server, run
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+And open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+After you've ran the code on the development server, try building it with
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+npm run build
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+And, after it's done compiling, if it doesn't have any errors, run
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm run start
+```
 
-## Learn More
+And open [http://localhost:3000](http://localhost:3000) to test it in production mode.
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Contributions are very much welcome! You can open an issue on the relative page, or directly send a pull request.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Please respect the PR and issue templates, or, if strictly necessary, try to follow them as much as possible.
 
-## Deploy on Vercel
+## Sponsor
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You can sponsor the project by donating on my Paypal at my email, nicolamigone179@gmail.com
