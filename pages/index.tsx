@@ -5,6 +5,7 @@ import Image from "next/legacy/image";
 import Head from "next/head";
 
 export default function Home() {
+    const loggedIn = false;
     const router = useRouter();
     const [name, setName] = useState<string>("");
 
@@ -19,36 +20,70 @@ export default function Home() {
 
     return (
     <>
-    <Head>
-        <title>Know ur teacher - home</title>
-    </Head>
-        <header className={styles.header}>
-            <h1>People Search</h1>
-            <form className={styles.search_form} action="#">
-            <input type="text" className={styles.search_input} value={name} onChange={(e:any) => setName(e.target.value)} placeholder="Search your teacher..." />
-            <button type="submit" onClick={(e: any) => search(e)}>Search</button>
-            </form>
-        </header>
-        <main className={styles.main}>
-            <section className={styles.service_description}>
-                <img className={styles.service_image} src='/photos/teacherWithStudent.jpg' alt="A teacher with her student"/>
-                <div>
-                    <h2>
-                        What is this for?
-                    </h2>
-                    <p>
-                        <a href="https://knowurteacher.com">knowurteacher.com</a> is a service to get to know how to better prepare your essays and speeches for your teachers.
-                        <br/>
-                        For example, you might want to know if your teacher prefers you to use very precise terminology,
-                        if they would like you to space as much as possible starting from their question,
-                        or if they would prefer an interview-like exam, with short and concise answers.
-                    </p>
-                </div>
-            </section>
-        </main>
-        <footer className={styles.footer}>
-            <p>Made with &lt;3 by Ilaria. This website is <a href="https://github.com/ilariiiiia/knowurteacher">open source</a></p>
-        </footer>
+      <header className="bg-primary text-white text-center py-5">
+        <h1 className="display-4">knowurteacher.com</h1>
+        <p className="md-4">Fine tune your studying technique and study less for a better grade, based on your teacher</p>
+      </header>
+
+      <main className="container mt-5">
+        <h2 className="text-center mb-4">
+            Search your teacher
+        </h2>
+        <div className="input-group mb-3">
+        <input type="text" className="form-control" aria-label="" aria-describedby="basic-addon1" placeholder="ex: John Doe"/>
+        <div className="input-group-prepend">
+            <button className="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+        </div>
+        <h2 className="text-center mb-4">More content!</h2>
+
+        <div className="card mb-3">
+          <div className="row g-0">
+            <div className="col-md-4">
+              <img src="content1.jpg" className="card-img" alt="Content 1" />
+            </div>
+            <div className="col-md-8">
+              <div className="card-body">
+                <h5 className="card-title">Study Guides</h5>
+                <p className="card-text">Access comprehensive study guides for a wide range of subjects.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="card mb-3">
+          <div className="row g-0">
+            <div className="col-md-4">
+              <img src="content2.jpg" className="card-img" alt="Content 2" />
+            </div>
+            <div className="col-md-8">
+              <div className="card-body">
+                <h5 className="card-title">Practice Exams</h5>
+                <p className="card-text">Take practice exams to test your knowledge and improve your performance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="card mb-3">
+          <div className="row g-0">
+            <div className="col-md-4">
+              <img src="content3.jpg" className="card-img" alt="Content 3" />
+            </div>
+            <div className="col-md-8">
+              <div className="card-body">
+                <h5 className="card-title">Video Tutorials</h5>
+                <p className="card-text">Watch video tutorials to grasp complex concepts in an engaging way.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer className="bg-dark text-white text-center py-3 mt-5">
+        <p>Made with &lt;3 by <a href="https://github.com/ilariiiiia" target="_blank">Ilaria</a></p>
+        <p>We&apos;re open source! Check out the repo or help <a href="https://github.com/ilariiiiia/knowurteacher" target="_blank">here</a></p>
+      </footer>
     </>
   )
 }
