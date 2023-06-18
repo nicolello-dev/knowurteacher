@@ -1,16 +1,12 @@
 import { useRouter } from "next/router"
 import { useState } from "react";
-import styles from "./HomeStyles.module.css"
-import Image from "next/legacy/image";
-import Head from "next/head";
 
 export default function Home() {
     const loggedIn = false;
     const router = useRouter();
     const [name, setName] = useState<string>("");
 
-    function search(e: any) {
-        e.preventDefault();
+    function search() {
         if(name.trim() == "") {
             alert("Name must not be empty!");
             return;
@@ -30,9 +26,9 @@ export default function Home() {
             Search your teacher
         </h2>
         <div className="input-group mb-3">
-        <input type="text" className="form-control" aria-label="" aria-describedby="basic-addon1" placeholder="ex: John Doe"/>
+        <input type="text" className="form-control" aria-label="" aria-describedby="basic-addon1" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
         <div className="input-group-prepend">
-            <button className="btn btn-outline-secondary" type="button">Search</button>
+            <button className="btn btn-outline-secondary" type="button" onClick={search}>Search</button>
         </div>
         </div>
         <h2 className="text-center mb-4">More content!</h2>
