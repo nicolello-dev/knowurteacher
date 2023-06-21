@@ -60,7 +60,7 @@
 }
 
 .thirdSection h3 {
-  margin: auto 0px;
+  margin: auto auto;
   font-size: xx-large;
   color: white;
 }
@@ -95,4 +95,7 @@
 
 .footer {
   padding: 20px;
+  background-color: #432e59;
+  color: white;
+  text-align: center;
 }

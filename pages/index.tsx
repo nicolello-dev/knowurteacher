@@ -93,7 +93,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <footer className={`bg-dark text-center text-white ${homeStyles.footer}`}>
+      <footer className={homeStyles.footer}>
         <p>
           Made with &lt;3. <a href="github.com/ilariiiiia/knowurteacher">We&apos;re open source!</a>
         </p>
