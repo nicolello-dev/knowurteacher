@@ -1,0 +1,94 @@
+.initialSection {
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: #DEC9E9;
+  padding: 100px 20px;
+}
+
+
+.initialSection > * {
+  text-align: center;
+  width: 40%;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.initialSection > div {
+  aspect-ratio: 1/1;
+  position: relative;
+}
+
+.initialSection > svg {
+  color: #DEC9E9;
+}
+
+.secondSection {
+  color: black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #DEC9E9;
+  padding: 100px 20px;
+  font-family: 'Gloock';
+}
+
+.secondSection p {
+  font-size: 24px;
+  margin: 25px 0px;
+}
+
+.secondSection input {
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+.thirdSection {
+  height: 100vh;
+  max-height: 800px;
+  background: linear-gradient(to top, #A06CD5CC, #A06CD5CC), url(/photos/newspapers.jpg) no-repeat top center;
+  background-size: cover;
+  background-position: center;
+  background-color: #DEC9E9;
+  opacity: 80%;
+  text-align: center;
+  display: flex;
+}
+
+.thirdSection h3 {
+  margin: auto 0px;
+  font-size: xx-large;
+  color: white;
+}
+
+.fourthSection {
+  background-color: #A06CD5;
+  padding: 100px 20px;
+}
+
+.fourthSection h3 {
+  font-size: 48px;
+  margin-left: 30px;
+}
+
+.faqWrapper {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.faqWrapper > div {
+  width: 40%;
+  min-width: 250px;
+  margin: 30px 10px;
+}
+
+.footer {
+  padding: 20px;
+}

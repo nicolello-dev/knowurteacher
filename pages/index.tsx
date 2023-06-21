@@ -1,84 +1,102 @@
+import Image from "next/image";
 import { useRouter } from "next/router"
 import { useState } from "react";
+import homeStyles from "@/styles/HomeStyles.module.css";
 
 export default function Home() {
-    const loggedIn = false;
     const router = useRouter();
     const [name, setName] = useState<string>("");
 
     function search() {
         if(name.trim() == "") {
             alert("Name must not be empty!");
-            return;
+            return false;
         }
         router.push(`/search/${name}`);
+        return false;
     }
 
     return (
     <>
-      <header className="bg-primary text-white text-center py-5">
-        <h1 className="display-4">knowurteacher.com</h1>
-        <p className="md-4">Fine tune your studying technique and study less for a better grade, based on your teacher</p>
-      </header>
-
-      <main className="container mt-5">
-        <h2 className="text-center mb-4">
-            Search your teacher
-        </h2>
-        <div className="input-group mb-3">
-        <input type="text" className="form-control" aria-label="" aria-describedby="basic-addon1" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
-        <div className="input-group-prepend">
-            <button className="btn btn-outline-secondary" type="button" onClick={search}>Search</button>
+      <section className={`hero-unit ${homeStyles.initialSection}`}>
+        <h1>
+          KNOWURTEACHER
+        </h1>
+        <div>
+          <Image src='/logo.svg' alt='logo' fill={true}/>
         </div>
-        </div>
-        <h2 className="text-center mb-4">More content!</h2>
-
-        <div className="card mb-3">
-          <div className="row g-0">
-            <div className="col-md-4">
-              <img src="content1.jpg" className="card-img" alt="Content 1" />
-            </div>
-            <div className="col-md-8">
-              <div className="card-body">
-                <h5 className="card-title">Study Guides</h5>
-                <p className="card-text">Access comprehensive study guides for a wide range of subjects.</p>
+      </section>
+      <section className={homeStyles.secondSection}>
+        <div>
+          <h1>
+            Empower your education
+          </h1>
+          <p>
+          Unveil the hidden gems of the teaching world and help your peers make informed choices for a better academic experience!
+          With KnowUrTeacher, you can rate your teachers, share reviews, and prep-up for upcoming exams.
+          </p>
+          <h3>
+            Search your teacher:
+          </h3>
+          <form onSubmit={(e: any) => {e.preventDefault(); search()}}>
+            <div className="input-group mb-3">
+              <input type="text" className="form-control" aria-label="" aria-describedby="basic-addon1" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
+              <div className="input-group-prepend">
+                  <button className="btn btn-outline-secondary" type="button" onClick={search}>Search</button>
               </div>
             </div>
+          </form>
+        </div>
+      </section>
+      <section className={homeStyles.thirdSection}>
+        <h3>
+          &quot;Education is the passport for the future, for tomorrow belongs to those who prepare for it today.&quot;
+        </h3>
+      </section>
+      <section className={homeStyles.fourthSection}>
+        <h3>
+          FAQ
+        </h3>
+        <div className={homeStyles.faqWrapper}>
+          <div>
+            <h5>
+              How do I rate a teacher?
+            </h5>
+            <p>
+              Simply search the name of your teacher, then leave a review based on your experiences with them.
+            </p>
+          </div>
+          <div>
+            <h5>
+              Is my review anonymous?
+            </h5>
+            <p>
+              Yes! Nobody can see who wrote a specific review, except for us.
+            </p>
+          </div>
+
+          <div>
+            <h5>
+              How can I report reviews?
+            </h5>
+            <p>
+              Hover over a review and click on the three buttons. There will be a &quot;Report&quot; button that will guide you through a report submission.
+            </p>
+          </div>
+          <div>
+            <h5>
+              Are reviews filtered?
+            </h5>
+            <p>
+              We want the reviews to be purely professional and not personal. We might remove or edit reviews without disclosure for such reasons.
+            </p>
           </div>
         </div>
-
-        <div className="card mb-3">
-          <div className="row g-0">
-            <div className="col-md-4">
-              <img src="content2.jpg" className="card-img" alt="Content 2" />
-            </div>
-            <div className="col-md-8">
-              <div className="card-body">
-                <h5 className="card-title">Practice Exams</h5>
-                <p className="card-text">Take practice exams to test your knowledge and improve your performance.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="card mb-3">
-          <div className="row g-0">
-            <div className="col-md-4">
-              <img src="content3.jpg" className="card-img" alt="Content 3" />
-            </div>
-            <div className="col-md-8">
-              <div className="card-body">
-                <h5 className="card-title">Video Tutorials</h5>
-                <p className="card-text">Watch video tutorials to grasp complex concepts in an engaging way.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-
-      <footer className="bg-dark text-white text-center py-3 mt-5">
-        <p>Made with &lt;3 by <a href="https://github.com/ilariiiiia" target="_blank">Ilaria</a></p>
-        <p>We&apos;re open source! Check out the repo or help <a href="https://github.com/ilariiiiia/knowurteacher" target="_blank">here</a></p>
+      </section>
+      <footer className={`bg-dark text-center text-white ${homeStyles.footer}`}>
+        <p>
+          Made with &lt;3. <a href="github.com/ilariiiiia/knowurteacher">We&apos;re open source!</a>
+        </p>
       </footer>
     </>
   )
