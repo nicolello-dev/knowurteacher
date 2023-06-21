@@ -42,7 +42,7 @@ export default function Home() {
             <div className="input-group mb-3">
               <input type="text" className="form-control" aria-label="" aria-describedby="basic-addon1" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
               <div className="input-group-prepend">
-                  <button className="btn btn-outline-secondary" type="button" onClick={search}>Search</button>
+                  <button className={`btn btn-outline-secondary ${homeStyles.button}`} type="button" onClick={search}>Search</button>
               </div>
             </div>
           </form>

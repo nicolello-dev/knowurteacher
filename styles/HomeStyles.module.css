@@ -47,6 +47,18 @@
   font-family:Arial, Helvetica, sans-serif;
 }
 
+.button {
+  color: white;
+  background-color: black;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
+}
+
 .thirdSection {
   height: 100vh;
   max-height: 800px;
