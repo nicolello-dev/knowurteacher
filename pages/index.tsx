@@ -35,10 +35,10 @@ export default function Home() {
           Unveil the hidden gems of the teaching world and help your peers make informed choices for a better academic experience!
           With KnowUrTeacher, you can rate your teachers, share reviews, and prep-up for upcoming exams.
           </p>
-          <h3>
-            Search your teacher:
-          </h3>
           <form onSubmit={(e: any) => {e.preventDefault(); search()}}>
+            <h3>
+              Search your teacher:
+            </h3>
             <div className="input-group mb-3">
               <input type="text" className="form-control" aria-label="" aria-describedby="basic-addon1" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
               <div className="input-group-prepend">

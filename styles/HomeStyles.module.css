@@ -38,6 +38,12 @@
   font-family: 'Gloock';
 }
 
+.secondSection form {
+  width: 40%;
+  margin: 0px auto;
+  min-width: 280px;
+}
+
 .secondSection p {
   font-size: 24px;
   margin: 25px 0px;
