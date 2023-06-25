@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { useRouter } from "next/router"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import homeStyles from "@/styles/HomeStyles.module.css";
 
 export default function Home() {
     const router = useRouter();
     const [name, setName] = useState<string>("");
+    const [recommendedTeachers, setRecommendedTeachers] = useState<string[]>([]);
 
     function search() {
         if(name.trim() == "") {
@@ -15,6 +16,19 @@ export default function Home() {
         router.push(`/search/${name}`);
         return false;
     }
+
+    function redirectTo(name: string) {
+      router.push(`/search/${name}`);
+    }
+
+    useEffect(() => {
+      if(name.length < 3) {
+        setRecommendedTeachers([]);
+      }
+      fetch(`/api/suggest?name=${encodeURIComponent(name)}`)
+        .then((response) => response.json())
+        .then(r => setRecommendedTeachers(r.map((t: any) => t.name)));
+    }, [name]);
 
     return (
     <>
@@ -27,26 +41,31 @@ export default function Home() {
         </div>
       </section>
       <section className={homeStyles.secondSection}>
-        <div>
-          <h1>
-            Empower your education
-          </h1>
-          <p>
-          Unveil the hidden gems of the teaching world and help your peers make informed choices for a better academic experience!
-          With KnowUrTeacher, you can rate your teachers, share reviews, and prep-up for upcoming exams.
-          </p>
-          <form onSubmit={(e: any) => {e.preventDefault(); search()}}>
-            <h3>
-              Search your teacher:
-            </h3>
-            <div className="input-group mb-3">
-              <input type="text" className="form-control" aria-label="" aria-describedby="basic-addon1" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
-              <div className="input-group-prepend">
-                  <button className={`btn btn-outline-secondary ${homeStyles.button}`} type="button" onClick={search}>Search</button>
-              </div>
+        <h1>
+          Empower your education
+        </h1>
+        <p>
+        Unveil the hidden gems of the teaching world and help your peers make informed choices for a better academic experience!
+        With KnowUrTeacher, you can rate your teachers, share reviews, and prep-up for upcoming exams.
+        </p>
+        <form onSubmit={(e: any) => {e.preventDefault(); search()}}>
+          <h3>
+            Search your teacher:
+          </h3>
+          <div className="input-group mb-3">
+            <input type="text" className="form-control" aria-label="" aria-describedby="basic-addon1" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
+            <div className="input-group-prepend">
+                <button className={`btn btn-outline-secondary ${homeStyles.button}`} type="button" onClick={search}>Search</button>
             </div>
-          </form>
-        </div>
+          </div>
+          <div className={homeStyles.absoluteContainer}>
+            <ul className={homeStyles.list}>
+              {
+                recommendedTeachers.map((t, key) => <li key={key} onClick={_ => redirectTo(t)}><p>{t}</p></li>)
+              }
+            </ul>
+        </div> 
+        </form>
       </section>
       <section className={homeStyles.thirdSection}>
         <h3>

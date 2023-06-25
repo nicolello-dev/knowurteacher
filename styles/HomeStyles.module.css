@@ -65,6 +65,28 @@
   color: black;
 }
 
+.absoluteContainer {
+  margin: 0px;
+  color: black;
+  cursor: pointer;
+  width: 40%;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1;
+}
+
+.list {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 0px;
+  margin: 0px;
+  background-color: white;
+}
+
+.list p {
+  margin-left: 32px;
+}
+
 .thirdSection {
   height: 100vh;
   max-height: 800px;
