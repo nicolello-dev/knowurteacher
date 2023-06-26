@@ -3,10 +3,15 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
 import homeStyles from "@/styles/HomeStyles.module.css";
 
+interface TeacherSuggestion {
+  name: string;
+  id: number;
+}
+
 export default function Home() {
     const router = useRouter();
     const [name, setName] = useState<string>("");
-    const [recommendedTeachers, setRecommendedTeachers] = useState<string[]>([]);
+    const [recommendedTeachers, setRecommendedTeachers] = useState<TeacherSuggestion[]>([]);
 
     function search() {
         if(name.trim() == "") {
@@ -17,8 +22,8 @@ export default function Home() {
         return false;
     }
 
-    function redirectTo(name: string) {
-      router.push(`/search/${name}`);
+    function redirectTo(id: number) {
+      router.push(`/search/id/${id}`);
     }
 
     useEffect(() => {
@@ -28,7 +33,7 @@ export default function Home() {
       }
       fetch(`/api/suggest?name=${encodeURIComponent(name)}`)
         .then((response) => response.json())
-        .then(r => setRecommendedTeachers(r.map((t: any) => t.name)));
+        .then(r => setRecommendedTeachers(r));
     }, [name]);
 
     return (
@@ -62,7 +67,7 @@ export default function Home() {
           <div className={homeStyles.absoluteContainer}>
             <ul className={homeStyles.list}>
               {
-                recommendedTeachers.map((t, key) => <li key={key} onClick={_ => redirectTo(t)}><p>{t}</p></li>)
+                recommendedTeachers.map((t, key) => <li key={key} onClick={_ => redirectTo(t.id)}><p>{t.name}</p></li>)
               }
             </ul>
         </div> 
