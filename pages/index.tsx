@@ -24,6 +24,7 @@ export default function Home() {
     useEffect(() => {
       if(name.length < 3) {
         setRecommendedTeachers([]);
+        return;
       }
       fetch(`/api/suggest?name=${encodeURIComponent(name)}`)
         .then((response) => response.json())
