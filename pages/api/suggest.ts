@@ -11,6 +11,7 @@ export default async function suggestTeacher(req: APIRequest, res: NextApiRespon
     const nameInput: string | undefined = req.query.name;
     if(nameInput != undefined && nameInput.length < 3) {
         res.status(200).json([]);
+        return;
     }
     const prisma = new PrismaClient();
     const teachers =  await prisma.teacher.findMany({
@@ -25,4 +26,5 @@ export default async function suggestTeacher(req: APIRequest, res: NextApiRespon
         }
     })
     res.status(200).json(teachers);
+    return;
 }
