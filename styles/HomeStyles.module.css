@@ -84,7 +84,12 @@
 }
 
 .list p {
-  margin-left: 32px;
+  margin: 16px;
+  font-size: 1rem;
+}
+
+.list li {
+  border-bottom: 1px solid black;
 }
 
 .thirdSection {
