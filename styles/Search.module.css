@@ -37,9 +37,36 @@
 .firstSection {
     background-color: #DEC9E9;
     padding: 32px;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.firstSection > p {
+    margin-top: 16px;
 }
 
 .secondSection {
     background-color: #DEC9E9;
     padding: 16px 0px;
+}
+
+.form {
+    margin: 32px;
+    width: 60%;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.form > * {
+    margin: 12px;
+}
+
+.button {
+    margin: 0px auto;
+}
+
+.pinkBG {
+    background-color: #DEC9E9;
 }

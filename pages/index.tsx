@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
 import homeStyles from "@/styles/HomeStyles.module.css";
+import Link from "next/link";
 
 interface TeacherSuggestion {
   name: string;
@@ -70,7 +71,10 @@ export default function Home() {
                 recommendedTeachers.map((t, key) => <li key={key} onClick={_ => redirectTo(t.id)}><p>{t.name}</p></li>)
               }
             </ul>
-        </div> 
+          </div>
+          <p>
+            Don&apos;t see your teacher above? <Link href="/add">Add them to our database!</Link>
+          </p>
         </form>
       </section>
       <section className={homeStyles.thirdSection}>

@@ -41,7 +41,12 @@ export default function SearchByName({ teachers, searched, count } : { teachers:
         fetch(`/api/moreTeachers?name=${searched}&startIndex=${cursor}`)
             .then(r => r.json())
             .then(t => setShownTeachers(t));
-    }, [cursor, searched])
+    }, [cursor, searched]);
+
+    // Pink body background
+    useEffect(() => {
+        document.body.className = ss.pinkBG;
+    }, []);
 
     return (
         <>
@@ -81,6 +86,31 @@ export default function SearchByName({ teachers, searched, count } : { teachers:
                     </button>
                 </div>
             }
+        </section>
+        <section className={ss.firstSection}>
+            <div className="hero-unit">
+                <h1>
+                    Need more filters?
+                </h1>
+            </div>
+            <p>Use the following:</p>
+            <form className={ss.form} action="/" onSubmit={(e) => e.preventDefault()}>
+                <div className="input-group mb3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" id="basic-addon1">Name:</span>
+                    </div>
+                    <input type="text" name="name" className="form-control" placeholder="John Doe" aria-label="name" />
+                </div>
+                <div className="input-group mb3">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" id="basic-addon1">School:</span>
+                    </div>
+                    <input type="text" name="school" className="form-control" placeholder="San Clemente High School" aria-label="school" />
+                </div>
+            </form>
+                <button className={`btn btn-primary ${ss.button}`}>
+                    Search
+                </button>
         </section>
             {
                 JSON.stringify(teachers)
