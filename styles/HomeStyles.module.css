@@ -95,7 +95,7 @@
 .thirdSection {
   height: 100vh;
   max-height: 800px;
-  background: linear-gradient(to top, #A06CD5CC, #A06CD5CC), url(/photos/newspapers.jpg) no-repeat top center;
+  background: linear-gradient(to top, #A06CD5CC, #A06CD5CC), url(https://cdn.knowurteacher.com/photos/newspapers.jpg) no-repeat top center;
   background-size: cover;
   background-position: center;
   background-color: #DEC9E9;

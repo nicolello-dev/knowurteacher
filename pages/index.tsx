@@ -43,7 +43,7 @@ export default function Home() {
           KNOWURTEACHER
         </h1>
         <div>
-          <Image src='/logo.svg' alt='logo' fill={true}/>
+          <Image src='https://cdn.knowurteacher.com/logo.svg' alt='logo' fill={true}/>
         </div>
       </section>
       <section className={homeStyles.secondSection}>
