@@ -2,6 +2,8 @@ import Head from 'next/head'
 import 'bootstrap/dist/css/bootstrap.css' // Bootstrap
 import '@/styles/globals.css'
 
+import { Analytics } from '@vercel/analytics/react';
+
 function MyApp({ Component, pageProps }: {Component: any, pageProps: any}) {
   return (
     <>
@@ -23,6 +25,7 @@ function MyApp({ Component, pageProps }: {Component: any, pageProps: any}) {
         <meta name="theme-color" content="#000000"/>
       </Head>
       <Component {...pageProps} />
+      <Analytics />
     </>
   )
 }
