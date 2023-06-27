@@ -24,7 +24,8 @@ export default async function suggestTeacher(req: APIRequest, res: NextApiRespon
         select: {
             name: true,
             id: true
-        }
+        },
+        take: 5
     })
     res.status(200).json(teachers);
     return;
