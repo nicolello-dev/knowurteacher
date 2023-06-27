@@ -41,7 +41,7 @@ export default function SearchByName({ teachers, searched, count } : { teachers:
         fetch(`/api/moreTeachers?name=${searched}&startIndex=${cursor}`)
             .then(r => r.json())
             .then(t => setShownTeachers(t));
-    }, [cursor])
+    }, [cursor, searched])
 
     return (
         <>
