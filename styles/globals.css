@@ -18,3 +18,8 @@ body, h1, h2, h3, p, ul, li {
   h4, h5, p {
     font-family: 'Figtree';
   }
+
+html, body {
+  height: 100%;
+  width: 100%;
+}

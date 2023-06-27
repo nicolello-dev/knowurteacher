@@ -1,0 +1,14 @@
+.a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.wrapper {
+    width: 40%;
+    min-width: 270px;
+    margin: 16px auto;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid black;
+    background-color: #F2F2F2;
+}
