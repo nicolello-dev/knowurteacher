@@ -15,9 +15,12 @@ import ss from "@/styles/Search.module.css"; // Search Styles
 import TeacherSelect from "@/components/teacherSelect";
 import Link from "next/link";
 
-export default function SearchByName({ teachers, searched, count } : { teachers: Teacher[], searched: string, count:number }) {
+export default function SearchByName({ teachers, searched, countProp } : { teachers: Teacher[], searched: string, countProp:number }) {
 
+    const [count, setCount] = useState<number>(countProp);
     const [cursor, setCursor] = useState<number>(0);
+    const [schoolInput, setSchoolInput] = useState<string>("");
+    const [school, setSchool] = useState<string>("");
     const [shownTeachers, setShownTeachers] = useState<Teacher[]>(teachers);
 
     function getPrevResults() {
@@ -38,10 +41,13 @@ export default function SearchByName({ teachers, searched, count } : { teachers:
     }
 
     useEffect(() => {
-        fetch(`/api/moreTeachers?name=${searched}&startIndex=${cursor}`)
+        fetch(`/api/moreTeachers?name=${searched}&startIndex=${cursor}&school=${school}`)
             .then(r => r.json())
-            .then(t => setShownTeachers(t));
-    }, [cursor, searched]);
+            .then(t => {
+                setShownTeachers(t.teachers);
+                setCount(t.count);
+            });
+    }, [cursor, searched, school]);
 
     // Pink body background
     useEffect(() => {
@@ -97,18 +103,12 @@ export default function SearchByName({ teachers, searched, count } : { teachers:
             <form className={ss.form} action="/" onSubmit={(e) => e.preventDefault()}>
                 <div className="input-group mb3">
                     <div className="input-group-prepend">
-                        <span className="input-group-text" id="basic-addon1">Name:</span>
-                    </div>
-                    <input type="text" name="name" className="form-control" placeholder="John Doe" aria-label="name" />
-                </div>
-                <div className="input-group mb3">
-                    <div className="input-group-prepend">
                         <span className="input-group-text" id="basic-addon1">School:</span>
                     </div>
-                    <input type="text" name="school" className="form-control" placeholder="San Clemente High School" aria-label="school" />
+                    <input type="text" name="school" className="form-control" placeholder="Politecnico di Milano" aria-label="school" value={schoolInput} onChange={(e: any) => setSchoolInput(e.target.value)} />
                 </div>
             </form>
-                <button className={`btn btn-primary ${ss.button}`}>
+                <button className={`btn btn-primary ${ss.button}`} onClick={_ => setSchool(schoolInput)}>
                     Search
                 </button>
         </section>
