@@ -23,6 +23,7 @@ function MyApp({ Component, pageProps }: {Component: any, pageProps: any}) {
         <link rel="mask-icon" href="https://cdn.knowurteacher.com/safari-pinned-tab.svg" color="#000000"/>
         <meta name="msapplication-TileColor" content="#da532c"/>
         <meta name="theme-color" content="#000000"/>
+        <meta name="google-site-verification" content="KgI7QxovzGjE_f_S2u1LvlUqJSTrmVAuiwFfImkhEXU" />
       </Head>
       <Component {...pageProps} />
       <Analytics />
