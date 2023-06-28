@@ -80,11 +80,11 @@ export default function SearchByName({ teachers, searched, countProp } : { teach
         <section className={ss.secondSection}>
         <div className={`list-group ${ss.teachersWrapper}`}>
             {                            // this div is necessary for the `key` prop, for optimization purposes.
-                shownTeachers.map((t, key) => <div className="list-group-item" key={key}><TeacherSelect teacher={t}/></div>)
+                shownTeachers.map((t, key) => <div style={{ width: '300px', padding: '1rem'}} key={key}><TeacherSelect teacher={t}/></div>)
             }
         </div>
             {
-                shownTeachers.length < count && <ul className="pagination">
+                shownTeachers.length < count && <ul className={`pagination ${ss.pagination}`}>
                     <li className="page-item"><button className="page-link btn" onClick={_ => getPrevResults()}>Previous</button></li>
                     <li className="page-item"><p className="page-link">{shownTeachers.length > 1 ? `${cursor + 1}-${cursor + shownTeachers.length }` : cursor + 1}</p></li>
                     <li className="page-item"><button className="page-link btn" onClick={_ => getNextResults()}>Next</button></li>

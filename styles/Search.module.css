@@ -71,10 +71,26 @@
     background-color: #DEC9E9;
 }
 
+.teachersWrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 .teachersWrapper > * {
     padding: 20px;
 }
 
 .teachersWrapper > * {
     background-color: #DEC9E9 !important;
+}
+
+.pagination {
+    margin-right: 20px;
+    justify-content: flex-end;
+}
+
+.card-img-top {
+    position: relative;
+    height: 200px;
 }
