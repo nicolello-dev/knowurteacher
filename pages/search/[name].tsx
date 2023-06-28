@@ -112,9 +112,6 @@ export default function SearchByName({ teachers, searched, countProp } : { teach
                     Search
                 </button>
         </section>
-            {
-                JSON.stringify(teachers)
-            }
         </>
     )
 }
