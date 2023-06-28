@@ -70,3 +70,11 @@
 .pinkBG {
     background-color: #DEC9E9;
 }
+
+.teachersWrapper > * {
+    padding: 20px;
+}
+
+.teachersWrapper > * {
+    background-color: #DEC9E9 !important;
+}

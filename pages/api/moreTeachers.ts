@@ -42,12 +42,7 @@ export default async function suggestTeacher(req: APIRequest, res: NextApiRespon
                     startsWith: nameInput,
                     mode: 'insensitive'
                 }
-            },
-            orderBy: {
-                id: 'asc'
-            },
-            skip: startIndex,
-            take: 5
+            }
         });
     } else {
         teachers = await prisma.teacher.findMany({
@@ -77,12 +72,7 @@ export default async function suggestTeacher(req: APIRequest, res: NextApiRespon
                     startsWith: schoolInput,
                     mode: "insensitive"
                 }
-            },
-            orderBy: {
-                id: 'asc'
-            },
-            skip: startIndex,
-            take: 5
+            }
         });
     }
 

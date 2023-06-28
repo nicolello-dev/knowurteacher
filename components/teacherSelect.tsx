@@ -1,16 +1,15 @@
 import type { Teacher } from "@prisma/client";
 
-import styles from "./teacherSelect.module.css";
-
 export default function TeacherSelect({ teacher }:{teacher: Teacher}) {
     return (
         <>
-            <a href={`/search/id/${teacher.id}`} className={styles.a}>
-                <div className={styles.wrapper}>
-                    <h5>Name: <b>{teacher.name}</b></h5>
-                    <p>School: <b>{teacher.school || "Not available"}</b></p>
+            <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title">{teacher.name}</h5>
+                    <p className="card-text">{teacher.school || "Unknown school"}</p>
+                    <a href={`/search/id/${teacher.id}`} className="btn btn-primary">View profile</a>
                 </div>
-            </a>
+            </div>
         </>
     )
 }

@@ -78,19 +78,17 @@ export default function SearchByName({ teachers, searched, countProp } : { teach
             <p>There are <b>{count || "no"}</b> teachers whose name starts with <b>{searched}</b></p>
         </section>
         <section className={ss.secondSection}>
+        <div className={`list-group ${ss.teachersWrapper}`}>
             {                            // this div is necessary for the `key` prop, for optimization purposes.
-                shownTeachers.map((t, key) => <div key={key}><TeacherSelect teacher={t}/></div>)
+                shownTeachers.map((t, key) => <div className="list-group-item" key={key}><TeacherSelect teacher={t}/></div>)
             }
+        </div>
             {
-                shownTeachers.length < count && <div className={ss.navButtons}>
-                    <button className="btn" onClick={_ => getPrevResults()}>
-                        &lt;
-                    </button>
-                    <p>{shownTeachers.length > 1 ? `${cursor + 1}-${cursor + shownTeachers.length }` : cursor + 1}</p>
-                    <button className="btn" onClick={_ => getNextResults()}>
-                        &gt;
-                    </button>
-                </div>
+                shownTeachers.length < count && <ul className="pagination">
+                    <li className="page-item"><button className="page-link btn" onClick={_ => getPrevResults()}>Previous</button></li>
+                    <li className="page-item"><p className="page-link">{shownTeachers.length > 1 ? `${cursor + 1}-${cursor + shownTeachers.length }` : cursor + 1}</p></li>
+                    <li className="page-item"><button className="page-link btn" onClick={_ => getNextResults()}>Next</button></li>
+                </ul>
             }
         </section>
         <section className={ss.firstSection}>
@@ -134,7 +132,7 @@ export async function getServerSideProps(ctx: any) {
             take: 5
         });
 
-        const count = await prisma.teacher.count({
+        const countProp = await prisma.teacher.count({
             where: {
                 name: {
                     startsWith: name,
@@ -146,7 +144,7 @@ export async function getServerSideProps(ctx: any) {
         return {
             props: {
                 teachers,
-                count,
+                countProp,
                 searched: name
             }
         }
@@ -155,7 +153,7 @@ export async function getServerSideProps(ctx: any) {
         return {
             props: {
                 teachers: [],
-                count: 0,
+                countProp: 0,
                 searched: name
             }
         }
