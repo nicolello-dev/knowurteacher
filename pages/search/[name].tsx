@@ -65,7 +65,7 @@ export default function SearchByName({ teachers, searched, countProp } : { teach
                     Knowurteacher
                 </h3>
                 <div>
-                    <Image src='/logo.svg' alt='logo' fill={true}/>
+                    <Image src='https://cdn.knowurteacher.com/logo.svg' alt='logo' fill={true}/>
                 </div>
             </Link>
         </header>
