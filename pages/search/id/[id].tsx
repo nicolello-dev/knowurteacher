@@ -1,18 +1,15 @@
+import TeacherProfile from "@/components/teacherProfile";
 import type { Teacher } from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
+import Head from "next/head";
 
-export default function SearchByName({ teachers } : { teachers: Teacher[]}) {
+export default function SearchByName({ teacher } : { teacher: Teacher}) {
     return (
         <>
-            <h1>
-                Still under development!
-            </h1>
-            <p>
-                If the teacher you searched for is in our database, all their data will be shown down here:
-            </p>
-            {
-                JSON.stringify(teachers)
-            }
+            <Head>
+                <title>Knowurteacher | teacher</title>
+            </Head>
+            <TeacherProfile teacher={teacher}/>
         </>
     )
 }
@@ -21,21 +18,21 @@ export async function getServerSideProps(ctx: any) {
     const { id } = ctx.query
     const prisma = new PrismaClient();
     try {
-        const teachers = await prisma.teacher.findMany({
+        const teacher = await prisma.teacher.findUnique({
             where: {
                 id: parseInt(id),
             },
         });
         return {
             props: {
-                teachers
+                teacher
             }
         }
     } catch (error) {
         console.error(error);
         return {
             props: {
-                teachers: []
+                teacher: undefined
             }
         }
     }

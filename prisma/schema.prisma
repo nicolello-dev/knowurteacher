@@ -11,4 +11,5 @@ model Teacher {
   id Int  @id @default(autoincrement())
   name String
   school String?
+  photoURL String?
 }

@@ -75,7 +75,7 @@ export default function SearchByName({ teachers, searched, countProp } : { teach
                     Your search results:
                 </h1>
             </div>
-            <p>There are <b>{count}</b> teachers starting with <b>{searched}</b></p>
+            <p>There are <b>{count || "no"}</b> teachers whose name starts with <b>{searched}</b></p>
         </section>
         <section className={ss.secondSection}>
             {                            // this div is necessary for the `key` prop, for optimization purposes.
