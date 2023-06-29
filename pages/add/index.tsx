@@ -49,7 +49,7 @@ export default function AddTeacher() {
             Teacher added successfully!
         </div>
         <div className="alert alert-danger" role="alert" style={{ display: showError ? "block" : "none" }}>
-            There was an error adding the teacher.
+            There was an error adding the teacher; it likely already exists
         </div>
         <div className="hero-unit">
                 <h1 className="text-center m-3">
