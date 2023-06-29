@@ -1,4 +1,3 @@
-import TeacherProfile from "@/components/teacherProfile";
 import TeacherSelect from "@/components/teacherSelect";
 import type { Teacher } from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
