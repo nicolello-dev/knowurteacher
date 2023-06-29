@@ -1,5 +1,72 @@
+import { Teacher } from "@prisma/client";
+import Image from "next/image";
+
+import styles from "./teacherProfile.module.css"
+import ss from "@/styles/Search.module.css";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+
 export default function AddTeacher() {
+    
+    const [name, setName] = useState("");
+    const [school, setSchool] = useState("");
+    const [showSuccess, setShowSuccess] = useState<boolean>(false);
+    const [showError, setShowError] = useState<boolean>(false);
+
+    function addTeacher() {
+        fetch(`/api/addTeacher?name=${name}&school=${school}`)
+            .then(r => r.json())
+            .then(r => r.success ? setShowSuccess(true) : setShowError(true));
+        alert("Thank you for adding a teacher! Your contribution is really valuable!");
+    }
+
+    // Pink body background
+    useEffect(() => {
+        document.body.className = ss.pinkBG;
+    }, []);
+
+    useEffect(() => {
+        showSuccess && setTimeout(_ => setShowSuccess(false), 3000);
+    }, [showSuccess]);
+
+    useEffect(() => {
+        showError && setTimeout(_ => setShowError(false), 3000);
+    }, [showError]);
+    
     return (<>
-        <h1>Still under development!</h1>
+        <header className={ss.header}>
+            <Link href="/">
+                <h3>
+                    Knowurteacher
+                </h3>
+                <div>
+                    <Image src='https://cdn.knowurteacher.com/logo.svg' alt='logo' fill={true}/>
+                </div>
+            </Link>
+        </header>
+        <div className="alert alert-success" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
+            Teacher added successfully!
+        </div>
+        <div className="alert alert-error" role="alert" style={{ display: showError ? "block" : "none" }}>
+            There was an error adding the teacher.
+        </div>
+        <div className="hero-unit">
+                <h1 className="text-center m-3">
+                    Add a teacher:
+                </h1>
+            </div>
+        <div className="card" style={{alignItems: 'center', width: 'min-content', minWidth: '270px', margin: '100px auto'}}>
+            <div className="card-body">
+                <Image src={"https://cdn.knowurteacher.com/defaultpfp.png"} height={200} width={200} alt={`${name}'s picture`}/>
+            </div>
+            <div className="card-body" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <label className="form-label">Name:</label>
+                <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)}/>
+                <label className="form-label m-2">School:</label>
+                <input type="text" className="form-control" value={school} onChange={(e) => setSchool(e.target.value)}/>
+                <button className="btn btn-primary m-2" onClick={_ => addTeacher()}>Add</button>
+            </div>
+        </div>
     </>)
 }

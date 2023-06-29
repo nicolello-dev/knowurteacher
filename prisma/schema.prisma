@@ -12,4 +12,6 @@ model Teacher {
   name String
   school String?
   photoURL String?
+
+  @@unique([name, school])
 }
