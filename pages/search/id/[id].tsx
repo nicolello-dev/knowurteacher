@@ -1,4 +1,5 @@
 import TeacherProfile from "@/components/teacherProfile";
+import TeacherSelect from "@/components/teacherSelect";
 import type { Teacher } from "@prisma/client";
 import { PrismaClient } from "@prisma/client";
 import Head from "next/head";
@@ -9,7 +10,7 @@ export default function SearchByName({ teacher } : { teacher: Teacher}) {
             <Head>
                 <title>Knowurteacher | teacher</title>
             </Head>
-            <TeacherProfile teacher={teacher}/>
+            <TeacherSelect teacher={teacher}/>
         </>
     )
 }
