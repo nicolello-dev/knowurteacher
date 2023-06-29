@@ -48,7 +48,7 @@ export default function AddTeacher() {
         <div className="alert alert-success" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
             Teacher added successfully!
         </div>
-        <div className="alert alert-error" role="alert" style={{ display: showError ? "block" : "none" }}>
+        <div className="alert alert-danger" role="alert" style={{ display: showError ? "block" : "none" }}>
             There was an error adding the teacher.
         </div>
         <div className="hero-unit">
