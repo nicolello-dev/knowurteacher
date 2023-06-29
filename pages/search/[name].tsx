@@ -14,6 +14,7 @@ import ss from "@/styles/Search.module.css"; // Search Styles
 // Components
 import TeacherSelect from "@/components/teacherSelect";
 import Link from "next/link";
+import Header from "@/components/header";
 
 export default function SearchByName({ teachers, searched, countProp } : { teachers: Teacher[], searched: string, countProp:number }) {
 
@@ -59,16 +60,7 @@ export default function SearchByName({ teachers, searched, countProp } : { teach
         <Head>
             <title>{`Knowurteacher search | ${searched}`}</title>
         </Head>
-        <header className={ss.header}>
-            <Link href="/">
-                <h3>
-                    Knowurteacher
-                </h3>
-                <div>
-                    <Image src='https://cdn.knowurteacher.com/logo.svg' alt='logo' fill={true}/>
-                </div>
-            </Link>
-        </header>
+        <Header/>
         <section className={ss.firstSection}>
             <div className="hero-unit">
                 <h1>

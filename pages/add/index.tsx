@@ -6,6 +6,7 @@ import ss from "@/styles/Search.module.css";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Header from "@/components/header";
 
 export default function AddTeacher() {
     
@@ -35,16 +36,7 @@ export default function AddTeacher() {
     }, [showError]);
     
     return (<>
-        <header className={ss.header}>
-            <Link href="/">
-                <h3>
-                    Knowurteacher
-                </h3>
-                <div>
-                    <Image src='https://cdn.knowurteacher.com/logo.svg' alt='logo' fill={true}/>
-                </div>
-            </Link>
-        </header>
+        <Header/>
         <div className="alert alert-success" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
             Teacher added successfully!
         </div>
