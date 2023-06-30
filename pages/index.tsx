@@ -77,10 +77,22 @@ export default function Home() {
           </p>
         </form>
       </section>
-      <section className={homeStyles.thirdSection}>
-        <h3>
-          &quot;Education is the passport for the future, for tomorrow belongs to those who prepare for it today.&quot;
-        </h3>
+      <section className="position-relative bg-pink d-flex" style={{ height: '100vh', maxHeight: '800px' }}>
+        <div className="position-relative h-100 w-100">
+          <Image
+            src="https://cdn.knowurteacher.com/photos/newspapers.jpg"
+            fill={true}
+            alt="Some newspapers"
+            style={{ objectFit: 'cover', filter: 'grayscale(50%)' }}
+            />
+        </div>
+        <div className="position-absolute h-100 w-100 bg-purple" style={{ opacity: '70%'}}>
+        </div>
+        <div className="position-absolute text-center h-100 w-100 d-flex">
+          <h3 className="container mx-auto my-auto fs-1 text-white">
+            &quot;Education is the passport for the future, for tomorrow belongs to those who prepare for it today.&quot;
+          </h3>
+        </div>
       </section>
       <section className={homeStyles.fourthSection}>
         <h3>
