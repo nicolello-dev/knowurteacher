@@ -49,15 +49,7 @@
   margin-left: 30px;
 }
 
-.faqWrapper {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.faqWrapper > div {
+.faqdiv {
   width: 40%;
   min-width: 250px;
   margin: 30px 10px;

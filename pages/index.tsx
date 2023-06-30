@@ -98,8 +98,8 @@ export default function Home() {
         <h3>
           FAQ
         </h3>
-        <div className={homeStyles.faqWrapper}>
-          <div>
+        <div className="d-flex flex-wrap justify-content-around" style={{ marginTop: '50px' }}>
+          <div className={homeStyles.faqdiv}>
             <h5 className="text-white">
               How do I rate a teacher?
             </h5>
@@ -107,7 +107,7 @@ export default function Home() {
               Simply search the name of your teacher, then leave a review based on your experiences with them.
             </p>
           </div>
-          <div>
+          <div className={homeStyles.faqdiv}>
             <h5 className="text-white">
               Is my review anonymous?
             </h5>
@@ -116,7 +116,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div>
+          <div className={homeStyles.faqdiv}>
             <h5 className="text-white">
               How can I report reviews?
             </h5>
@@ -124,7 +124,7 @@ export default function Home() {
               Hover over a review and click on the three buttons. There will be a &quot;Report&quot; button that will guide you through a report submission.
             </p>
           </div>
-          <div>
+          <div className={homeStyles.faqdiv}>
             <h5 className="text-white">
               Are reviews filtered?
             </h5>

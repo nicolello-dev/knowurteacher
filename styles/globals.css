@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Gloock');
 @import url('https://fonts.googleapis.com/css?family=Figtree');
 
-body, h1, h2, h3, p, ul, li {
+body, ul, li {
     margin: 0;
     padding: 0;
   }
