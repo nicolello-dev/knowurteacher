@@ -39,3 +39,11 @@ html, body {
 .bg-purple {
   background-color: #A06CD5;
 }
+
+.dark-purple {
+  color: #432e59;
+}
+
+.bg-dark-purple {
+  background-color: #432e59;
+}

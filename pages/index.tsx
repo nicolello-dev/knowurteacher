@@ -47,7 +47,7 @@ export default function Home() {
           <Image src='https://cdn.knowurteacher.com/logo.svg' alt='logo' fill={true}/>
         </div>
       </section>
-      <section className="container p-5 text-black">
+      <section className="container p-5 text-black bg-pink">
         <h1 className="p-4">
           Empower your education
         </h1>
@@ -100,7 +100,7 @@ export default function Home() {
         </h3>
         <div className={homeStyles.faqWrapper}>
           <div>
-            <h5>
+            <h5 className="text-white">
               How do I rate a teacher?
             </h5>
             <p>
@@ -108,7 +108,7 @@ export default function Home() {
             </p>
           </div>
           <div>
-            <h5>
+            <h5 className="text-white">
               Is my review anonymous?
             </h5>
             <p>
@@ -117,7 +117,7 @@ export default function Home() {
           </div>
 
           <div>
-            <h5>
+            <h5 className="text-white">
               How can I report reviews?
             </h5>
             <p>
@@ -125,7 +125,7 @@ export default function Home() {
             </p>
           </div>
           <div>
-            <h5>
+            <h5 className="text-white">
               Are reviews filtered?
             </h5>
             <p>
@@ -134,7 +134,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <footer className={homeStyles.footer}>
+      <footer className="p-4 text-white text-center bg-dark-purple">
         <p>
           Made with &lt;3. <a href="github.com/ilariiiiia/knowurteacher">We&apos;re open source!</a>
         </p>
