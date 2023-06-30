@@ -22,11 +22,6 @@ export default function AddTeacher() {
         alert("Thank you for adding a teacher! Your contribution is really valuable!");
     }
 
-    // Pink body background
-    useEffect(() => {
-        document.body.className = ss.pinkBG;
-    }, []);
-
     useEffect(() => {
         showSuccess && setTimeout(_ => setShowSuccess(false), 3000);
     }, [showSuccess]);

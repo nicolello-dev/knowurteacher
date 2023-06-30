@@ -50,11 +50,6 @@ export default function SearchByName({ teachers, searched, countProp } : { teach
             });
     }, [cursor, searched, school]);
 
-    // Pink body background
-    useEffect(() => {
-        document.body.className = ss.pinkBG;
-    }, []);
-
     return (
         <>
         <Head>

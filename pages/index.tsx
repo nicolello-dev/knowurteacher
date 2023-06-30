@@ -43,36 +43,36 @@ export default function Home() {
         <h1>
           KNOWURTEACHER
         </h1>
-        <div>
+        <div className="position-relative ratio ratio-1x1">
           <Image src='https://cdn.knowurteacher.com/logo.svg' alt='logo' fill={true}/>
         </div>
       </section>
-      <section className={homeStyles.secondSection}>
-        <h1>
+      <section className="container p-5 text-black">
+        <h1 className="p-4">
           Empower your education
         </h1>
-        <p>
+        <h5 className="p-3">
         Unveil the hidden gems of the teaching world and help your peers make informed choices for a better academic experience!
         With KnowUrTeacher, you can rate your teachers, share reviews, and prep-up for upcoming exams.
-        </p>
-        <form id="teacher-name-form" onSubmit={(e: any) => {e.preventDefault(); search()}}>
-          <h3>
-            Search your teacher:
-          </h3>
+        </h5>
+        <h3 className="p-4">
+          Search your teacher:
+        </h3>
+        <form id="teacher-name-form" className="p-3" onSubmit={(e: any) => {e.preventDefault(); search()}}>
           <div className="input-group mb-3">
             <input autoComplete="yes" type="text" name="name" className="form-control" aria-label="" aria-describedby="basic-addon1" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
             <div className="input-group-prepend">
                 <button className={`btn btn-outline-secondary ${homeStyles.button}`} type="button" onClick={search}>Search</button>
             </div>
           </div>
-          <div className={homeStyles.absoluteContainer}>
-            <ul className={homeStyles.list}>
+          <div className={`m-0 text-black position-absolute ${homeStyles.absoluteContainer}`}>
+            <ul className="bg-white m-0 p-0 list-unstyled">
               {
-                recommendedTeachers.map((t, key) => <li key={key} onClick={_ => redirectTo(t.id)}><p>{t.name}</p></li>)
+                recommendedTeachers.map((t, key) => <li key={key} className="border-bottom" onClick={_ => redirectTo(t.id)}><p className="p-3">• {t.name}</p></li>)
               }
             </ul>
           </div>
-          <p>
+          <p className="text-dark">
             Don&apos;t see your teacher above? <Link href="/add">Add them to our database!</Link>
           </p>
         </form>

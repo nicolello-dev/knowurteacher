@@ -1,7 +1,6 @@
 .initialSection {
   background-color: black;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -17,41 +16,8 @@
   max-width: 600px;
 }
 
-.initialSection > div {
-  aspect-ratio: 1/1;
-  position: relative;
-}
-
 .initialSection > svg {
   color: #DEC9E9;
-}
-
-.secondSection {
-  color: black;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background-color: #DEC9E9;
-  padding: 100px 20px;
-  padding-bottom: 50px;
-  font-family: 'Gloock';
-}
-
-.secondSection form {
-  width: 40%;
-  margin: 0px auto;
-  min-width: 280px;
-}
-
-.secondSection p {
-  font-size: 24px;
-  margin: 25px 0px;
-}
-
-.secondSection input {
-  font-family:Arial, Helvetica, sans-serif;
 }
 
 .button {
@@ -67,30 +33,10 @@
 }
 
 .absoluteContainer {
-  margin: 0px;
-  color: black;
   cursor: pointer;
   width: 40%;
   border-radius: 10px;
-  position: absolute;
   z-index: 1;
-}
-
-.list {
-  max-height: 500px;
-  overflow-y: auto;
-  padding: 0px;
-  margin: 0px;
-  background-color: white;
-}
-
-.list p {
-  margin: 16px;
-  font-size: 1rem;
-}
-
-.list li {
-  border-bottom: 1px solid black;
 }
 
 .thirdSection {

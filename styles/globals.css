@@ -8,7 +8,7 @@ body, h1, h2, h3, p, ul, li {
   
   /* Basic styling */
   body {
-    background-color: #f2f2f2;
+    background-color: #DEC9E9;
   }
 
   h1, h2, h3 {
@@ -22,4 +22,12 @@ body, h1, h2, h3, p, ul, li {
 html, body {
   height: 100%;
   width: 100%;
+}
+
+.pink {
+  color: #DEC9E9;
+}
+
+.bg-pink {
+  background-color: #DEC9E9;
 }
