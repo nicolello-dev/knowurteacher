@@ -6,7 +6,7 @@ import Link from "next/link";
 
 interface TeacherSuggestion {
   name: string;
-  id: number;
+  school: string;
 }
 
 export default function Home() {
@@ -23,8 +23,8 @@ export default function Home() {
         return false;
     }
 
-    function redirectTo(id: number) {
-      router.push(`/search/id/${id}`);
+    function redirectTo(t: TeacherSuggestion) {
+      router.push(`/view/${t.school}/${t.name}`);
     }
 
     useEffect(() => {
@@ -68,7 +68,7 @@ export default function Home() {
           <div className={`m-0 text-black position-absolute ${homeStyles.absoluteContainer}`}>
             <ul className="bg-white m-0 p-0 list-unstyled">
               {
-                recommendedTeachers.map((t, key) => <li key={key} className="border-bottom" onClick={_ => redirectTo(t.id)}><p className="p-3">• {t.name}</p></li>)
+                recommendedTeachers.map((t, key) => <li key={key} className="border-bottom" onClick={_ => redirectTo(t)}><p className="p-3">• {t.name}</p></li>)
               }
             </ul>
           </div>

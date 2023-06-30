@@ -23,7 +23,7 @@ export default async function suggestTeacher(req: APIRequest, res: NextApiRespon
         },
         select: {
             name: true,
-            id: true
+            school: true
         },
         take: 5
     })
