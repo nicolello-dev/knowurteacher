@@ -1,12 +1,35 @@
 import Header from "@/components/header";
 import TeacherSelect from "@/components/teacherSelect";
-import { PrismaClient, Teacher } from "@prisma/client";
+import { ShowAvgReview, RateTeacher } from "@/components/showReview";
 
-export default function ViewTeacherReviews({ teacher } : { teacher: Teacher }) {
+import { PrismaClient, Review, Teacher } from "@prisma/client";
+
+export default function ViewTeacherReviews({ teacher, reviews } : { teacher: Teacher, reviews: Review[] }) {
+
+    if(!teacher) {
+        return (
+            <>
+            <Header/>
+            <h1>No teacher found. Please try again or contact support if the problem persists</h1>
+            </>
+        )
+    }
+
     return (
         <>
         <Header/>
-        { teacher ? <TeacherSelect teacher={teacher}/> : <h1>No teacher found. Please try again or contact support if the problem persists</h1>}
+        <div className="d-flex flex-wrap justify-content-center m-5">
+            <TeacherSelect teacher={teacher}/>
+            <div className="d-flex m-3">
+                <ShowAvgReview reviews={reviews}/>
+            </div>
+        </div>
+        <div className="text-center">
+            <h3>
+                Do you know them? Rate them yourself!
+            </h3>
+            <RateTeacher teacher={teacher}/>
+        </div>
         </>
     )
 }
@@ -44,12 +67,17 @@ export async function getServerSideProps(ctx: any) {
             where: whereClause
         });
 
-        console.log(teacher);
+        const reviews = await prisma.review.findMany({
+            where: {
+                teacherID: teacher.id
+            }
+        })
 
         return {
             props: {
                 error: false,
-                teacher
+                teacher,
+                reviews
             }
         }
     } catch (error) {
@@ -57,8 +85,11 @@ export async function getServerSideProps(ctx: any) {
         return {
             props: {
                 error: true,
-                teacher: null
+                teacher: null,
+                reviews: []
             }
         }
     }
 }
+
+// TODO: Change it so that instead of getting all the reviews, it only gives the average rating for each
