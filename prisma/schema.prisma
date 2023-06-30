@@ -32,4 +32,11 @@ model Review {
   authorID  String
   teacher   Teacher @relation(fields: [teacherID], references: [id])
   teacherID Int
+  strictness Int
+  punctuality Int
+  precision Int
+  communication Int
+  engagement Int
+  feedbackQuality Int
+  flexibility Int
 }
