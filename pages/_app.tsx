@@ -4,7 +4,9 @@ import '@/styles/globals.css'
 
 import { Analytics } from '@vercel/analytics/react';
 
-function MyApp({ Component, pageProps }: {Component: any, pageProps: any}) {
+import { SessionProvider } from 'next-auth/react'
+
+function MyApp({ Component, pageProps, session }: {Component: any, pageProps: any, session: any }) {
   return (
     <>
       <Head>
@@ -25,7 +27,9 @@ function MyApp({ Component, pageProps }: {Component: any, pageProps: any}) {
         <meta name="theme-color" content="#000000"/>
         <meta name="google-site-verification" content="KgI7QxovzGjE_f_S2u1LvlUqJSTrmVAuiwFfImkhEXU" />
       </Head>
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
       <Analytics />
     </>
   )

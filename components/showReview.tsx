@@ -92,6 +92,7 @@ export function RateTeacher({ teacher } : { teacher: Teacher }) {
   
     function rate(e: any) {
         e.preventDefault();
+        alert("This feature is still being worked on. Apologies for any inconvenience caused.");
         // fetch(`/api/rate?name=${teacher.name}&school=${teacher.school}&strictness=${strictness}&communication=${communication}&engagement=${engagement}&feedbackQuality=${feedbackQuality}&flexibility=${flexibility}&precision=${precision}&punctuality=${punctuality}`)
         // TODO: Actually add the rating
     }
