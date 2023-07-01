@@ -4,7 +4,6 @@ import { PrismaClient } from "@prisma/client";
 
 // Next
 import Head from "next/head";
-import Image from "next/image";
 // React
 import { useEffect, useState } from "react";
 
@@ -13,7 +12,6 @@ import ss from "@/styles/Search.module.css"; // Search Styles
 
 // Components
 import TeacherSelect from "@/components/teacherSelect";
-import Link from "next/link";
 import Header from "@/components/header";
 
 export default function SearchByName({ teachers, searched, countProp } : { teachers: Teacher[], searched: string, countProp:number }) {
@@ -67,7 +65,7 @@ export default function SearchByName({ teachers, searched, countProp } : { teach
         <section className={ss.secondSection}>
         <div className={`list-group ${ss.teachersWrapper}`}>
             {                            // this div is necessary for the `key` prop, for optimization purposes.
-                shownTeachers.map((t, key) => <div style={{ width: '300px', padding: '1rem'}} key={key}><TeacherSelect teacher={t}/></div>)
+                shownTeachers.map((t, key) => <div style={{ width: '300px', padding: '1rem'}} key={key}><TeacherSelect teacher={t} button={true}/></div>)
             }
         </div>
             {

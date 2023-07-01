@@ -1,7 +1,7 @@
 import type { Teacher } from "@prisma/client";
 import Image from "next/image";
 
-export default function TeacherSelect({ teacher }:{teacher: Teacher}) {
+export default function TeacherSelect({ teacher, button=true }:{ teacher: Teacher, button: boolean }) {
     return (
         <>
             <div className="card" style={{alignItems: 'center', maxWidth: '300px'}}>
@@ -11,7 +11,7 @@ export default function TeacherSelect({ teacher }:{teacher: Teacher}) {
                 <div className="card-body" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <h5 className="card-title">{teacher.name}</h5>
                     <p className="card-text">{teacher.school || "Unknown school"}</p>
-                    <a href={`/view/${teacher.school}/${teacher.name}`} className="btn btn-primary">View profile</a>
+                    {button && <a href={`/view/${teacher.school}/${teacher.name}`} className="btn btn-primary">View profile</a>}
                 </div>
             </div>
         </>

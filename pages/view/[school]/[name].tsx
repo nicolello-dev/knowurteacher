@@ -19,7 +19,7 @@ export default function ViewTeacherReviews({ teacher, reviews } : { teacher: Tea
         <>
         <Header/>
         <div className="d-flex flex-wrap justify-content-center m-5">
-            <TeacherSelect teacher={teacher}/>
+            <TeacherSelect teacher={teacher} button={false}/>
             <div className="d-flex m-3">
                 <ShowAvgReview reviews={reviews}/>
             </div>
