@@ -8,7 +8,7 @@ generator client {
 }
 
 model Teacher {
-  id       Int      @id @default(autoincrement())
+  id       String   @id @default(uuid())
   name     String
   school   String?
   photoURL String?
@@ -27,16 +27,18 @@ model User {
 }
 
 model Review {
-  id        String  @id @default(uuid())
-  author    User    @relation(fields: [authorID], references: [id])
-  authorID  String
-  teacher   Teacher @relation(fields: [teacherID], references: [id])
-  teacherID Int
-  strictness Int
-  punctuality Int
-  precision Int
-  communication Int
-  engagement Int
+  id              String  @id @default(uuid())
+  author          User    @relation(fields: [authorID], references: [id])
+  authorID        String
+  teacher         Teacher @relation(fields: [teacherID], references: [id])
+  teacherID       String
+  strictness      Int
+  punctuality     Int
+  precision       Int
+  communication   Int
+  engagement      Int
   feedbackQuality Int
-  flexibility Int
+  flexibility     Int
+
+  @@unique([authorID, teacherID])
 }
