@@ -4,7 +4,11 @@ import { ShowAvgReview, RateTeacher } from "@/components/showReview";
 
 import { PrismaClient, Review, Teacher } from "@prisma/client";
 
+import { useSession } from 'next-auth/react';
+
 export default function ViewTeacherReviews({ teacher, reviews } : { teacher: Teacher, reviews: Review[] }) {
+
+    const { data: session } = useSession();
 
     if(!teacher) {
         return (
@@ -28,7 +32,7 @@ export default function ViewTeacherReviews({ teacher, reviews } : { teacher: Tea
             <h3>
                 Do you know them? Rate them yourself!
             </h3>
-            <RateTeacher teacher={teacher}/>
+            <RateTeacher teacher={teacher} session={session}/>
         </div>
         </>
     )

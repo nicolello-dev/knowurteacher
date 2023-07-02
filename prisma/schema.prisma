@@ -20,7 +20,7 @@ model Teacher {
 model User {
   id       String   @id @default(uuid())
   email    String   @unique
-  username String   @unique
+  username String
   school   String?
   photoURL String?
   Reviews  Review[]
@@ -33,8 +33,6 @@ model Review {
   teacher         Teacher @relation(fields: [teacherID], references: [id])
   teacherID       String
   strictness      Int
-  punctuality     Int
-  precision       Int
   communication   Int
   engagement      Int
   feedbackQuality Int

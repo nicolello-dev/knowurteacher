@@ -3,6 +3,7 @@ import { Teacher, Review } from "@prisma/client";
 import { CircularProgress, Typography } from '@mui/material';
 
 import { useState } from "react";
+import { Session } from "next-auth";
 
 function CircularProgressWithLabel({ value } : { value: number }) {
     return (
@@ -17,8 +18,6 @@ function CircularProgressWithLabel({ value } : { value: number }) {
 
 enum ReviewElements {
   strictness = "strictness",
-  punctuality = "punctuality",
-  precision = "precision",
   communication = "communication",
   engagement = "engagement",
   feedbackQuality = "feedbackQuality",
@@ -27,8 +26,6 @@ enum ReviewElements {
 
 const reviewParts: ReviewElements[] = [
     ReviewElements.strictness,
-    ReviewElements.punctuality,
-    ReviewElements.precision,
     ReviewElements.communication,
     ReviewElements.engagement,
     ReviewElements.feedbackQuality,
@@ -39,8 +36,6 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
 
   const reviewsDict: { [key: string]: number[] } = {
     strictness: [],
-    punctuality: [],
-    precision: [],
     communication: [],
     engagement: [],
     feedbackQuality: [],
@@ -81,19 +76,23 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
   </>;
 }
 
-export function RateTeacher({ teacher } : { teacher: Teacher }) {
+export function RateTeacher({ teacher, session } : { teacher: Teacher, session: Session | null }) {
     const [strictness, setStrictness] = useState<number>(5);
     const [communication, setCommunication] = useState<number>(5);
     const [engagement, setEngagement] = useState<number>(5);
     const [feedbackQuality, setFeedbackQuality] = useState<number>(5);
     const [flexibility, setFlexibility] = useState<number>(5);
-    const [precision, setPrecision] = useState<number>(5);
-    const [punctuality, setPunctuality] = useState<number>(5);
   
     function rate(e: any) {
-        e.preventDefault();
-        alert("This feature is still being worked on. Apologies for any inconvenience caused.");
-        // fetch(`/api/rate?name=${teacher.name}&school=${teacher.school}&strictness=${strictness}&communication=${communication}&engagement=${engagement}&feedbackQuality=${feedbackQuality}&flexibility=${flexibility}&precision=${precision}&punctuality=${punctuality}`)
+      e.preventDefault();
+      if(!session) {
+        alert("Not signed in! Please sign in to rate.");
+        return;
+      } else {
+        const email = session.user?.email
+        fetch(`/api/rate?email=${email}&name=${teacher.name}&school=${teacher.school}&strictness=${strictness}&communication=${communication}&engagement=${engagement}&feedbackQuality=${feedbackQuality}&flexibility=${flexibility}`)
+      }
+        // fetch(`/api/rate?name=${teacher.name}&school=${teacher.school}&strictness=${strictness}&communication=${communication}&engagement=${engagement}&feedbackQuality=${feedbackQuality}&flexibility=${flexibility}`)
         // TODO: Actually add the rating
     }
   
@@ -152,26 +151,6 @@ export function RateTeacher({ teacher } : { teacher: Teacher }) {
             step="1"
             value={flexibility}
             onChange={e => setFlexibility(parseInt(e.target.value))}
-          />
-  
-          <label>Precision: {precision}/10</label>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            step="1"
-            value={precision}
-            onChange={e => setPrecision(parseInt(e.target.value))}
-          />
-  
-          <label>Punctuality: {punctuality}/10</label>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            step="1"
-            value={punctuality}
-            onChange={e => setPunctuality(parseInt(e.target.value))}
           />
   
           <input className="btn btn-primary m-3" type="submit" value="Grade" />
