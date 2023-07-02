@@ -2,23 +2,25 @@
 
 [https://knowurteacher.com](https://www.knowurteacher.com)
 
-A website where you can chat about your teachers to discuss about how to better perform in an exa.
-
-Does your teacher prefer concise responses, technical terms, or would they prefer a more general discourse?
+A website where you can rate your teachers in regards to their teaching.
 
 ## For developers
 
 This project makes use of various frameworks:
 
 - NextJS, a frontend framework developed by Vercel
-- Firebase*, used for managing credentials
-- RDS*, an AWS database service. Using PostgreSQL
-
-<sup>* will be added later</sup>
+- Bootstrap, a frontend library for consistent styling
+- NextAuth, a Vercel framework to handle authentication
+- RDS, an AWS service for relational databases
+- PostgreSQL as the main database
+- Prisma as the ORM
+- Google Analytics and Vercel Analytics
 
 ## How to run
 
-To run the development server, run
+Before running the webapp locally, you should initiate a PostgreSQL database and configure the .env as in the [.example.env](https://github.com/ilariiiiia/knowurteacher/blob/main/.example.env) file. You will also need to generate Google Client ID and Google Client Secret through Google Cloud for oAuth2.
+
+To run the development server (locally), run
 
 ```bash
 npm run dev
@@ -42,7 +44,7 @@ And open [http://localhost:3000](http://localhost:3000) to test it in production
 
 ## Contributing
 
-Contributions are very much welcome! You can open an issue on the relative page, or directly send a pull request.
+Contributions are very much welcome! You can open an issue on the relative page, or send a pull request.
 
 Please respect the PR and issue templates, or, if strictly necessary, try to follow them as much as possible.
 
