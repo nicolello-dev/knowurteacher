@@ -109,7 +109,7 @@ export default function Home() {
           </div>
           <div className={homeStyles.faqdiv}>
             <h5 className="text-white">
-              Is my review anonymous?
+              Are my reviews anonymous?
             </h5>
             <p>
               Yes! Nobody can see who wrote a specific review, except for us.
