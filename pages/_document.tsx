@@ -4,8 +4,9 @@ import { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 
 export default function Document() {
-  const nonce = randomBytes(128).toString('base64')
-  const csp = `object-src 'none'; base-uri 'none'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https: http: 'nonce-${nonce}' 'strict-dynamic'`
+  const nonce = randomBytes(128).toString('base64');
+  const prod = process.env.NODE_ENV === 'production';
+  const csp = `object-src 'none'; base-uri 'none'; script-src 'self' ${prod ? '' : "'unsafe-eval'"} 'unsafe-inline' https: http: 'nonce-${nonce}' 'strict-dynamic'`
 
   return (
     <Html lang="en">
