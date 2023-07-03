@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
     return (
         <>
@@ -8,10 +10,10 @@ export default function Footer() {
                     </h5>
                     <ul>
                         <li>
-                            <a href="/legal/privacy-policy">Privacy Policy</a>
+                            <Link href="/legal/privacy-policy">Privacy Policy</Link>
                         </li>
                         <li>
-                            <a href="/legal/terms-of-service">Terms Of Service</a>
+                            <Link href="/legal/terms-of-service">Terms Of Service</Link>
                         </li>
                     </ul>
                 </div>
@@ -21,10 +23,10 @@ export default function Footer() {
                     </h5>
                     <ul>
                         <li>
-                            <a href="/legal/privacy-policy">About</a>
+                            <Link href="/legal/privacy-policy">About</Link>
                         </li>
                         <li>
-                            <a href="/legal/terms-of-service">Extended FAQ</a>
+                            <Link href="/legal/terms-of-service">Extended FAQ</Link>
                         </li>
                     </ul>
                 </div>
@@ -34,10 +36,10 @@ export default function Footer() {
                     </h5>
                     <ul>
                         <li>
-                            <a href="/complaints">Send a message</a>
+                            <Link href="/complaints">Send a message</Link>
                         </li>
                         <li>
-                            <a href="/report">Report</a>
+                            <Link href="/report">Report</Link>
                         </li>
                     </ul>
                 </div>
