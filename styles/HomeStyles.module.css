@@ -20,6 +20,83 @@
   color: #DEC9E9;
 }
 
+.divider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 150px;
+}
+
+.shapeFillBlack {
+  fill: #000000;
+}
+
+.shapeBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.shapeBottom svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 150px;
+}
+
+.curveTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.curveTop svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 100px;
+}
+
+.shapeFillPink {
+  fill: #DEC9E9;
+}
+
+.shapeBookBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.shapeBookBottom svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 150px;
+}
+
+.shapeFillPurple {
+  fill: #A06CD5;
+}
+
 .button {
   color: white;
   background-color: black;
@@ -40,6 +117,7 @@
 }
 
 .fourthSection {
+  color: inherit;
   background-color: #A06CD5;
   padding: 100px 20px;
 }
