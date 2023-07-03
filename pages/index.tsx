@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
 import homeStyles from "@/styles/HomeStyles.module.css";
 import Link from "next/link";
+import Footer from "@/components/footer";
 
 interface TeacherSuggestion {
   name: string;
@@ -76,7 +77,7 @@ export default function Home() {
             <div className={`m-0 text-black position-absolute ${homeStyles.absoluteContainer}`}>
               <ul className="bg-white m-0 p-0 list-unstyled">
                 {
-                  recommendedTeachers.map((t, key) => <li key={key} className="border-bottom" onClick={_ => redirectTo(t)}><p className="p-3">• {t.name}</p></li>)
+                  recommendedTeachers.map((t, key) => <li key={key} onClick={_ => redirectTo(t)}><p className="p-3">{t.name}</p></li>)
                 }
               </ul>
             </div>
@@ -148,11 +149,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <footer className="p-4 text-white text-center bg-dark-purple">
-        <p>
-          Made with &lt;3. <a href="github.com/ilariiiiia/knowurteacher">We&apos;re open source!</a>
-        </p>
-      </footer>
+      <Footer/>
     </>
   )
 }

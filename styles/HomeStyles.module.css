@@ -113,7 +113,7 @@
   cursor: pointer;
   width: 40%;
   border-radius: 10px;
-  z-index: 1;
+  z-index: 5;
 }
 
 .fourthSection {
