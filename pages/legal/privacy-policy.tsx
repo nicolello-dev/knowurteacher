@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 
 export default function privacyPolicy() {
@@ -152,6 +153,7 @@ If we transfer your personal information out of Europe, we will rely on recogniz
 Should you have any questions about our privacy practices or this Privacy Policy, or if you would like to exercise any of the rights available to you, please email us at nicolamigone179@gmail.com.
             </p>
             </div>
+            <Footer/>
         </>
     )
 }

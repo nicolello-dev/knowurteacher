@@ -7,6 +7,7 @@ import ss from "@/styles/Search.module.css";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export default function AddTeacher() {
     
@@ -55,5 +56,6 @@ export default function AddTeacher() {
                 <button className="btn btn-primary m-2" onClick={_ => addTeacher()}>Add</button>
             </div>
         </div>
+        <Footer/>
     </>)
 }

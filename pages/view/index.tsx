@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 
 export default function viewNoSchool() {
@@ -10,6 +11,7 @@ export default function viewNoSchool() {
                 </h1>
                 <p>If you believe this is an error, please send me an email at <a href="mailto:nicolamigone179%40gmail.com">nicolamigone179@gmail.com</a></p>
             </div>
+            <Footer/>
         </>
     )
 }

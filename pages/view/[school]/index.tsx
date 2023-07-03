@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 
 export default function viewNoName() {
@@ -13,6 +14,7 @@ export default function viewNoName() {
                     P.S. In the future, you may be able to see all the teachers from the same school here
                 </p>
             </div>
+            <Footer/>
         </>
     )
 }

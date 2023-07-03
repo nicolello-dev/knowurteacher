@@ -13,6 +13,7 @@ import ss from "@/styles/Search.module.css"; // Search Styles
 // Components
 import TeacherSelect from "@/components/teacherSelect";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export default function SearchByName({ teachers, searched, countProp } : { teachers: Teacher[], searched: string, countProp:number }) {
 
@@ -95,6 +96,7 @@ export default function SearchByName({ teachers, searched, countProp } : { teach
                     Search
                 </button>
         </section>
+        <Footer/>
         </>
     )
 }

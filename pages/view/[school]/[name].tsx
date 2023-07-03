@@ -5,6 +5,7 @@ import { ShowAvgReview, RateTeacher } from "@/components/showReview";
 import { PrismaClient, Review, Teacher } from "@prisma/client";
 
 import { useSession } from 'next-auth/react';
+import Footer from "@/components/footer";
 
 export default function ViewTeacherReviews({ teacher, reviews } : { teacher: Teacher, reviews: Review[] }) {
 
@@ -34,6 +35,7 @@ export default function ViewTeacherReviews({ teacher, reviews } : { teacher: Tea
             </h3>
             <RateTeacher teacher={teacher} session={session}/>
         </div>
+        <Footer/>
         </>
     )
 }
