@@ -2,7 +2,7 @@ import Header from "@/components/header";
 import TeacherSelect from "@/components/teacherSelect";
 import { ShowAvgReview, RateTeacher } from "@/components/showReview";
 
-import { PrismaClient, Review, Teacher } from "@prisma/client";
+import { Review, Teacher } from "@prisma/client";
 
 import { useSession } from 'next-auth/react';
 import Footer from "@/components/footer";
@@ -18,7 +18,7 @@ export default function ViewTeacherReviews({ name, school } : { name: string, sc
         fetch(`/api/getTeacher?name=${name}&school=${school}`)
             .then(r => r.json())
             .then(t => setTeacher(t));
-    }, []);
+    }, [name, school]);
 
     useEffect(() => {
         teacher && fetch(`/api/getTeacherReviews?teacherID=${teacher?.id}`)

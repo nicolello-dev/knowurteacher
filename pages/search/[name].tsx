@@ -15,13 +15,13 @@ import TeacherSelect from "@/components/teacherSelect";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-export default function SearchByName({ teachers, searched, countProp } : { teachers: Teacher[], searched: string, countProp:number }) {
+export default function SearchByName({ searched } : { searched: string }) {
 
-    const [count, setCount] = useState<number>(countProp);
+    const [count, setCount] = useState<number>(0);
     const [cursor, setCursor] = useState<number>(0);
     const [schoolInput, setSchoolInput] = useState<string>("");
     const [school, setSchool] = useState<string>("");
-    const [shownTeachers, setShownTeachers] = useState<Teacher[]>(teachers);
+    const [shownTeachers, setShownTeachers] = useState<Teacher[]>([]);
 
     function getPrevResults() {
         if(cursor - 5 < 0) {
@@ -103,46 +103,10 @@ export default function SearchByName({ teachers, searched, countProp } : { teach
 
 export async function getServerSideProps(ctx: any) {
     const { name } = ctx.query
-    const prisma = new PrismaClient();
 
-    try {
-        const teachers = await prisma.teacher.findMany({
-            where: {
-                name: {
-                    startsWith: name,
-                    mode: 'insensitive'
-                }
-            },
-            orderBy: {
-                id: 'asc'
-            },
-            take: 5
-        });
-
-        const countProp = await prisma.teacher.count({
-            where: {
-                name: {
-                    startsWith: name,
-                    mode: 'insensitive'
-                }
-            }
-        });
-
-        return {
-            props: {
-                teachers,
-                countProp,
-                searched: name
-            }
-        }
-    } catch (error) {
-        console.error(error);
-        return {
-            props: {
-                teachers: [],
-                countProp: 0,
-                searched: name
-            }
+    return {
+        props: {
+            searched: name
         }
     }
 }
