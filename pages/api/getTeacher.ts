@@ -3,7 +3,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 interface APIRequest extends NextApiRequest {
     query: {
-        name: string | undefined;
+        name: string | undefined,
+        school: string | undefined
     }
 }
 
@@ -14,24 +15,22 @@ export default async function suggestTeachers(req: APIRequest, res: NextApiRespo
     }
 
     const nameInput: string | undefined = req.query.name;
+    const schoolInput: string | null = req.query.school || null;
     if(nameInput == undefined || nameInput.length < 3) {
-        res.status(200).json([]);
+        res.status(400).json([]);
         return;
     }
     const prisma = new PrismaClient();
-    const teachers =  await prisma.teacher.findMany({
+    const teacher =  await prisma.teacher.findFirst({
         where: {
             name: {
-                startsWith: nameInput,
-                mode: 'insensitive'
+                equals: nameInput
+            },
+            school: {
+                equals: schoolInput
             }
-        },
-        select: {
-            name: true,
-            school: true
-        },
-        take: 5
-    })
-    res.status(200).json(teachers);
+        }
+    });
+    res.status(200).json(teacher || null);
     return;
 }

@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 interface APIRequest extends NextApiRequest {
     query: {
-        name: string | undefined;
+        teacherID: string | undefined;
     }
 }
 
@@ -13,25 +13,19 @@ export default async function suggestTeachers(req: APIRequest, res: NextApiRespo
         res.status(405).json({"success": false, "error": "Invalid method used. Please use GET only."})
     }
 
-    const nameInput: string | undefined = req.query.name;
-    if(nameInput == undefined || nameInput.length < 3) {
-        res.status(200).json([]);
+    const { teacherID } = req.query;
+    if(teacherID == undefined) {
+        res.status(400).json([]);
         return;
     }
     const prisma = new PrismaClient();
-    const teachers =  await prisma.teacher.findMany({
+    const reviews =  await prisma.review.findMany({
         where: {
-            name: {
-                startsWith: nameInput,
-                mode: 'insensitive'
+            teacherID: {
+                equals: req.query.teacherID
             }
-        },
-        select: {
-            name: true,
-            school: true
-        },
-        take: 5
-    })
-    res.status(200).json(teachers);
+        }
+    });
+    res.status(200).json(reviews || []);
     return;
 }

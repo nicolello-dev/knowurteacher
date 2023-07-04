@@ -6,10 +6,25 @@ import { PrismaClient, Review, Teacher } from "@prisma/client";
 
 import { useSession } from 'next-auth/react';
 import Footer from "@/components/footer";
+import { useEffect, useState } from "react";
 
-export default function ViewTeacherReviews({ teacher, reviews } : { teacher: Teacher, reviews: Review[] }) {
+export default function ViewTeacherReviews({ name, school } : { name: string, school: string }) {
 
     const { data: session } = useSession();
+    const [teacher, setTeacher] = useState<Teacher | null>(null);
+    const [reviews, setReviews] = useState<Review[]>([]);
+
+    useEffect(() => {
+        fetch(`/api/getTeacher?name=${name}&school=${school}`)
+            .then(r => r.json())
+            .then(t => setTeacher(t));
+    }, []);
+
+    useEffect(() => {
+        teacher && fetch(`/api/getTeacherReviews?teacherID=${teacher?.id}`)
+            .then(r => r.json())
+            .then(r => setReviews(r));
+    }, [teacher]);
 
     if(!teacher) {
         return (
@@ -43,57 +58,9 @@ export default function ViewTeacherReviews({ teacher, reviews } : { teacher: Tea
 export async function getServerSideProps(ctx: any) {
     let { name, school } = ctx.query;
 
-    const prisma = new PrismaClient();
-
-    if(school == undefined) {
-        school = null
-    }
-
-    let whereClause;
-
-    if(!school) {
-        whereClause = {
-            name: {
-                equals: name
-            },
-            school: {
-                equals: school
-            }
-        }
-    } else {
-        whereClause = {
-            name: {
-                equals: name
-            }
-        }
-    }
-
-    try {
-        const teacher = await prisma.teacher.findFirstOrThrow({
-            where: whereClause
-        });
-
-        const reviews = await prisma.review.findMany({
-            where: {
-                teacherID: teacher.id
-            }
-        })
-
-        return {
-            props: {
-                error: false,
-                teacher,
-                reviews
-            }
-        }
-    } catch (error) {
-        console.error(error);
-        return {
-            props: {
-                error: true,
-                teacher: null,
-                reviews: []
-            }
+    return {
+        props: {
+            name, school
         }
     }
 }
