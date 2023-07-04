@@ -17,7 +17,14 @@ export default function AddTeacher() {
     const [showError, setShowError] = useState<boolean>(false);
 
     function addTeacher() {
-        fetch(`/api/addTeacher?name=${name}&school=${school}`)
+        const body = {
+            name,
+            school
+        }
+        fetch(`/api/addTeacher?name=${name}&school=${school}`, {
+            method: "POST",
+            body: JSON.stringify(body)
+        })
             .then(r => r.json())
             .then(r => r.success ? setShowSuccess(true) : setShowError(true));
         alert("Thank you for adding a teacher! Your contribution is really valuable!");

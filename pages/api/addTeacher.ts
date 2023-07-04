@@ -8,16 +8,21 @@ interface APIRequest extends NextApiRequest {
     }
 }
 
-export default async function suggestTeacher(req: APIRequest, res: NextApiResponse) {
-    let { name, school } = req.query;
-    if(name == '') {
-        name = undefined;
+export default async function addTeacher(req: APIRequest, res: NextApiResponse) {
+    if(req.method != "POST") {
+        res.status(405).json({ 'success': false, 'message': 'Method not allowed. Use a POST request instead, please.'});
+        return;
+    }
+    let { name, school } = req.body;
+    if(name.length == 0 || name == undefined) {
+        res.status(405).json({ 'success': false, 'message': 'Method not allowed. Use a POST request instead, please.'});
+        return;
     }
     if(school == '') {
         school = undefined;
     }
-    if(name == undefined) {
-        res.status(400).json({ 'success': false, 'error': 'Name is undefined' });
+    if(name == undefined || name == "") {
+        res.status(400).json({ 'success': false, 'error': 'Name is not defined' });
         return;
     }
     const prisma = new PrismaClient();
@@ -32,6 +37,6 @@ export default async function suggestTeacher(req: APIRequest, res: NextApiRespon
         res.status(500).json({ 'success': false, 'error': 'Unknown error; likely the teacher already exists'});
         return;
     }
-    res.status(200).json({ 'success': true });
+    res.status(200).json({ 'success': true, 'teacherdata': { name, school } });
     return;
 }

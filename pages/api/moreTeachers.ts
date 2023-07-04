@@ -9,7 +9,12 @@ interface APIRequest extends NextApiRequest {
     }
 }
 
-export default async function suggestTeacher(req: APIRequest, res: NextApiResponse) {
+export default async function getTeachersFromName(req: APIRequest, res: NextApiResponse) {
+
+    if(req.method !== "GET") {
+        res.status(405).json({ 'success': false, 'error': 'Invalid method, GET only allowed.' })
+    }
+
     const nameInput: string | undefined = req.query.name;
     const schoolInput: string | undefined = req.query.school;
     const startIndex: number = parseInt(req.query.startIndex || '0');

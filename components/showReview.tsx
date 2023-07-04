@@ -90,10 +90,21 @@ export function RateTeacher({ teacher, session } : { teacher: Teacher, session: 
         return;
       } else {
         const email = session.user?.email
-        fetch(`/api/rate?email=${email}&name=${teacher.name}&school=${teacher.school}&strictness=${strictness}&communication=${communication}&engagement=${engagement}&feedbackQuality=${feedbackQuality}&flexibility=${flexibility}`)
+        const body = {
+          email,
+          name: teacher.name,
+          school: teacher.school,
+          strictness,
+          communication,
+          engagement,
+          feedbackQuality,
+          flexibility
+        }
+        fetch('/api/rate', {
+          method: "POST",
+          body: JSON.stringify(body)
+        })
       }
-        // fetch(`/api/rate?name=${teacher.name}&school=${teacher.school}&strictness=${strictness}&communication=${communication}&engagement=${engagement}&feedbackQuality=${feedbackQuality}&flexibility=${flexibility}`)
-        // TODO: Actually add the rating
     }
   
     return (

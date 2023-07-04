@@ -13,7 +13,6 @@ export default NextAuth({
     ],
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
-            console.log(user);
             try {
                 await prisma.user.create({
                     data: {

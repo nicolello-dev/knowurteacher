@@ -14,9 +14,13 @@ interface APIRequest extends NextApiRequest {
     }
 }
 
-export default async function suggestTeacher(req: APIRequest, res: NextApiResponse) {
+export default async function rateTeacher(req: APIRequest, res: NextApiResponse) {
 
-    let { email, name, school, strictness, communication, engagement, feedbackQuality, flexibility } = req.query;
+    if(req.method !== "POST") {
+        res.status(405).json({ "success": false, "message": "Invalid method! POST only"});
+    }
+
+    let { email, name, school, strictness, communication, engagement, feedbackQuality, flexibility } = JSON.parse(req.body);
 
     email = email || undefined;
     name = name || undefined
