@@ -8,7 +8,7 @@ export default function Footer() {
                     <h5>
                         Legal
                     </h5>
-                    <ul>
+                    <ul className="p-0 m-0">
                         <li>
                             <Link href="/legal/privacy-policy">Privacy Policy</Link>
                         </li>
@@ -21,7 +21,7 @@ export default function Footer() {
                     <h5>
                         Info
                     </h5>
-                    <ul>
+                    <ul className="p-0 m-0">
                         <li>
                             <Link href="/legal/privacy-policy">About</Link>
                         </li>
@@ -34,7 +34,7 @@ export default function Footer() {
                     <h5>
                         Complaints
                     </h5>
-                    <ul>
+                    <ul className="p-0 m-0">
                         <li>
                             <Link href="/complaints">Send a message</Link>
                         </li>
