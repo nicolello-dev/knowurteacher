@@ -38,10 +38,5 @@ export default function Header() {
         }
         </div>
     </header>
-    {
-        !!session && <div className="alert alert-success" role="alert">
-            <p className="m-0">Successfully logged in as {session?.user?.name}</p>
-        </div>
-    }
     </>)
 }
