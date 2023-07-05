@@ -3,6 +3,8 @@ import type { Teacher } from "@prisma/client";
 
 // Next
 import Head from "next/head";
+import { useRouter } from "next/router";
+
 // React
 import { useEffect, useState } from "react";
 
@@ -14,13 +16,16 @@ import TeacherSelect from "@/components/teacherSelect";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-export default function SearchByName({ searched } : { searched: string }) {
+export default function SearchByName() {
 
     const [count, setCount] = useState<number>(0);
     const [cursor, setCursor] = useState<number>(0);
     const [schoolInput, setSchoolInput] = useState<string>("");
     const [school, setSchool] = useState<string>("");
     const [shownTeachers, setShownTeachers] = useState<Teacher[]>([]);
+
+    const router = useRouter();
+    const searched = router.query.name
 
     function getPrevResults() {
         if(cursor - 5 < 0) {
@@ -60,7 +65,7 @@ export default function SearchByName({ searched } : { searched: string }) {
                     Your search results:
                 </h1>
             </div>
-            <p>There are <b>{count || "no"}</b> teachers whose name starts with <b>{searched}</b></p>
+            <p>There are <b>{count || "no"}</b> teachers whose name contains <b>{searched}</b></p>
         </section>
         <section className={ss.secondSection}>
         <div className={`list-group ${ss.teachersWrapper}`}>
@@ -98,14 +103,4 @@ export default function SearchByName({ searched } : { searched: string }) {
         <Footer/>
         </>
     )
-}
-
-export async function getServerSideProps(ctx: any) {
-    const { name } = ctx.query
-
-    return {
-        props: {
-            searched: name
-        }
-    }
 }

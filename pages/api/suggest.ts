@@ -22,7 +22,7 @@ export default async function suggestTeachers(req: APIRequest, res: NextApiRespo
     const teachers =  await prisma.teacher.findMany({
         where: {
             name: {
-                startsWith: nameInput,
+                contains: nameInput,
                 mode: 'insensitive'
             }
         },

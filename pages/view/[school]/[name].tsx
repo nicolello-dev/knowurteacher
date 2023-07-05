@@ -7,8 +7,9 @@ import { Review, Teacher } from "@prisma/client";
 import { useSession } from 'next-auth/react';
 import Footer from "@/components/footer";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-export default function ViewTeacherReviews({ name, school } : { name: string, school: string }) {
+export default function ViewTeacherReviews() {
 
     const { data: session } = useSession();
     const [teacher, setTeacher] = useState<Teacher | null>(null);
@@ -17,6 +18,9 @@ export default function ViewTeacherReviews({ name, school } : { name: string, sc
     const [showError, setShowError] = useState<boolean>(false);
     const [errorMesssage, setErrorMessage] = useState<string>("");
 
+    const router = useRouter();
+    const { name, school } = router.query;
+    
     useEffect(() => {
         fetch(`/api/getTeacher?name=${name}&school=${school}`)
             .then(r => r.json())
@@ -70,16 +74,6 @@ export default function ViewTeacherReviews({ name, school } : { name: string, sc
         <Footer/>
         </>
     )
-}
-
-export async function getServerSideProps(ctx: any) {
-    let { name, school } = ctx.query;
-
-    return {
-        props: {
-            name, school
-        }
-    }
 }
 
 // TODO: Change it so that instead of getting all the reviews, it only gives the average rating for each

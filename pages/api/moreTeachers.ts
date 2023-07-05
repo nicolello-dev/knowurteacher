@@ -31,7 +31,7 @@ export default async function getTeachersFromName(req: APIRequest, res: NextApiR
         teachers = await prisma.teacher.findMany({
             where: {
                 name: {
-                    startsWith: nameInput,
+                    contains: nameInput,
                     mode: 'insensitive'
                 }
             },
