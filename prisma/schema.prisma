@@ -10,7 +10,7 @@ generator client {
 model Teacher {
   id       String   @id @default(uuid())
   name     String
-  school   String?
+  school   String
   photoURL String?
   Reviews  Review[]
 

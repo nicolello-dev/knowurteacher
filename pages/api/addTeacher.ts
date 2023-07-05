@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import prisma from "@/prisma/prisma";
 
 interface APIRequest extends NextApiRequest {
     query: {
@@ -25,7 +25,6 @@ export default async function addTeacher(req: APIRequest, res: NextApiResponse) 
         res.status(400).json({ 'success': false, 'error': 'Name is not defined' });
         return;
     }
-    const prisma = new PrismaClient();
     try {
         await prisma.teacher.create({
             data: {

@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import prisma from "@/prisma/prisma";
 
 interface APIRequest extends NextApiRequest {
     query: {
@@ -20,7 +20,6 @@ export default async function suggestTeachers(req: APIRequest, res: NextApiRespo
         res.status(400).json([]);
         return;
     }
-    const prisma = new PrismaClient();
     const teacher =  await prisma.teacher.findFirst({
         where: {
             name: {

@@ -1,5 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+
+import prisma from "@/prisma/prisma";
 
 interface APIRequest extends NextApiRequest {
     query: {
@@ -35,8 +36,6 @@ export default async function rateTeacher(req: APIRequest, res: NextApiResponse)
         res.status(400).json({ 'success': false, 'error': 'Something was not defined' });
         return;
     }
-
-    const prisma = new PrismaClient();
     try {
         const user = await prisma.user.findUniqueOrThrow({
             where: {

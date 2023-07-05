@@ -1,5 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+
+import prisma from "@/prisma/prisma";
 
 interface APIRequest extends NextApiRequest {
     query: {
@@ -24,7 +25,6 @@ export default async function getTeachersFromName(req: APIRequest, res: NextApiR
         return;
     }
 
-    const prisma = new PrismaClient();
     let teachers;
     let count;
     if(schoolInput == "") {

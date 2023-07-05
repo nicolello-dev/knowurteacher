@@ -1,6 +1,5 @@
 // Prisma
 import type { Teacher } from "@prisma/client";
-import { PrismaClient } from "@prisma/client";
 
 // Next
 import Head from "next/head";
