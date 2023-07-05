@@ -77,7 +77,12 @@ export default function Home() {
             <div className={`m-0 text-black position-absolute ${homeStyles.absoluteContainer}`}>
               <ul className="bg-white m-0 p-0 list-unstyled">
                 {
-                  recommendedTeachers.map((t, key) => <li key={key} onClick={_ => redirectTo(t)}><p className="p-3">{t.name}</p></li>)
+                  recommendedTeachers.map((t, key) => <li key={key} onClick={_ => redirectTo(t)}>
+                    <div className="p-3">
+                      <p className="m-0">{t.name} </p>
+                      <p className="m-0 text-muted">{t.school}</p>
+                    </div>
+                  </li>)
                 }
               </ul>
             </div>
