@@ -13,6 +13,9 @@ export default function ViewTeacherReviews({ name, school } : { name: string, sc
     const { data: session } = useSession();
     const [teacher, setTeacher] = useState<Teacher | null>(null);
     const [reviews, setReviews] = useState<Review[]>([]);
+    const [showSuccess, setShowSuccess] = useState<boolean>(false);
+    const [showError, setShowError] = useState<boolean>(false);
+    const [errorMesssage, setErrorMessage] = useState<string>("");
 
     useEffect(() => {
         fetch(`/api/getTeacher?name=${name}&school=${school}`)
@@ -26,6 +29,14 @@ export default function ViewTeacherReviews({ name, school } : { name: string, sc
             .then(r => setReviews(r));
     }, [teacher]);
 
+    useEffect(() => {
+        showSuccess && setTimeout(_ => setShowSuccess(false), 3000);
+    }, [showSuccess]);
+
+    useEffect(() => {
+        showError && setTimeout(_ => setShowError(false), 3000);
+    }, [showError]);
+
     if(!teacher) {
         return (
             <>
@@ -38,6 +49,12 @@ export default function ViewTeacherReviews({ name, school } : { name: string, sc
     return (
         <>
         <Header/>
+        <div className="alert alert-success" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
+            Teacher added successfully!
+        </div>
+        <div className="alert alert-danger" role="alert" style={{ display: showError ? "block" : "none" }}>
+            {errorMesssage}
+        </div>
         <div className="d-flex flex-wrap justify-content-center m-5">
             <TeacherSelect teacher={teacher} button={false}/>
             <div className="d-flex m-3">
@@ -48,7 +65,7 @@ export default function ViewTeacherReviews({ name, school } : { name: string, sc
             <h3>
                 Do you know them? Rate them yourself!
             </h3>
-            <RateTeacher teacher={teacher} session={session}/>
+            <RateTeacher teacher={teacher} session={session} setError={setErrorMessage} setShowSuccess={setShowSuccess} setShowError={setShowError}/>
         </div>
         <Footer/>
         </>

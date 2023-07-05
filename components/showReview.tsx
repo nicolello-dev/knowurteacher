@@ -76,7 +76,7 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
   </>;
 }
 
-export function RateTeacher({ teacher, session } : { teacher: Teacher, session: Session | null }) {
+export function RateTeacher({ teacher, session, setError, setShowSuccess, setShowError } : { teacher: Teacher, session: Session | null, setError: Function, setShowSuccess: Function, setShowError: Function }) {
     const [strictness, setStrictness] = useState<number>(5);
     const [communication, setCommunication] = useState<number>(5);
     const [engagement, setEngagement] = useState<number>(5);
@@ -86,7 +86,8 @@ export function RateTeacher({ teacher, session } : { teacher: Teacher, session: 
     function rate(e: any) {
       e.preventDefault();
       if(!session) {
-        alert("Not signed in! Please sign in to rate.");
+        setError("Not signed in! Please do in order to rate and add teachers.");
+        setShowError(true);
         return;
       } else {
         const email = session.user?.email
@@ -104,6 +105,14 @@ export function RateTeacher({ teacher, session } : { teacher: Teacher, session: 
           method: "POST",
           body: JSON.stringify(body)
         })
+          .then(r => r.json())
+          .then(r => {
+            if(r.success) {
+              setShowSuccess(true);
+            } else {
+              setError(r.message);
+              setShowError(true);
+            }});
       }
     }
   
