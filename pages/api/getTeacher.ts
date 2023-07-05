@@ -14,9 +14,9 @@ export default async function suggestTeachers(req: APIRequest, res: NextApiRespo
         res.status(405).json({"success": false, "error": "Invalid method used. Please use GET only."})
     }
 
-    const nameInput: string | undefined = req.query.name;
+    const nameInput: string | null = req.query.name || null;
     const schoolInput: string | null = req.query.school || null;
-    if(nameInput == undefined || nameInput.length < 3) {
+    if(nameInput == null || nameInput.length < 3 || schoolInput == null) {
         res.status(400).json([]);
         return;
     }
