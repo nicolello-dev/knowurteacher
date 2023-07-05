@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from "@/prisma/prisma";
+import { getServerSession } from "next-auth/next"
+import authOptions from "./auth/[...nextauth]"
 
 interface APIRequest extends NextApiRequest {
     query: {
@@ -19,6 +21,11 @@ export default async function rateTeacher(req: APIRequest, res: NextApiResponse)
 
     if(req.method !== "POST") {
         res.status(405).json({ "success": false, "message": "Invalid method! POST only"});
+    }
+
+    const session = await getServerSession(req, res, authOptions);
+    if(!session) {
+        res.status(401).json({ 'success': false, 'message': "Not authenticated. Please sign in and try again." });
     }
 
     let { email, name, school, strictness, communication, engagement, feedbackQuality, flexibility } = JSON.parse(req.body);
