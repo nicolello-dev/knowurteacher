@@ -5,7 +5,6 @@ import styles from "./teacherProfile.module.css"
 import ss from "@/styles/Search.module.css";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
@@ -18,16 +17,15 @@ export default function AddTeacher() {
 
     function addTeacher() {
         const body = {
-            name,
-            school
+            name: name,
+            school: school
         }
-        fetch(`/api/addTeacher?name=${name}&school=${school}`, {
+        fetch(`/api/addTeacher`, {
             method: "POST",
             body: JSON.stringify(body)
         })
             .then(r => r.json())
             .then(r => r.success ? setShowSuccess(true) : setShowError(true));
-        alert("Thank you for adding a teacher! Your contribution is really valuable!");
     }
 
     useEffect(() => {

@@ -11,7 +11,7 @@ interface APIRequest extends NextApiRequest {
 export default async function suggestTeachers(req: APIRequest, res: NextApiResponse) {
 
     if(req.method !== "GET") {
-        res.status(405).json({"success": false, "error": "Invalid method used. Please use GET only."})
+        res.status(405).json({"success": false, "message": "Invalid method used. Please use GET only."})
     }
 
     const nameInput: string | undefined = req.query.name;

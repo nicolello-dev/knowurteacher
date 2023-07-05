@@ -33,7 +33,7 @@ export default async function rateTeacher(req: APIRequest, res: NextApiResponse)
     flexibility = flexibility || undefined;
 
     if(email == undefined || name == undefined || school == undefined || strictness == undefined || communication == undefined || engagement == undefined || feedbackQuality == undefined || flexibility == undefined) {
-        res.status(400).json({ 'success': false, 'error': 'Something was not defined' });
+        res.status(400).json({ 'success': false, 'message': 'Something was not defined' });
         return;
     }
     try {
@@ -65,7 +65,7 @@ export default async function rateTeacher(req: APIRequest, res: NextApiResponse)
             }
         });
     } catch (err) {
-        res.status(500).json({ 'success': false, 'error': 'Unknown error; likely the user or teacher specified doesn\'t exist'});
+        res.status(500).json({ 'success': false, 'message': 'Unknown error; likely the user or teacher specified doesn\'t exist'});
         return;
     }
     res.status(200).json({ 'success': true });
