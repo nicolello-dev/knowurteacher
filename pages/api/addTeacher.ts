@@ -16,15 +16,13 @@ export default async function addTeacher(req: APIRequest, res: NextApiResponse) 
         res.status(405).json({ 'success': false, 'message': 'Method not allowed. Use a POST request instead, please.' });
         return;
     }
-    
+
     const session = await getServerSession(req, res, authOptions);
     if(!session) {
         res.status(401).json({ 'success': false, 'message': "Not authenticated. Please sign in and try again." });
     }
 
     const { name, school } = JSON.parse(req.body)
-
-    console.log(name, school, req.body);
 
     if(name == undefined || name == "" || school == undefined || school.length == 0) {
         res.status(400).json({ 'success': false, 'message': 'Name or school are either not defined or an empty string ""' });
