@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { useRouter } from "next/router";
 
 export default function AddTeacher() {
     
@@ -11,6 +12,8 @@ export default function AddTeacher() {
     const [showSuccess, setShowSuccess] = useState<boolean>(false);
     const [showError, setShowError] = useState<boolean>(false);
     const [errorMesssage, setErrorMessage] = useState<string>("");
+
+    const router = useRouter();
 
     function addTeacher() {
         if(!name || !school) {
@@ -46,7 +49,7 @@ export default function AddTeacher() {
     }, [showError]);
     
     return (<>
-        <Header/>
+        <Header router={router}/>
         <div className="alert alert-success" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
             Teacher added successfully!
         </div>

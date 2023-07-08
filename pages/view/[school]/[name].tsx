@@ -44,7 +44,7 @@ export default function ViewTeacherReviews() {
     if(!teacher) {
         return (
             <>
-            <Header/>
+            <Header router={router}/>
             <h1>No teacher found. Please try again or contact support if the problem persists</h1>
             </>
         )
@@ -52,7 +52,7 @@ export default function ViewTeacherReviews() {
 
     return (
         <>
-        <Header/>
+        <Header router={router}/>
         <div className="alert alert-success" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
             Teacher added successfully!
         </div>

@@ -45,7 +45,7 @@ export default function SearchByName() {
     }
 
     useEffect(() => {
-        fetch(`/api/moreTeachers?name=${searched}&startIndex=${cursor}&school=${school}`)
+        searched && fetch(`/api/moreTeachers?name=${searched}&startIndex=${cursor}&school=${school}`)
             .then(r => r.json())
             .then(t => {
                 setShownTeachers(t.teachers);

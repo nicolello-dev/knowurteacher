@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import homeStyles from "@/styles/HomeStyles.module.css";
 import Link from "next/link";
 import Footer from "@/components/footer";
+import Header from "@/components/header";
 
 interface TeacherSuggestion {
   name: string;
@@ -12,6 +13,7 @@ interface TeacherSuggestion {
 
 export default function Home() {
     const router = useRouter();
+
     const [name, setName] = useState<string>("");
     const [recommendedTeachers, setRecommendedTeachers] = useState<TeacherSuggestion[]>([]);
 
@@ -40,14 +42,7 @@ export default function Home() {
 
     return (
     <>
-      <section className={`hero-unit ${homeStyles.initialSection}`}>
-        <h1>
-          KNOWURTEACHER
-        </h1>
-        <div className="position-relative ratio ratio-1x1">
-          <Image src='https://cdn.knowurteacher.com/logo.svg' alt='logo' fill={true}/>
-        </div>
-      </section>
+      <Header router={router}/>
       <section className="bg-pink position-relative m-0">
         <div>
           <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">

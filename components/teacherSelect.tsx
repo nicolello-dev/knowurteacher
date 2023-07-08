@@ -10,7 +10,7 @@ export default function TeacherSelect({ teacher, button=true }:{ teacher: Teache
                 </div>
                 <div className="card-body" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <h5 className="card-title">{teacher.name}</h5>
-                    <p className="card-text">{teacher.school || "Unknown school"}</p>
+                    <p className="card-text text-center">{teacher.school || "Unknown school"}</p>
                     {button && <a href={`/view/${teacher.school}/${teacher.name}`} className="btn btn-primary">View profile</a>}
                 </div>
             </div>
