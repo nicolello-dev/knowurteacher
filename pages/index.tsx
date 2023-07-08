@@ -56,8 +56,7 @@ export default function Home() {
             Empower your education
           </h1>
           <h5 className="p-3">
-          Unveil the hidden gems of the teaching world and help your peers make informed choices for a better academic experience!
-          With KnowUrTeacher, you can rate your teachers, share reviews, and prep-up for upcoming exams.
+          Get to know your teachers before class by rating 0-10 on various aspects of their teaching seeing other's ratings!
           </h5>
           <h3 className="p-4">
             Search your teacher:
