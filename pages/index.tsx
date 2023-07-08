@@ -56,7 +56,7 @@ export default function Home() {
             Empower your education
           </h1>
           <h5 className="p-3">
-          Get to know your teachers before class by rating 0-10 on various aspects of their teaching seeing other's ratings!
+          Get to know your teachers before class by rating 0-10 on various aspects of their teaching seeing other&apos;s ratings!
           </h5>
           <h3 className="p-4">
             Search your teacher:
