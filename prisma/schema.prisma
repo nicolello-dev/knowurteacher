@@ -7,36 +7,54 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Labels {
+  // Positive
+  Helpful
+  Passionate
+  Knowledgeable
+  Patient
+  Motivating
+  Creative
+  Fun
+  // Negative
+  Strict
+  Unorganized
+  Inconsistent
+  Harsh
+  Impatient
+  Unavailable
+  Serious
+}
+
 model Teacher {
-  id       String   @id @default(uuid())
-  name     String
-  school   String
-  photoURL String?
-  Reviews  Review[]
+  id         String   @id @default(uuid())
+  added_date DateTime @default(now()) @db.Timestamptz(3)
+  name       String
+  school     String
+  photoURL   String?
+  Reviews    Review[]
 
   @@unique([name, school])
 }
 
 model User {
-  id       String   @id @default(uuid())
-  email    String   @unique
-  username String
-  school   String?
-  photoURL String?
-  Reviews  Review[]
+  id        String   @id @default(uuid())
+  email     String   @unique
+  join_date DateTime @default(now()) @db.Timestamptz(3)
+  username  String
+  school    String?
+  photoURL  String?
+  Reviews   Review[]
 }
 
 model Review {
-  id              String  @id @default(uuid())
-  author          User    @relation(fields: [authorID], references: [id])
-  authorID        String
-  teacher         Teacher @relation(fields: [teacherID], references: [id])
-  teacherID       String
-  strictness      Int
-  communication   Int
-  engagement      Int
-  feedbackQuality Int
-  flexibility     Int
+  id            String   @id @default(uuid())
+  creation_date DateTime @default(now()) @db.Timestamptz(3)
+  author        User     @relation(fields: [authorID], references: [id])
+  authorID      String
+  teacher       Teacher  @relation(fields: [teacherID], references: [id])
+  teacherID     String
+  labels        Labels[]
 
   @@unique([authorID, teacherID])
 }
