@@ -101,7 +101,7 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
             <label style={{ display: showError ? "block" : "none", color: 'red'}}> <b>The label you provided is not a valid label!</b></label>
             <label
               htmlFor="newteacherlabel"
-              className="form-label">Labels chosen: {labels.map(l => <kbd>{l}</kbd>)}</label>
+              className="form-label">Labels chosen: {labels.map((l, i) => <kbd key={i}>{l}</kbd>)}</label>
             <input
               id="newteacherlabel"
               type="text"
