@@ -61,27 +61,29 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
         setError("Not signed in! Please do in order to rate and add teachers.");
         setShowError(true);
         return;
-      } else {
-        const email = session.user?.email
-        const body = {
-          email,
-          name: teacher.name,
-          school: teacher.school,
-          labels
-        }
-        fetch('/api/rate', {
-          method: "POST",
-          body: JSON.stringify(body)
-        })
-          .then(r => r.json())
-          .then(r => {
-            if(r.success) {
-              setShowSuccess(true);
-            } else {
-              setError(r.message);
-              setShowError(true);
-            }});
       }
+      const email = session.user?.email
+      const body = {
+        email,
+        name: teacher.name,
+        school: teacher.school,
+        labels
+      }
+      fetch('/api/rate', {
+        method: "POST",
+        body: JSON.stringify(body)
+      })
+        .then(r => r.json())
+        .then(r => {
+          if(r.success) {
+            setShowSuccess(true);
+            setLabels([]);
+            setCurrentLabel("");
+            setShowError(false);
+          } else {
+            setError(r.message);
+            setShowError(true);
+          }});
     }
 
     function handleNewLabel() {
