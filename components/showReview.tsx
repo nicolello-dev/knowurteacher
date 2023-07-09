@@ -77,6 +77,9 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
           .then(r => {
             if(r.success) {
               setShowSuccess(true);
+              setLabels([]);
+              setCurrentLabel("");
+              setShowError(false);
             } else {
               setError(r.message);
               setShowError(true);
