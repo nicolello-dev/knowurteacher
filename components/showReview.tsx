@@ -1,51 +1,19 @@
-import { Teacher, Review } from "@prisma/client";
-
-import { CircularProgress, Typography } from '@mui/material';
+import { Teacher, Review, Labels } from "@prisma/client";
 
 import { useState } from "react";
 import { Session } from "next-auth";
 
-function CircularProgressWithLabel({ value } : { value: number }) {
-    return (
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-        <CircularProgress variant="determinate" value={value} />
-        <Typography variant="body2" color="textSecondary" style={{ marginLeft: 10 }}>
-            {`${Math.round(value)}%`}
-        </Typography>
-        </div>
-    );
-}
-
-enum ReviewElements {
-  strictness = "strictness",
-  communication = "communication",
-  engagement = "engagement",
-  feedbackQuality = "feedbackQuality",
-  flexibility = "flexibility",
-}
-
-const reviewParts: ReviewElements[] = [
-    ReviewElements.strictness,
-    ReviewElements.communication,
-    ReviewElements.engagement,
-    ReviewElements.feedbackQuality,
-    ReviewElements.flexibility,
-];
-
 export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
 
-  const reviewsDict: { [key: string]: number[] } = {
-    strictness: [],
-    communication: [],
-    engagement: [],
-    feedbackQuality: [],
-    flexibility: [],
+  const reviewsDict: { [key: string]: number } = {
   };
 
-  reviewParts.forEach((p) => {
-    reviews.forEach((r) => {
-      reviewsDict[p].push(r[p]);
-    });
+  for(const key in Labels) {
+    reviewsDict[key] = 0;
+  }
+
+  reviews.forEach(r => {
+    r.labels.forEach(l => reviewsDict[l] += 1);
   });
 
   return <>
@@ -53,20 +21,27 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
         <tbody>
             <tr>
                 <th>
-                    Trait
+                    Label
                 </th>
                 <th>
-                    Rating ({reviews.length})
+                    Count ({reviews.length})
                 </th>
             </tr>
         {
-            Object.keys(reviewsDict).map((k: any) => {
+                                    // Sort the reviews by descending order
+            Object.keys(reviewsDict).sort((a, b) => {
+              if(reviewsDict[a] < reviewsDict[b]) {
+                return 1
+              } else if(reviewsDict[a] == reviewsDict[b]) {
+                return 0
+              }
+              return -1
+            }).map((k: any) => {
                 const times = reviewsDict[k];
-                const avg = times.reduce((p: any, c: any, i: any) => p + (c - p) / (i + 1), 0);
                 return <tr className="container" key={k}>
-                    <td key={k}>{k == "feedbackQuality" ? "Feedback Quality" : k.charAt(0).toUpperCase() + k.slice(1)}</td>
-                    <td className="text-center">
-                        <CircularProgressWithLabel value={avg * 10} />
+                    <td key={k}>{k}</td>
+                    <td className="text-center" key={k + times}>
+                      {times ? times.toString() : "-"}
                     </td>
                 </tr>;
             })
@@ -77,14 +52,10 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
 }
 
 export function RateTeacher({ teacher, session, setError, setShowSuccess, setShowError } : { teacher: Teacher, session: Session | null, setError: Function, setShowSuccess: Function, setShowError: Function }) {
-    const [strictness, setStrictness] = useState<number>(5);
-    const [communication, setCommunication] = useState<number>(5);
-    const [engagement, setEngagement] = useState<number>(5);
-    const [feedbackQuality, setFeedbackQuality] = useState<number>(5);
-    const [flexibility, setFlexibility] = useState<number>(5);
+    const [labels, setLabels] = useState<Labels[]>([]);
+    const [currentLabel, setCurrentLabel] = useState<string>("");
   
-    function rate(e: any) {
-      e.preventDefault();
+    function rate() {
       if(!session) {
         setError("Not signed in! Please do in order to rate and add teachers.");
         setShowError(true);
@@ -95,11 +66,7 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
           email,
           name: teacher.name,
           school: teacher.school,
-          strictness,
-          communication,
-          engagement,
-          feedbackQuality,
-          flexibility
+          labels
         }
         fetch('/api/rate', {
           method: "POST",
@@ -115,66 +82,37 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
             }});
       }
     }
+
+    function handleNewLabel() {
+      // Validate user input
+      if(!Object.keys(Labels).includes(currentLabel) || labels.includes(currentLabel as Labels)) {
+        // user input is not a valid Label or labels already includes the user's input
+        return;
+      }
+      setLabels([...labels, currentLabel as Labels]);
+      setCurrentLabel("");
+    }
   
     return (
       <>
-        <form
-          className="container d-flex flex-column"
-          onSubmit={e => rate(e)}
-          style={{ maxWidth: '400px', minWidth: '300px' }}
-        >
-          <label>Strictness: {strictness}/10</label>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            step="1"
-            value={strictness}
-            onChange={e => setStrictness(parseInt(e.target.value))}
-          />
+          <div className="mb-3">
+            <label
+              htmlFor="newteacherlabel"
+              className="form-label">Labels chosen: {labels.join(", ")}</label>
+            <input
+              id="newteacherlabel"
+              type="text"
+              value={currentLabel}
+              onChange={(e) => setCurrentLabel(e.target.value)}
+              onKeyDown={(key) => {
+                if(key.key == "Enter") {
+                  handleNewLabel();
+                }
+              }}
+            />
+          </div>
   
-          <label>Communication: {communication}/10</label>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            step="1"
-            value={communication}
-            onChange={e => setCommunication(parseInt(e.target.value))}
-          />
-  
-          <label>Engagement: {engagement}/10</label>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            step="1"
-            value={engagement}
-            onChange={e => setEngagement(parseInt(e.target.value))}
-          />
-  
-          <label>Feedback Quality: {feedbackQuality}/10</label>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            step="1"
-            value={feedbackQuality}
-            onChange={e => setFeedbackQuality(parseInt(e.target.value))}
-          />
-  
-          <label>Flexibility: {flexibility}/10</label>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            step="1"
-            value={flexibility}
-            onChange={e => setFlexibility(parseInt(e.target.value))}
-          />
-  
-          <input className="btn btn-primary m-3" type="submit" value="Grade" />
-        </form>
+          <input className="btn btn-primary m-3" type="submit" value="Grade" onClick={_ => rate()} />
       </>
     );
   }

@@ -28,18 +28,14 @@ export default async function rateTeacher(req: APIRequest, res: NextApiResponse)
         res.status(401).json({ 'success': false, 'message': "Not authenticated. Please sign in and try again." });
     }
 
-    let { email, name, school, strictness, communication, engagement, feedbackQuality, flexibility } = JSON.parse(req.body);
+    let { email, name, school, labels } = JSON.parse(req.body);
 
     email = email || undefined;
     name = name || undefined
     school = school || undefined;
-    strictness = strictness || undefined;
-    communication = communication || undefined;
-    engagement = engagement || undefined;
-    feedbackQuality = feedbackQuality || undefined;
-    flexibility = flexibility || undefined;
+    labels = labels?.length ? labels : undefined;
 
-    if(email == undefined || name == undefined || school == undefined || strictness == undefined || communication == undefined || engagement == undefined || feedbackQuality == undefined || flexibility == undefined) {
+    if(email == undefined || name == undefined || school == undefined || labels == undefined) {
         res.status(400).json({ 'success': false, 'message': 'Something was not defined' });
         return;
     }
@@ -64,15 +60,12 @@ export default async function rateTeacher(req: APIRequest, res: NextApiResponse)
             data: {
                 author: { connect: { id: user.id } },
                 teacher: { connect: { id: teacher.id } },
-                strictness: parseInt(strictness),
-                communication: parseInt(communication),
-                engagement: parseInt(engagement),
-                feedbackQuality: parseInt(feedbackQuality),
-                flexibility: parseInt(flexibility)
+                labels: labels
             }
         });
     } catch (err) {
-        res.status(500).json({ 'success': false, 'message': 'Unknown error; likely the user or teacher specified doesn\'t exist'});
+        console.error(err);
+        res.status(500).json({ 'success': false, 'message': 'Unknown error; you likely already wrote a review for the teacher'});
         return;
     }
     res.status(200).json({ 'success': true });

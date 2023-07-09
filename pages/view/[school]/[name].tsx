@@ -22,7 +22,7 @@ export default function ViewTeacherReviews() {
     const { name, school } = router.query;
     
     useEffect(() => {
-        fetch(`/api/getTeacher?name=${name}&school=${school}`)
+        name && school && fetch(`/api/getTeacher?name=${name}&school=${school}`)
             .then(r => r.json())
             .then(t => setTeacher(t));
     }, [name, school]);
@@ -54,19 +54,19 @@ export default function ViewTeacherReviews() {
         <>
         <Header router={router}/>
         <div className="alert alert-success" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
-            Teacher added successfully!
+            Review added successfully!
         </div>
         <div className="alert alert-danger" role="alert" style={{ display: showError ? "block" : "none" }}>
             {errorMesssage}
         </div>
-        <div className="d-flex flex-wrap justify-content-center m-5">
+        <div className="d-flex flex-wrap justify-content-center align-items-center m-5">
             <TeacherSelect teacher={teacher} button={false}/>
             <div className="d-flex m-3">
                 <ShowAvgReview reviews={reviews}/>
             </div>
         </div>
         <div className="text-center">
-            <h3>
+            <h3 className="m-3 mb-4">
                 Do you know them? Rate them yourself!
             </h3>
             <RateTeacher teacher={teacher} session={session} setError={setErrorMessage} setShowSuccess={setShowSuccess} setShowError={setShowError}/>

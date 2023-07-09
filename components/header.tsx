@@ -34,7 +34,7 @@ export default function Header(props: {router?: NextRouter}) {
                 session ? <>
                     <button className="btn btn-primary" onClick={() => signOut()}>Log Out</button>
                 </> : <>
-                    <button className="btn btn-primary" onClick={() => {signIn('google', { callbackUrl: `?success=1` }); setShowLabel(true)}}>Log In</button>
+                    <button className="btn btn-primary" onClick={() => {signIn(); setShowLabel(true)}}>Log In</button>
                 </>
             }
             </div>
