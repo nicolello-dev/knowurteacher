@@ -8,8 +8,6 @@ import { NextRouter } from "next/router";
 
 export default function Header(props: {router?: NextRouter}) {
     const success = props.router?.query.success || false;
-    console.log(props.router?.pathname);
-    const asPath = props.router?.pathname;
     const { data: session } = useSession();
     const [showLabel, setShowLabel] = useState<boolean>(true);
     // Hide label after three seconds
