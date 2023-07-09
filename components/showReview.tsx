@@ -54,6 +54,7 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
 export function RateTeacher({ teacher, session, setError, setShowSuccess, setShowError } : { teacher: Teacher, session: Session | null, setError: Function, setShowSuccess: Function, setShowError: Function }) {
     const [labels, setLabels] = useState<Labels[]>([]);
     const [currentLabel, setCurrentLabel] = useState<string>("");
+    const [showError, setShowErrorMessage] = useState<boolean>(false);
   
     function rate() {
       if(!session) {
@@ -87,6 +88,7 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
       // Validate user input
       if(!Object.keys(Labels).includes(currentLabel) || labels.includes(currentLabel as Labels)) {
         // user input is not a valid Label or labels already includes the user's input
+        setShowErrorMessage(true);
         return;
       }
       setLabels([...labels, currentLabel as Labels]);
@@ -95,15 +97,16 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
   
     return (
       <>
-          <div className="mb-3">
+          <div className="mb-3 d-flex flex-column flex-wrap align-content-center">
+            <label style={{ display: showError ? "block" : "none", color: 'red'}}> <b>The label you provided is not a valid label!</b></label>
             <label
               htmlFor="newteacherlabel"
-              className="form-label">Labels chosen: {labels.join(", ")}</label>
+              className="form-label">Labels chosen: {labels.map(l => <kbd>{l}</kbd>)}</label>
             <input
               id="newteacherlabel"
               type="text"
               value={currentLabel}
-              onChange={(e) => setCurrentLabel(e.target.value)}
+              onChange={(e) => {setCurrentLabel(e.target.value); setShowErrorMessage(false)}}
               onKeyDown={(key) => {
                 if(key.key == "Enter") {
                   handleNewLabel();
