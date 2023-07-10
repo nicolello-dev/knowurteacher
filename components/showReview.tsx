@@ -28,7 +28,7 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
                 </th>
             </tr>
         {
-                                    // Sort the reviews by descending order
+                                    // Sort the labels in descending order
             Object.keys(reviewsDict).sort((a, b) => {
               if(reviewsDict[a] < reviewsDict[b]) {
                 return 1
@@ -39,7 +39,7 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
             }).map((k: any) => {
                 const times = reviewsDict[k];
                 return <tr className="container" key={k}>
-                    <td key={k}>{k}</td>
+                    <td key={k}><kbd>{k}</kbd></td>
                     <td className="text-center" key={k + times}>
                       {times ? times.toString() : "-"}
                     </td>
@@ -51,7 +51,7 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
   </>;
 }
 
-export function RateTeacher({ teacher, session, setError, setShowSuccess, setShowError } : { teacher: Teacher, session: Session | null, setError: Function, setShowSuccess: Function, setShowError: Function }) {
+export function RateTeacher({ teacher, session, setError, setShowSuccess, setShowError, setReviews } : { teacher: Teacher, session: Session | null, setError: Function, setShowSuccess: Function, setShowError: Function, setReviews: Function }) {
     const [labels, setLabels] = useState<Labels[]>([]);
     const [currentLabel, setCurrentLabel] = useState<string>("");
     const [showError, setShowErrorMessage] = useState<boolean>(false);
@@ -80,6 +80,9 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
               setLabels([]);
               setCurrentLabel("");
               setShowError(false);
+              fetch(`/api/getTeacherReviews?teacherID=${teacher.id}`)
+                .then(r => r.json())
+                .then(r => setReviews(r))
             } else {
               setError(r.message);
               setShowError(true);

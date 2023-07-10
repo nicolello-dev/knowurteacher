@@ -56,13 +56,27 @@ export default async function rateTeacher(req: APIRequest, res: NextApiResponse)
                 id: true
             }
         });
-        await prisma.review.create({
-            data: {
-                author: { connect: { id: user.id } },
-                teacher: { connect: { id: teacher.id } },
-                labels: labels
-            }
-        });
+        try {
+            await prisma.review.create({
+                data: {
+                    author: { connect: { id: user.id } },
+                    teacher: { connect: { id: teacher.id } },
+                    labels: labels
+                }
+            });
+        } catch(err) {
+            await prisma.review.update({
+                where: {
+                    authorID_teacherID: {
+                        authorID: user.id,
+                        teacherID: teacher.id
+                    }
+                },
+                data: {
+                    labels
+                }
+            });
+        }
     } catch (err) {
         console.error(err);
         res.status(500).json({ 'success': false, 'message': 'Unknown error; you likely already wrote a review for the teacher'});

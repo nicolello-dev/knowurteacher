@@ -69,7 +69,7 @@ export default function ViewTeacherReviews() {
             <h3 className="m-3 mb-4">
                 Do you know them? Rate them yourself!
             </h3>
-            <RateTeacher teacher={teacher} session={session} setError={setErrorMessage} setShowSuccess={setShowSuccess} setShowError={setShowError}/>
+            <RateTeacher teacher={teacher} session={session} setError={setErrorMessage} setShowSuccess={setShowSuccess} setShowError={setShowError} setReviews={setReviews}/>
         </div>
         <Footer/>
         </>
