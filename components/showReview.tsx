@@ -91,7 +91,6 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
     }
 
     function handleNewLabel() {
-      console.log(currentLabel);
       // Validate user input
       if(!Object.keys(Labels).includes(currentLabel) || labels.includes(currentLabel as Labels)) {
         // user input is not a valid Label or labels already includes the user's input
@@ -104,10 +103,10 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
   
     return (
       <>
-          <div className="mb-3 d-flex flex-column flex-wrap align-content-center">
+          <div className="m-3 d-flex flex-column flex-wrap align-content-center w-full max-w-3xl">
             <label
               htmlFor="newteacherlabel"
-              className="form-label">
+              className="form-label d-flex flex-row flex-wrap">
                 Labels chosen: 
                 {
                 labels.map((l, i) => {
