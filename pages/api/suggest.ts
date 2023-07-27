@@ -19,19 +19,24 @@ export default async function suggestTeachers(req: APIRequest, res: NextApiRespo
         res.status(200).json([]);
         return;
     }
-    const teachers =  await prisma.teacher.findMany({
-        where: {
-            name: {
-                contains: nameInput,
-                mode: 'insensitive'
-            }
-        },
-        select: {
-            name: true,
-            school: true
-        },
-        take: 5
-    })
-    res.status(200).json(teachers);
-    return;
+	try {
+		const teachers =  await prisma.teacher.findMany({
+	        where: {
+	            name: {
+	                contains: nameInput,
+	                mode: 'insensitive'
+	            }
+	        },
+	        select: {
+	            name: true,
+	            school: true
+	        },
+	        take: 5
+	    })
+	    res.status(200).json(teachers);
+	    return;	
+	} catch (err) {
+		console.error(err);
+		res.status(500).json([])
+	}
 }
