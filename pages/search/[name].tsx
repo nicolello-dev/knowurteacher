@@ -60,13 +60,13 @@ export default function SearchByName() {
             <title>{`Search - ${searched} | knowurteacher`}</title>
         </Head>
         <Header/>
-        <section className="bg-bg p-8 pb-4 flex flex-col items-center">
+        <section className="bg-bg p-8 pb-4 flex flex-col items-center dark:bg-darkbg">
             <h1 className='text-3xl'>
 				Your search results:
 			</h1>
             <p className='mt-4'>There are <b>{count || "no"}</b> teachers whose name contains <b>{searched}</b></p>
         </section>
-        <section className="bg-bg py-4">
+        <section className="bg-bg py-4 dark:bg-darkbg">
         <div className='flex flex-row flex-wrap justify-evenly'>
             {                            // this div is necessary for the `key` prop, for optimization purposes.
                 shownTeachers.map((t, key) => <div className="w-72" style={{ padding: '1rem'}} key={key}><TeacherSelect teacher={t} button={true}/></div>)
@@ -80,7 +80,7 @@ export default function SearchByName() {
                 </ul>
             }
         </section>
-        <section className="bg-bg p-8 pb-4 flex flex-col items-center">
+        <section className="bg-bg p-8 pb-4 flex flex-col items-center dark:bg-darkbg">
             <h1 className="text-2xl">
 				Need more filters?
 			</h1>
