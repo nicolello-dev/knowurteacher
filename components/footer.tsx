@@ -25,6 +25,10 @@ export default function Footer() {
 				{
 					name: "Extended FAQ",
 					link: "/faq"
+				},
+				{
+					name: "Source code",
+					link: "https://github.com/ilariiiiia/knowurteacher"
 				}
 			]
 		},
