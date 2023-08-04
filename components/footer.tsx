@@ -44,7 +44,7 @@ export default function Footer() {
 	]
     return (
         <>
-            <footer className="p-4 text-center bg-black flex justify-evenly">
+            <footer className="p-4 text-center bg-dark-purple flex justify-evenly">
 				{
 					links.map((l, i) => {
 						return <div key={i} className="flex flex-col items-center m-3">
