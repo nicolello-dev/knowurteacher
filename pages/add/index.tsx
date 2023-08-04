@@ -56,7 +56,7 @@ export default function AddTeacher() {
         <div className={`relative px-3 py-3 mb-4 bg-red-500 rounded ${showSuccess ? "block" : "hidden"}`}>
             {errorMesssage}
         </div>
-		<h1 className="text-center m-6 mt-8 text-4xl font-serif">
+		<h1 className="text-center m-6 mt-8 text-4xl font-serif dark:text-darktext">
 			Add a teacher:
 		</h1>
         <div className="relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-gray-300 dark:bg-[#26092a] dark:border-primary" style={{alignItems: 'center', width: 'min-content', minWidth: '270px', margin: '100px auto'}}>

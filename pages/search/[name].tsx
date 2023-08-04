@@ -67,11 +67,11 @@ export default function SearchByName() {
             <p className='mt-4'>There are <b>{count || "no"}</b> teachers whose name contains <b>{searched}</b></p>
         </section>
         <section className="bg-bg py-4 dark:bg-darkbg">
-        <div className='flex flex-row flex-wrap justify-evenly'>
-            {                            // this div is necessary for the `key` prop, for optimization purposes.
-                shownTeachers.map((t, key) => <div className="w-72" style={{ padding: '1rem'}} key={key}><TeacherSelect teacher={t} button={true}/></div>)
-            }
-        </div>
+	        <div className='flex flex-row flex-wrap justify-evenly'>
+	            {                            // this div is necessary for the `key` prop, for optimization purposes.
+	                shownTeachers.map((t, key) => <div className="w-72 p-4" ey={key}><TeacherSelect teacher={t} button={true}/></div>)
+	            }
+	        </div>
             {
                 shownTeachers.length < count && <ul className={`pagination ${ss.pagination}`}>
                     <li className="page-item"><button className="page-link btn" onClick={_ => getPrevResults()}>Previous</button></li>
