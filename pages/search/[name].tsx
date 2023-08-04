@@ -48,29 +48,28 @@ export default function SearchByName() {
         searched && fetch(`/api/moreTeachers?name=${searched}&startIndex=${cursor}&school=${school}`)
             .then(r => r.json())
             .then(t => {
-                setShownTeachers(t.teachers);
-                setCount(t.count);
-            });
+                setShownTeachers(t.teachers || []);
+                setCount(t.count || 0);
+            })
+			.catch(e => console.error(e));
     }, [cursor, searched, school]);
 
     return (
         <>
         <Head>
-            <title>{`Knowurteacher search | ${searched}`}</title>
+            <title>{`Search - ${searched} | knowurteacher`}</title>
         </Head>
         <Header/>
-        <section className={ss.firstSection}>
-            <div className="hero-unit">
-                <h1>
-                    Your search results:
-                </h1>
-            </div>
-            <p>There are <b>{count || "no"}</b> teachers whose name contains <b>{searched}</b></p>
+        <section className="bg-bg p-8 pb-4 flex flex-col items-center">
+            <h1 className='text-3xl'>
+				Your search results:
+			</h1>
+            <p className='mt-4'>There are <b>{count || "no"}</b> teachers whose name contains <b>{searched}</b></p>
         </section>
-        <section className={ss.secondSection}>
-        <div className={`list-group ${ss.teachersWrapper}`}>
+        <section className="bg-bg py-4">
+        <div className='flex flex-row flex-wrap justify-evenly'>
             {                            // this div is necessary for the `key` prop, for optimization purposes.
-                shownTeachers.map((t, key) => <div style={{ width: '300px', padding: '1rem'}} key={key}><TeacherSelect teacher={t} button={true}/></div>)
+                shownTeachers.map((t, key) => <div className="w-72" style={{ padding: '1rem'}} key={key}><TeacherSelect teacher={t} button={true}/></div>)
             }
         </div>
             {
@@ -81,22 +80,19 @@ export default function SearchByName() {
                 </ul>
             }
         </section>
-        <section className={ss.firstSection}>
-            <div className="hero-unit">
-                <h1>
-                    Need more filters?
-                </h1>
-            </div>
-            <p>Use the following:</p>
-            <form className={ss.form} action="/" onSubmit={(e) => e.preventDefault()}>
-                <div className="input-group mb3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="basic-addon1">School:</span>
-                    </div>
-                    <input type="text" name="school" className="form-control" placeholder="Politecnico di Milano" aria-label="school" value={schoolInput} onChange={(e: any) => setSchoolInput(e.target.value)} />
+        <section className="bg-bg p-8 pb-4 flex flex-col items-center">
+            <h1 className="text-2xl">
+				Need more filters?
+			</h1>
+            <form className="m-8 w-4/6 max-w-96 min-w-72" action="/" onSubmit={(e) => e.preventDefault()}>
+                <div className="flex flex-row flex-nowrap mb-3 rounded">
+                    <p className="m-0 p-2">
+                        School:
+					</p>
+                    <input type="text" name="school" className="w-full p-2" placeholder="CalTech" aria-label="school" value={schoolInput} onChange={(e: any) => setSchoolInput(e.target.value)} />
                 </div>
             </form>
-                <button className={`btn btn-primary ${ss.button}`} onClick={_ => setSchool(schoolInput)}>
+                <button className="bg-primary p-2 text-lg rounded-lg text-white" onClick={_ => setSchool(schoolInput)}>
                     Search
                 </button>
         </section>

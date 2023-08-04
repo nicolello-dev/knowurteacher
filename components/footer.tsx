@@ -1,48 +1,70 @@
 import Link from "next/link";
 
 export default function Footer() {
+	const links = [
+		{
+			name: "Legal",
+			items: [
+				{
+					name: "Privacy Policy",
+					link: "/legal/privacy-policy"
+				},
+				{
+					name: "Terms Of Service",
+					link: "/legal/terms-of-service"
+				}
+			]
+		},
+		{
+			name: "Info",
+			items: [
+				{
+					name: "About",
+					link: "/about"
+				},
+				{
+					name: "Extended FAQ",
+					link: "/faq"
+				}
+			]
+		},
+		{
+			name: "Complaints",
+			items: [
+				{
+					name: "Send a complaint",
+					link: "/complaints"
+				},
+				{
+					name: "Report",
+					link: "/report"
+				}
+			]
+		}
+	]
     return (
         <>
-            <footer className="p-4 text-white text-center bg-dark-purple d-flex justify-content-evenly">
-                <div className="d-flex flex-column align-items-center m-3">
-                    <h5>
-                        Legal
-                    </h5>
-                    <ul className="p-0 m-0">
-                        <li>
-                            <Link href="/legal/privacy-policy">Privacy Policy</Link>
-                        </li>
-                        <li>
-                            <Link href="/legal/terms-of-service">Terms Of Service</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className="d-flex flex-column align-items-center m-3">
-                    <h5>
-                        Info
-                    </h5>
-                    <ul className="p-0 m-0">
-                        <li>
-                            <Link href="/legal/privacy-policy">About</Link>
-                        </li>
-                        <li>
-                            <Link href="/legal/terms-of-service">Extended FAQ</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className="d-flex flex-column align-items-center m-3">
-                    <h5>
-                        Complaints
-                    </h5>
-                    <ul className="p-0 m-0">
-                        <li>
-                            <Link href="/complaints">Send a message</Link>
-                        </li>
-                        <li>
-                            <Link href="/report">Report</Link>
-                        </li>
-                    </ul>
-                </div>
+            <footer className="p-4 text-center bg-black flex justify-evenly">
+				{
+					links.map((l, i) => {
+						return <div key={i} className="flex flex-col items-center m-3">
+							<h1 className="text-lg text-primary text-xl dark:text-darkaccent">
+								{
+									l.name
+								}
+							</h1>
+							<ul>
+								{
+									l.items.map((item, i) => {
+										return <li key={i}>
+											<Link className="dark:text-darktext my-1" href={item.link}>{item.name}</Link>
+										</li> 
+									})
+								}
+							</ul>
+						</div>
+					})
+				}
             </footer>
         </>
     )

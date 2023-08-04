@@ -44,7 +44,7 @@ export default function ViewTeacherReviews() {
     if(!teacher) {
         return (
             <>
-            <Header router={router}/>
+            <Header/>
             <h1>No teacher found. Please try again or contact support if the problem persists</h1>
             </>
         )
@@ -52,21 +52,21 @@ export default function ViewTeacherReviews() {
 
     return (
         <>
-        <Header router={router}/>
-        <div className="alert alert-success" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
+        <Header/>
+        <div className="relative px-3 py-3 mb-4 border rounded bg-green-200 border-green-300 text-green-800" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
             Review added successfully!
         </div>
-        <div className="alert alert-danger" role="alert" style={{ display: showError ? "block" : "none" }}>
+        <div className="relative px-3 py-3 mb-4 border rounded bg-red-200 border-red-300 text-red-800" role="alert" style={{ display: showError ? "block" : "none" }}>
             {errorMesssage}
         </div>
-        <div className="d-flex flex-wrap justify-content-center align-items-center m-5">
+        <div className="flex flex-wrap justify-center items-center m-12">
             <TeacherSelect teacher={teacher} button={false}/>
-            <div className="d-flex m-3">
+            <div className="flex m-6">
                 <ShowAvgReview reviews={reviews}/>
             </div>
         </div>
         <div className="text-center">
-            <h3 className="m-3 mb-4">
+            <h3 className="m-6 mb-4">
                 Do you know them? Rate them yourself!
             </h3>
             <RateTeacher teacher={teacher} session={session} setError={setErrorMessage} setShowSuccess={setShowSuccess} setShowError={setShowError} setReviews={setReviews}/>

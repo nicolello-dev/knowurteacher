@@ -11,8 +11,14 @@ module.exports = {
 			text : {
 				DEFAULT: "#000000"
 			},
+			darktext: {
+				DEFAULT: "#f6ecfd"
+			},
 			bg: {
 				DEFAULT: "#f6ecfd"
+			},
+			darkbg: {
+				DEFAUlt: "#130316"
 			},
 			primary: {
 				DEFAULT: "#7e0d74"
@@ -20,8 +26,14 @@ module.exports = {
 			secondary: {
 				DEFAULT: "#eaa4e1"
 			},
+			darksecondary: {
+				DEFAULt: "#26092a"
+			},
 			accent: {
 				DEFAULT: "#54245b"
+			},
+			darkaccent: {
+				DEFAULT: "#B15ABE"
 			}
 		},
       backgroundImage: {

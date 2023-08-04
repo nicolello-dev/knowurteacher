@@ -49,28 +49,26 @@ export default function AddTeacher() {
     }, [showError]);
     
     return (<>
-        <Header router={router}/>
-        <div className="alert alert-success" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
+        <Header/>
+        <div className={`relative px-3 py-3 mb-4 bg-green-300 rounded ${showSuccess ? "block" : "hidden"}`} role="alert">
             Teacher added successfully!
         </div>
-        <div className="alert alert-danger" role="alert" style={{ display: showError ? "block" : "none" }}>
+        <div className={`relative px-3 py-3 mb-4 bg-red-500 rounded ${showSuccess ? "block" : "hidden"}`}>
             {errorMesssage}
         </div>
-        <div className="hero-unit">
-                <h1 className="text-center m-3">
-                    Add a teacher:
-                </h1>
-            </div>
-        <div className="card" style={{alignItems: 'center', width: 'min-content', minWidth: '270px', margin: '100px auto'}}>
-            <div className="card-body">
+		<h1 className="text-center m-6 mt-8 text-4xl font-serif">
+			Add a teacher:
+		</h1>
+        <div className="relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-gray-300 dark:bg-[#26092a] dark:border-primary" style={{alignItems: 'center', width: 'min-content', minWidth: '270px', margin: '100px auto'}}>
+            <div className="flex-auto p-6">
                 <Image src={"https://cdn.knowurteacher.com/defaultpfp.png"} height={200} width={200} alt={`${name}'s picture`}/>
             </div>
-            <div className="card-body" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <div className="flex-auto p-6 flex flex-col items-center dark:text-darktext">
                 <label className="form-label">Name:</label>
-                <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} required={true}/>
+                <input type="text" className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded" value={name} onChange={(e) => setName(e.target.value)} required={true}/>
                 <label className="form-label m-2">School:</label>
-                <input type="text" className="form-control" value={school} onChange={(e) => setSchool(e.target.value)} required={true}/>
-                <button className="btn btn-primary m-2" onClick={_ => addTeacher()}>Add</button>
+                <input type="text" className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded" value={school} onChange={(e) => setSchool(e.target.value)} required={true}/>
+                <button className="inline-block align-middle text-center select-none font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white m-2 mt-6 bg-primary dark:bg-darkprimary" onClick={_ => addTeacher()}>Add</button>
             </div>
         </div>
         <Footer/>

@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import 'bootstrap/dist/css/bootstrap.css' // Bootstrap
 import '@/styles/globals.css'
 
 import { Analytics } from '@vercel/analytics/react';
@@ -15,7 +14,7 @@ function MyApp({ Component, pageProps, session }: {Component: any, pageProps: an
         <meta name="keywords" content="know ur teacher, know your teacher, teacher, exam, prepare, know, ur, school, tutoring"/>
         <meta name="author" content="Ilaria Migone"/>
         <meta charSet="UTF-8"/>
-        <title>Know ur teacher | Home</title>
+        <title>Home | Know ur teacher</title>
         <link rel="icon" type="image/x-icon" href="https://cdn.knowurteacher.com/favicon.ico"/>
         <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.knowurteacher.com/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.knowurteacher.com/favicon-32x32.png"/>

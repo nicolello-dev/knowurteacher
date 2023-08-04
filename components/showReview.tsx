@@ -17,7 +17,7 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
   });
 
   return <>
-    <table className="table m-3 my-0" style={{ margin: '0px' }}>
+    <table className="w-full max-w-full mb-4 bg-transparent m-6 m-0">
         <tbody>
             <tr>
                 <th>
@@ -38,7 +38,7 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
               return -1
             }).map((k: any) => {
                 const times = reviewsDict[k];
-                return <tr className="container" key={k}>
+                return <tr className="container mx-auto sm:px-4" key={k}>
                     <td key={k}><kbd>{k}</kbd></td>
                     <td className="text-center" key={k + times}>
                       {times ? times.toString() : "-"}
@@ -103,10 +103,10 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
   
     return (
       <>
-          <div className="m-3 d-flex flex-column flex-wrap align-content-center w-full max-w-3xl">
+          <div className="m-6 flex flex-col flex-wrap content-center w-full max-w-3xl">
             <label
               htmlFor="newteacherlabel"
-              className="form-label d-flex flex-row flex-wrap">
+              className="form-label flex flex-row flex-wrap">
                 Labels chosen: 
                 {
                 labels.map((l, i) => {
@@ -129,10 +129,10 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
                 })
               }
             </select>
-            <button className="btn btn-secondary m-3" onClick={handleNewLabel}>Add</button>
+            <button className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-gray-600 text-white hover:bg-gray-700 m-6" onClick={handleNewLabel}>Add</button>
           </div>
   
-          <input className="btn btn-primary m-3" type="submit" value="Grade" onClick={_ => rate()} />
+          <input className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white hover:bg-blue-600 m-6" type="submit" value="Grade" onClick={_ => rate()} />
       </>
     );
   }
