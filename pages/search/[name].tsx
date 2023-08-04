@@ -69,7 +69,7 @@ export default function SearchByName() {
         <section className="bg-bg py-4 dark:bg-darkbg">
 	        <div className='flex flex-row flex-wrap justify-evenly'>
 	            {                            // this div is necessary for the `key` prop, for optimization purposes.
-	                shownTeachers.map((t, key) => <div className="w-72 p-4" ey={key}><TeacherSelect teacher={t} button={true}/></div>)
+	                shownTeachers.map((t, key) => <div className="w-72 p-4" key={key}><TeacherSelect teacher={t} button={true}/></div>)
 	            }
 	        </div>
             {
