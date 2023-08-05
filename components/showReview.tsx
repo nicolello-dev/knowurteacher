@@ -17,7 +17,7 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
   });
 
   return <>
-    <table className="w-full max-w-full mb-4 bg-transparent m-6 m-0">
+    <table className="w-full max-w-full mb-4 bg-transparent m-6 m-0 dark:bg-secondary">
         <tbody>
             <tr>
                 <th>
@@ -103,7 +103,7 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
   
     return (
       <>
-          <div className="m-6 flex flex-col flex-wrap content-center w-full max-w-3xl">
+          <div className="my-6 mx-auto flex flex-col flex-wrap content-center w-full max-w-3xl">
             <label
               htmlFor="newteacherlabel"
               className="form-label flex flex-row flex-wrap">
