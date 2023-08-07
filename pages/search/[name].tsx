@@ -89,7 +89,7 @@ export default function SearchByName() {
                     <p className="m-0 p-2">
                         School:
 					</p>
-                    <input type="text" name="school" className="w-full p-2" placeholder="CalTech" aria-label="school" value={schoolInput} onChange={(e: any) => setSchoolInput(e.target.value)} />
+                    <input type="text" name="school" className="w-full p-2 dark:text-black" placeholder="CalTech" aria-label="school" value={schoolInput} onChange={(e: any) => setSchoolInput(e.target.value)} />
                 </div>
             </form>
                 <button className="bg-primary p-2 text-lg rounded-lg text-white" onClick={_ => setSchool(schoolInput)}>
