@@ -65,7 +65,7 @@ export default function Home() {
           <form className="p-6" onSubmit={(e: any) => {e.preventDefault(); search()}}>
             <div className="relative flex items-stretch w-full mb-3">
               <input autoComplete="yes" type="text" name="name" className="w-full py-1 px-2 mb-1 bg-white text-gray-800 border border-primary rounded rounded-r-none" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
-              <button className="text-text dark:text-darktext bg-primary rounded rounded-l-none py-1 px-2 mb-1" type="button" onClick={search}>Search</button>
+              <button className="text-white dark:text-darktext bg-primary rounded rounded-l-none py-1 px-2 mb-1" type="button" onClick={search}>Search</button>
             </div>
             <div className={`m-0 text-black absolute ${homeStyles.absoluteContainer}`}>
               <ul className="bg-white dark:bg-darktext m-0 p-0 list-none">
