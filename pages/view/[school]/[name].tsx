@@ -18,7 +18,7 @@ export default function ViewTeacherReviews() {
     const [showSuccess, setShowSuccess] = useState<boolean>(false);
     const [showError, setShowError] = useState<boolean>(false);
     const [errorMesssage, setErrorMessage] = useState<string>("");
-	const [loading, setLoading] = useState<bool>(true);
+	const [loading, setLoading] = useState<boolean>(true);
 
     const router = useRouter();
     const { name, school } = router.query;
