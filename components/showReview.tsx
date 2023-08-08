@@ -17,7 +17,7 @@ export function ShowAvgReview({ reviews }: { reviews: Review[] }) {
   });
 
   return <>
-    <table className="w-full max-w-full mb-4 bg-transparent m-6 m-0 dark:bg-secondary">
+    <table className="w-full max-w-full mb-4 bg-transparent m-6 m-0 dark:text-white">
         <tbody>
             <tr>
                 <th>
