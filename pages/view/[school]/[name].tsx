@@ -17,6 +17,7 @@ export default function ViewTeacherReviews() {
     const [showSuccess, setShowSuccess] = useState<boolean>(false);
     const [showError, setShowError] = useState<boolean>(false);
     const [errorMesssage, setErrorMessage] = useState<string>("");
+	const [loading, setLoading] = useState<bool>(true);
 
     const router = useRouter();
     const { name, school } = router.query;
@@ -24,13 +25,18 @@ export default function ViewTeacherReviews() {
     useEffect(() => {
         name && school && fetch(`/api/getTeacher?name=${name}&school=${school}`)
             .then(r => r.json())
-            .then(t => setTeacher(t));
+            .then(t => {
+				setLoading(false);
+				setTeacher(t);
+			});
     }, [name, school]);
 
     useEffect(() => {
         teacher && fetch(`/api/getTeacherReviews?teacherID=${teacher?.id}`)
             .then(r => r.json())
-            .then(r => setReviews(r));
+            .then(r => {
+				setReviews(r);
+			});
     }, [teacher]);
 
     useEffect(() => {
@@ -41,11 +47,23 @@ export default function ViewTeacherReviews() {
         showError && setTimeout(_ => setShowError(false), 3000);
     }, [showError]);
 
+	if(loading) {
+		return <>
+			<Header/>
+			<h1 className="mx-auto text-center text-xl p-5">Loading, please wait...</h1>
+		</>
+	}
+
     if(!teacher) {
         return (
             <>
             <Header/>
-            <h1>No teacher found. Please try again or contact support if the problem persists</h1>
+			<h1 className="mx-auto text-center text-3xl p-5">
+				The teacher you tried to search for doesn&apos;t exist.
+			</h1>
+			<p className="mx-auto text-center text-xl p-5">
+				If you believe this is an error, please contact support.
+			</p>
             </>
         )
     }

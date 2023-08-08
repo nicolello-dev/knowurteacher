@@ -23,6 +23,7 @@ export default function SearchByName() {
     const [schoolInput, setSchoolInput] = useState<string>("");
     const [school, setSchool] = useState<string>("");
     const [shownTeachers, setShownTeachers] = useState<Teacher[]>([]);
+	const [loading, setLoading]= useState<boolean>(true);
 
     const router = useRouter();
     const searched = router.query.name
@@ -48,6 +49,7 @@ export default function SearchByName() {
         searched && fetch(`/api/moreTeachers?name=${searched}&startIndex=${cursor}&school=${school}`)
             .then(r => r.json())
             .then(t => {
+				setLoading(false);
                 setShownTeachers(t.teachers || []);
                 setCount(t.count || 0);
             })
@@ -57,14 +59,16 @@ export default function SearchByName() {
     return (
         <>
         <Head>
-            <title>{`Search - ${searched} | knowurteacher`}</title>
+            <title>{loading ? "Teacher search | Knowurteacher" : `Search - ${searched} | knowurteacher`}</title>
         </Head>
         <Header/>
         <section className="p-8 pb-4 flex flex-col items-center dark:text-white">
             <h1 className='text-3xl'>
 				Your search results:
 			</h1>
-            <p className='mt-4'>There are <b>{count || "no"}</b> teachers whose name contains <b>{searched}</b></p>
+			{
+				loading ? <p className="mx-auto text-center">Loading data, please wait...</p> : <p className='mt-4'>There are <b>{count || "no"}</b> teachers whose name contains <b>{searched}</b></p>
+			}
         </section>
         <section className="py-4">
 	        <div className='flex flex-row flex-wrap justify-evenly'>
