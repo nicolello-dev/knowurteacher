@@ -56,7 +56,7 @@ export default function Home() {
       <Header/>
       <section className="relative m-0">
         <div className="container mx-auto sm:px-4 text-text p-6">
-          <h1 className="p-6 mt-16 text-3xl dark:text-darktext">
+          <h1 className="p-6 text-4xl dark:text-darktext">
             Rate your <span className="text-primary dark:text-darkaccent">teachers</span> and see others&apos; ratings about them.
           </h1>
           <h3 className="px-6 pt-6 pb-0 text-lg text-text dark:text-darktext">
