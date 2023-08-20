@@ -59,7 +59,7 @@ export default function Home() {
           <h1 className="p-6 text-4xl dark:text-darktext">
             Rate your <span className="text-primary dark:text-darkaccent">teachers</span> and see others&apos; ratings about them.
           </h1>
-          <h3 className="px-6 pt-6 pb-0 text-lg text-text dark:text-darktext">
+          <h3 className="px-6 pt-6 pb-0 text-xl text-text dark:text-darktext">
             Search your teacher:
           </h3>
           <form className="p-6" onSubmit={(e: any) => {e.preventDefault(); search()}}>
