@@ -52,7 +52,7 @@ export default function Footer() {
 				{
 					links.map((l, i) => {
 						return <div key={i} className="flex flex-col items-center m-3">
-							<h1 className="text-lg text-primary text-xl dark:text-darkaccent">
+							<h1 className="text-primary text-xl dark:text-darkaccent">
 								{
 									l.name
 								}
