@@ -43,7 +43,7 @@ export default function ViewProfile() {
         return <>
             <Header/>
             <h1 className="container max-w-lg text-3xl text-center mx-auto my-32">
-                It seems like you haven't logged in. Please try reloading the page or logging back in.
+                It seems like you haven&apos;t logged in. Please try reloading the page or logging back in.
             </h1>
             <Footer/>
         </>
