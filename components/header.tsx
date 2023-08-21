@@ -20,7 +20,7 @@ export default function Header() {
     return (<>
         <header className="bg-white p-6 flex flex-row justify-between flex-wrap">
             <Link href="/" className="flex text-decoration-none text-primary items-center">
-                <h1 className="text-xl hidden sm:block">
+                <h1 className="text-xl hidden mr-2 sm:block">
                     Knowurteacher
                 </h1>
                 <div className="relative h-8 aspect-square">
