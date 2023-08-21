@@ -20,7 +20,7 @@ export default function Home() {
 	const faqs = [
 		{
 			question: "Are reviews anonymous?",
-			answer: "Nobody will know who made the reviews, except for us."
+			answer: "Yes, all reviews are anonymous. We will not disclose the author of reviews to anyone, including third parties. More information about your data can be found in the terms of service"
 		},
 		{
 			question: "How do I rate a teacher?",
