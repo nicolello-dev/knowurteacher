@@ -2,7 +2,9 @@ import Header from "@/components/header";
 import TeacherSelect from "@/components/teacherSelect";
 import { ShowAvgReview, RateTeacher } from "@/components/showReview";
 
-import { Review, Teacher } from "@prisma/client";
+import type { APIResponse } from "@/types/api"
+
+import type { Review, Teacher } from "@prisma/client";
 
 import { useSession } from 'next-auth/react';
 import Footer from "@/components/footer";
@@ -24,19 +26,27 @@ export default function ViewTeacherReviews() {
     const { name, school } = router.query;
     
     useEffect(() => {
-        name && school && fetch(`/api/getTeacher?name=${name}&school=${school}`)
+        name && school && fetch(`/api/teacher/find?name=${name}&school=${school}`)
             .then(r => r.json())
-            .then(t => {
+            .then((t: APIResponse<Teacher>) => {
 				setLoading(false);
-				setTeacher(t);
+                if(!t.success) {
+                    console.error("An error occurred trying to get teacher information!", t.error);
+                    return;
+                }
+				setTeacher(t.data);
 			});
     }, [name, school]);
 
     useEffect(() => {
-        teacher && fetch(`/api/getTeacherReviews?teacherID=${teacher?.id}`)
+        teacher && fetch(`/api/teacher/review/get?teacherID=${teacher?.id}`)
             .then(r => r.json())
             .then(r => {
-				setReviews(r);
+                if (!r.success) {
+                    console.error(r.error);
+                    return;
+                }
+				setReviews(r.data);
 			});
     }, [teacher]);
 

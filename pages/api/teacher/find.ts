@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/prisma/prisma";
 
+import { APIResponse } from "@/types/api";
+
 interface APIRequest extends NextApiRequest {
     query: {
         name: string | undefined,
@@ -8,16 +10,24 @@ interface APIRequest extends NextApiRequest {
     }
 }
 
-export default async function suggestTeachers(req: APIRequest, res: NextApiResponse) {
+export default async function findTeacher(req: APIRequest, res: APIResponse) {
 
     if(req.method !== "GET") {
-        res.status(405).json({"success": false, "message": "Invalid method used. Please use GET only."})
+        res.status(405).json({
+            success: false,
+            data: null,
+            error: "Wrong method. Please only use GET requests for this route."
+        });
     }
 
     const nameInput: string | null = req.query.name || null;
     const schoolInput: string | null = req.query.school || null;
     if(nameInput == null || nameInput.length < 3 || schoolInput == null) {
-        res.status(400).json([]);
+        res.status(400).json({
+            success: false,
+            data: null,
+            error: "Input either inexistent or invalid. Please check you've compiled correctly all parts."
+        });
         return;
     }
     const teacher =  await prisma.teacher.findFirst({
@@ -30,6 +40,10 @@ export default async function suggestTeachers(req: APIRequest, res: NextApiRespo
             }
         }
     });
-    res.status(200).json(teacher || null);
+    res.status(200).json({
+        success: true,
+        data: teacher,
+        error: null
+    });
     return;
 }

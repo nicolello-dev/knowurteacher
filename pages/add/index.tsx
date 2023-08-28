@@ -25,7 +25,7 @@ export default function AddTeacher() {
             name: name,
             school: school
         }
-        fetch(`/api/addTeacher`, {
+        fetch(`/api/teacher/add`, {
             method: "POST",
             body: JSON.stringify(body)
         })

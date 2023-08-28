@@ -80,9 +80,9 @@ export function RateTeacher({ teacher, session, setError, setShowSuccess, setSho
               setCurrentLabel("");
               setShowError(false);
               // If successful refetch the reviews
-              fetch(`/api/getTeacherReviews?teacherID=${teacher.id}`)
+              fetch(`/api/teacher/review/get?teacherID=${teacher.id}`)
                 .then(r => r.json())
-                .then(r => setReviews(r))
+                .then(r => setReviews(r.data))
             } else {
               setError(r.message);
               setShowError(true);
