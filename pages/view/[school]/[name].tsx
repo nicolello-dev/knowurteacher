@@ -11,9 +11,6 @@ import NewReview from "@/components/view/NewReview";
 import type { APIResponse } from "@/types/api"
 import type { Review, Teacher } from "@prisma/client";
 
-// Next-auth
-import { useSession } from 'next-auth/react';
-
 // REACT
 import { useEffect, useState } from "react";
 
@@ -23,7 +20,6 @@ import Head from "next/head";
 
 export default function ViewTeacherReviews() {
 
-    const { data: session } = useSession();
     const [teacher, setTeacher] = useState<Teacher | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -76,7 +72,7 @@ export default function ViewTeacherReviews() {
 	        <Header/>
             <h1 className="text-3xl text-center font-bold m-12">Teacher details:</h1>
             <TeacherProfilePreview teacher={teacher} button={false}/>
-            <NewReview/>
+            <NewReview teacherId={teacher.id}/>
             <ShowReviews teacherId={teacher.id}/>
 	        <Footer/>
         </>

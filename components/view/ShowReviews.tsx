@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 export default function ShowReviews({ teacherId }: { teacherId: string }) {
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [reviews, setReviews] = useState();
+    const [reviews, setReviews] = useState<Review[] | null>(null);
     const [success, setSuccess] = useState<boolean | null>(null);
     
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
             })
     }, [teacherId])
 
-    if(isLoading) {
+    if(isLoading || reviews == null) {
         return <h1 className="text-center text-3xl">Loading reviews...</h1>;
     }
 

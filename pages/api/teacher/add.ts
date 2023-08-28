@@ -1,4 +1,4 @@
-import { NextApiRequest } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/prisma/prisma";
 
 import { APIResponse } from "@/types/api";
@@ -13,7 +13,7 @@ interface APIRequest extends NextApiRequest {
     }
 }
 
-export default async function addTeacher(req: APIRequest, res: APIResponse) {
+export default async function addTeacher(req: APIRequest, res: NextApiResponse<APIResponse>) {
     if(req.method != "POST") {
         res.status(405).json({
             success: false,

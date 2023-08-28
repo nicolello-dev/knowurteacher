@@ -17,15 +17,23 @@ interface APIRequest extends NextApiRequest {
     }
 }
 
-export default async function rateTeacher(req: APIRequest, res: APIResponse<null>) {
+export default async function rateTeacher(req: APIRequest, res: NextApiResponse<APIResponse>) {
 
     if(req.method !== "POST") {
-        res.status(405).json({ "success": false, "message": "Invalid method! POST only"});
+        res.status(405).json({
+            success: false,
+            data: null,
+            error: "Incorrect method! Please use a POST request instead."
+        });
     }
 
     const session = await getServerSession(req, res, authOptions);
     if(!session) {
-        res.status(401).json({ 'success': false, 'message': "Not authenticated. Please sign in and try again." });
+        res.status(401).json({
+            success: false,
+            data: null,
+            error: "Unauthenticated! Please login and try again."
+        });
     }
 
     let { email, name, school, teaching, fairness, general } = JSON.parse(req.body);

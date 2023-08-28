@@ -1,4 +1,4 @@
-import type { Teacher } from "@/prisma/client";
+import type { Teacher } from "@prisma/client";
 
 import Image from "next/image";
 

@@ -15,7 +15,7 @@ interface Request extends NextApiRequest {
     }
 }
 
-export default async function Handler(req: NextApiRequest, res: NextApiResponse<APIResponse<null>>) {
+export default async function Handler(req: NextApiRequest, res: NextApiResponse<APIResponse>) {
 
     if(req.method != "POST") {
         res.status(405).json({

@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/prisma/prisma";
 
 import { APIResponse } from "@/types/api";
+import { Teacher } from "@prisma/client";
 
 interface APIRequest extends NextApiRequest {
     query: {
@@ -10,7 +11,7 @@ interface APIRequest extends NextApiRequest {
     }
 }
 
-export default async function findTeacher(req: APIRequest, res: APIResponse) {
+export default async function findTeacher(req: APIRequest, res: NextApiResponse<APIResponse<Teacher>>) {
 
     if(req.method !== "GET") {
         res.status(405).json({

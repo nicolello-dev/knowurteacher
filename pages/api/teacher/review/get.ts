@@ -1,4 +1,4 @@
-import type { NextApiRequest } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 import type { APIResponse } from "@/types/api";
 
@@ -11,7 +11,7 @@ interface APIRequest extends NextApiRequest {
     }
 }
 
-export default async function suggestTeachers(req: APIRequest, res: APIResponse<Review[]>) {
+export default async function suggestTeachers(req: APIRequest, res: NextApiResponse<APIResponse<Review[]>>) {
 
     if (req.method !== "GET") {
         res.status(405).json({
