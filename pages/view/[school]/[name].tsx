@@ -1,14 +1,23 @@
+// COMPONENTS
+// Shared
 import Header from "@/components/header";
-import TeacherSelect from "@/components/teacherSelect";
-import { ShowAvgReview, RateTeacher } from "@/components/showReview";
+import Footer from "@/components/footer";
+// Teacher-specific
+import TeacherProfilePreview from "@/components/view/TeacherProfilePreview";
+import ShowReviews from "@/components/view/ShowReviews";
+import NewReview from "@/components/view/NewReview";
 
+// TYPES
 import type { APIResponse } from "@/types/api"
-
 import type { Review, Teacher } from "@prisma/client";
 
+// Next-auth
 import { useSession } from 'next-auth/react';
-import Footer from "@/components/footer";
+
+// REACT
 import { useEffect, useState } from "react";
+
+// NEXTJS
 import { useRouter } from "next/router";
 import Head from "next/head";
 
@@ -16,10 +25,6 @@ export default function ViewTeacherReviews() {
 
     const { data: session } = useSession();
     const [teacher, setTeacher] = useState<Teacher | null>(null);
-    const [reviews, setReviews] = useState<Review[]>([]);
-    const [showSuccess, setShowSuccess] = useState<boolean>(false);
-    const [showError, setShowError] = useState<boolean>(false);
-    const [errorMesssage, setErrorMessage] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>(true);
 
     const router = useRouter();
@@ -36,27 +41,7 @@ export default function ViewTeacherReviews() {
                 }
 				setTeacher(t.data);
 			});
-    }, [name, school]);
-
-    useEffect(() => {
-        teacher && fetch(`/api/teacher/review/get?teacherID=${teacher?.id}`)
-            .then(r => r.json())
-            .then(r => {
-                if (!r.success) {
-                    console.error(r.error);
-                    return;
-                }
-				setReviews(r.data);
-			});
-    }, [teacher]);
-
-    useEffect(() => {
-        showSuccess && setTimeout(_ => setShowSuccess(false), 3000);
-    }, [showSuccess]);
-
-    useEffect(() => {
-        showError && setTimeout(_ => setShowError(false), 3000);
-    }, [showError]);
+    }, [name, school])
 
 	if(loading) {
 		return <>
@@ -64,25 +49,23 @@ export default function ViewTeacherReviews() {
 			<Head>
 				<title>View teacher | Knowurteacher</title>
 			</Head>
-			<h1 className="mx-auto text-center text-xl p-5">Loading, please wait...</h1>
+			<h1 className="mx-auto text-center text-xl p-5">Loading data, please wait...</h1>
 		</>
 	}
 
     if(!teacher) {
-        return (
-            <>
-				<Head>
-					<title>View teacher | Knowurteacher</title>
-				</Head>
-	            <Header/>
-				<h1 className="mx-auto text-center text-3xl p-5">
-					The teacher you tried to search for doesn&apos;t exist.
-				</h1>
-				<p className="mx-auto text-center text-xl p-5">
-					If you believe this is an error, please contact support.
-				</p>
-            </>
-        )
+        return <>
+            <Head>
+                <title>View teacher | Knowurteacher</title>
+            </Head>
+            <Header/>
+            <h1 className="mx-auto text-center text-3xl p-5">
+                The teacher you tried to search for doesn&apos;t exist.
+            </h1>
+            <p className="mx-auto text-center text-xl p-5">
+                If you believe this is an error, please contact support.
+            </p>
+        </>
     }
 
     return (
@@ -91,27 +74,13 @@ export default function ViewTeacherReviews() {
 				<title>View teacher | Knowurteacher</title>
 			</Head>
 	        <Header/>
-	        <div className="relative px-3 py-3 mb-4 border rounded bg-green-200 border-green-300 text-green-800" role="alert" style={{ display: showSuccess ? "block" : "none" }}>
-	            Review added successfully!
-	        </div>
-	        <div className="relative px-3 py-3 mb-4 border rounded bg-red-200 border-red-300 text-red-800" role="alert" style={{ display: showError ? "block" : "none" }}>
-	            {errorMesssage}
-	        </div>
-	        <div className="flex flex-wrap justify-center items-center m-12">
-	            <TeacherSelect teacher={teacher} button={false}/>
-	            <div className="flex m-6">
-	                <ShowAvgReview reviews={reviews}/>
-	            </div>
-	        </div>
-	        <div className="text-center">
-	            <h3 className="m-6 mb-4">
-	                Do you know them? Rate them yourself!
-	            </h3>
-	            <RateTeacher teacher={teacher} session={session} setError={setErrorMessage} setShowSuccess={setShowSuccess} setShowError={setShowError} setReviews={setReviews}/>
-	        </div>
+            <h1 className="text-3xl text-center font-bold m-12">Teacher details:</h1>
+            <TeacherProfilePreview teacher={teacher} button={false}/>
+            <NewReview/>
+            <ShowReviews teacherId={teacher.id}/>
 	        <Footer/>
         </>
-    )
+    );
 }
 
 // TODO: Change it so that instead of getting all the reviews, it only gives the average rating for each

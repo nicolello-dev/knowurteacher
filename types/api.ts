@@ -1,6 +1,4 @@
-import { NextApiResponse } from "next";
-
-export interface APIResponse<T = any> extends NextApiResponse {
+export interface APIResponse<T = any> {
     success: boolean,
     data: T,
     error: string | null

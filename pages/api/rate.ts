@@ -4,20 +4,20 @@ import prisma from "@/prisma/prisma";
 import { getServerSession } from "next-auth/next"
 import authOptions from "./auth/[...nextauth]"
 
+import type { APIResponse } from "@/types/api";
+
 interface APIRequest extends NextApiRequest {
     query: {
         email: string | undefined;
         name: string | undefined;
         school: string | undefined;
-        strictness: string | undefined;
-        communication: string | undefined;
-        engagement: string | undefined;
-        feedbackQuality: string | undefined;
-        flexibility: string | undefined;
+        teaching: string | undefined;
+        fairness: string | undefined;
+        general: string | undefined;
     }
 }
 
-export default async function rateTeacher(req: APIRequest, res: NextApiResponse) {
+export default async function rateTeacher(req: APIRequest, res: APIResponse<null>) {
 
     if(req.method !== "POST") {
         res.status(405).json({ "success": false, "message": "Invalid method! POST only"});
@@ -28,15 +28,14 @@ export default async function rateTeacher(req: APIRequest, res: NextApiResponse)
         res.status(401).json({ 'success': false, 'message': "Not authenticated. Please sign in and try again." });
     }
 
-    let { email, name, school, labels } = JSON.parse(req.body);
-
-    email = email || undefined;
-    name = name || undefined
-    school = school || undefined;
-    labels = labels?.length ? labels : undefined;
-
-    if(email == undefined || name == undefined || school == undefined || labels == undefined) {
-        res.status(400).json({ 'success': false, 'message': 'Something was not defined' });
+    let { email, name, school, teaching, fairness, general } = JSON.parse(req.body);
+    
+    if([email, name, school, teaching, fairness, general].some(e => e == undefined)) {
+        res.status(400).json({
+            success: false,
+            data: null,
+            error: "Something was undefined! Please check that you filled in everything and retry."
+        });
         return;
     }
     try {
@@ -61,10 +60,12 @@ export default async function rateTeacher(req: APIRequest, res: NextApiResponse)
                 data: {
                     author: { connect: { id: user.id } },
                     teacher: { connect: { id: teacher.id } },
-                    labels: labels
+                    teaching,
+                    fairness,
+                    general
                 }
             });
-        } catch(err) {
+        } catch(err) { // If such a review already exists
             await prisma.review.update({
                 where: {
                     authorID_teacherID: {
@@ -73,15 +74,25 @@ export default async function rateTeacher(req: APIRequest, res: NextApiResponse)
                     }
                 },
                 data: {
-                    labels
+                    teaching,
+                    fairness,
+                    general
                 }
             });
         }
     } catch (err) {
         console.error(err);
-        res.status(500).json({ 'success': false, 'message': 'Unknown error; you likely already wrote a review for the teacher'});
+        res.status(500).json({
+            success: false,
+            data: null,
+            error: "Something unexpected happened! Please try again."
+        })
         return;
     }
-    res.status(200).json({ 'success': true });
+    res.status(200).json({
+        success: true,
+        data: null,
+        error: null
+    });
     return;
 }

@@ -4,27 +4,8 @@ datasource db {
 }
 
 generator client {
-    provider = "prisma-client-js"
-    engineType = "binary"
-}
-
-enum Labels {
-  // Positive
-  Helpful
-  Passionate
-  Knowledgeable
-  Patient
-  Motivating
-  Creative
-  Fun
-  // Negative
-  Strict
-  Unorganized
-  Inconsistent
-  Harsh
-  Impatient
-  Unavailable
-  Serious
+  provider   = "prisma-client-js"
+  engineType = "binary"
 }
 
 model Teacher {
@@ -36,6 +17,7 @@ model Teacher {
   Reviews    Review[]
 
   @@unique([name, school])
+  @@index([name, school])
 }
 
 model User {
@@ -46,16 +28,21 @@ model User {
   school    String?
   photoURL  String?
   Reviews   Review[]
+
+  @@index([email, username])
 }
 
 model Review {
-  id            String   @id @default(uuid())
-  creation_date DateTime @default(now()) @db.Timestamptz(3)
-  author        User     @relation(fields: [authorID], references: [id])
-  authorID      String
-  teacher       Teacher  @relation(fields: [teacherID], references: [id])
-  teacherID     String
-  labels        Labels[]
+  id        String   @id @default(uuid()) @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+  author    User     @relation(fields: [authorID], references: [id])
+  authorID  String
+  teacher   Teacher  @relation(fields: [teacherID], references: [id])
+  teacherID String
+  teaching  String   @db.Text
+  fairness  String   @db.Text
+  general   String   @db.Text
 
   @@unique([authorID, teacherID])
 }
