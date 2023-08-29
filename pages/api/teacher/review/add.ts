@@ -4,7 +4,6 @@ import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import prisma from "@/prisma/prisma";
-import { Prisma } from "@prisma/client";
 
 interface Request extends NextApiRequest {
     body: {
@@ -15,7 +14,7 @@ interface Request extends NextApiRequest {
     }
 }
 
-export default async function Handler(req: NextApiRequest, res: NextApiResponse<APIResponse>) {
+export default async function Handler(req: Request, res: NextApiResponse<APIResponse>) {
 
     if(req.method != "POST") {
         res.status(405).json({
@@ -40,23 +39,21 @@ export default async function Handler(req: NextApiRequest, res: NextApiResponse<
     const { teaching, fairness, general, teacherId } = req.body;
 
     try {
-        const id = prisma.user.findUnique({
+        await prisma.user.update({
             where: {
-                email: session.user?.email || ""
+                email: session.user?.email || undefined
             },
-            select: {
-                id: true
-            }
-        });
-        await prisma.review.create({
             data: {
-                teaching,
-                fairness,
-                general,
-                teacherID: teacherId,
-                authorID: id as unknown as string
+                Reviews: {
+                    create: {
+                        teaching,
+                        fairness,
+                        general,
+                        teacherID: teacherId
+                    }
+                }
             }
-        });
+        })
         res.status(200).json({
             success: true,
             data: null,

@@ -27,6 +27,10 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
             })
     }, [teacherId])
 
+    if(!success) {
+        return <h1 className="text-center text-3xl">Something went wrong! Please try again</h1>
+    }
+    
     if(isLoading || reviews == null) {
         return <h1 className="text-center text-3xl">Loading reviews...</h1>;
     }
