@@ -1,10 +1,12 @@
-// TODO: Implement an actual view of the reviews
-
 import type { Review } from "@prisma/client";
 
 import type { APIResponse } from "@/types/api";
 
 import { useState, useEffect } from "react";
+
+import { getRelativeTime } from "@/lib/time";
+
+import { svgs } from "@/components/svgs";
 
 export default function ShowReviews({ teacherId }: { teacherId: string }) {
 
@@ -25,7 +27,13 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
                 setSuccess(false);
                 console.error(err);
             })
-    }, [teacherId])
+    }, [teacherId]);
+
+    function reportReview(id: string) {
+        fetch('/api/teacher/review/report', {
+            body: JSON.stringify({ id })
+        })
+    }
 
     if(!success) {
         return <h1 className="text-center text-3xl">Something went wrong! Please try again</h1>
@@ -41,7 +49,24 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
     
     return <>
         {
-            JSON.stringify(reviews)
+            reviews.map((review: Review, i: number) => <article key={i} className="mx-auto p-5 m-5 bg-secondary container rounded-xl">
+                <div className="my-2 flex flex-row flex-wrap justify-between items-center">
+                    <p className="text-gray-700">
+                        Reviewed <span>{getRelativeTime(review.createdAt)}</span>, last update <span>{getRelativeTime(review.updatedAt)}</span>
+                    </p>
+                    <button className="flex flex-row items-center gap-x-2 border p-2 rounded border-black" onClick={_ => reportReview(review.id)}>
+                        {svgs.attention(18, 18, "#374151")} Report
+                    </button>
+                </div>
+                <div>
+                    <h2 className="font-bold text-lg">Teaching: </h2>
+                    <p>{review.teaching}</p>
+                    <h2 className="font-bold text-lg">Fairness: </h2>
+                    <p>{review.fairness}</p>
+                    <h2 className="font-bold text-lg">General: </h2>
+                    <p>{review.general}</p>
+                </div>
+            </article>)
         }
     </>
 }
