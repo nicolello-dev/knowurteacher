@@ -6,12 +6,7 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import prisma from "@/prisma/prisma";
 
 interface Request extends NextApiRequest {
-    body: {
-        teaching: string,
-        fairness: string,
-        general: string,
-        teacherId: string
-    }
+    body: string
 }
 
 export default async function Handler(req: Request, res: NextApiResponse<APIResponse>) {
@@ -36,7 +31,16 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
         return
     }
     
-    const { teaching, fairness, general, teacherId } = req.body;
+    const { teaching, fairness, general, teacherId } = JSON.parse(req.body);
+
+    if([teaching, fairness, general, teacherId].some(e => e == undefined)) {
+        res.status(400).json({
+            success: false,
+            data: null,
+            error: "Something was not defined! Received: " + JSON.stringify(req.body)
+        });
+        return;
+    }
 
     try {
         await prisma.user.update({
@@ -59,7 +63,6 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
             data: null,
             error: null
         });
-        console.log("Success adding a review!");
     } catch(err) {
         console.error(err);
         res.status(400).json({
