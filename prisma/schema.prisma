@@ -43,6 +43,7 @@ model Review {
   teaching  String   @db.Text
   fairness  String   @db.Text
   general   String   @db.Text
+  reports   Int      @default(0)
 
   @@unique([authorID, teacherID])
 }
