@@ -12,9 +12,10 @@ import { useEffect, useState } from "react";
 import ss from "@/styles/Search.module.css"; // Search Styles
 
 // Components
-import TeacherSelect from "@/components/teacherSelect";
+import TeacherProfilePreview from "@/components/view/TeacherProfilePreview";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+
 
 export default function SearchByName() {
 
@@ -73,7 +74,7 @@ export default function SearchByName() {
         <section className="py-4">
 	        <div className='flex flex-row flex-wrap justify-evenly'>
 	            {                            // this div is necessary for the `key` prop, for optimization purposes.
-	                shownTeachers.map((t, key) => <div className="w-72 p-4" key={key}><TeacherSelect teacher={t} button={true}/></div>)
+	                shownTeachers.map((t, key) => <div className="w-72 p-4" key={key}><TeacherProfilePreview teacher={t} button={true}/></div>)
 	            }
 	        </div>
             {
