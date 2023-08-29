@@ -71,9 +71,10 @@ export default function VotingComponent({ review, refetchReviews }: { review: Re
     
     return <div className="flex flex-row gap-x-2 items-center">
         {
-            reviewLayouts.map(element => {
+            reviewLayouts.map((element, i) => {
                 if (element.button) {
                     return <button
+                        key={i}
                         className={`bg-primary text-white p-2 rounded ${element.classNameExtras}`}
                         onClick={() => element.onClick(review.id, refetchReviews)}>
 
@@ -81,7 +82,7 @@ export default function VotingComponent({ review, refetchReviews }: { review: Re
 
                     </button>
                 } else {
-                    return <p className={element.classNameExtras}>{review.points}</p>
+                    return <p key={i} className={element.classNameExtras}>{review.points}</p>
                 }
             })
         }
