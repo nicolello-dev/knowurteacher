@@ -48,7 +48,7 @@ export default async function Handler(req: NextApiRequest, res: NextApiResponse<
                 id: true
             }
         });
-        prisma.review.create({
+        await prisma.review.create({
             data: {
                 teaching,
                 fairness,
