@@ -15,7 +15,7 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
         res.status(405).json({
             success: false,
             data: null,
-            error: "Method not allowed. Please make a POST request instead."
+            message: "Method not allowed. Please make a POST request instead."
         })
     }
 
@@ -25,7 +25,7 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
         res.status(401).json({
             success: false,
             data: null,
-            error: "Invalid credentials. Sign in and try again."
+            message: "Invalid credentials. Sign in and try again."
         });
         console.log("Invalid credentials");
         return
@@ -37,7 +37,7 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
         res.status(400).json({
             success: false,
             data: null,
-            error: "Something was not defined! Received: " + JSON.stringify(req.body)
+            message: "Something was not defined! Received: " + JSON.stringify(req.body)
         });
         return;
     }
@@ -61,14 +61,14 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
         res.status(200).json({
             success: true,
             data: null,
-            error: null
+            message: null
         });
     } catch(err) {
         console.error(err);
         res.status(400).json({
             success: false,
             data: null,
-            error: "Teacher or user not found. This error should not have happened, please try again or contact support."
+            message: "Teacher or user not found. This error should not have happened, please try again or contact support."
         });
         return;
     }

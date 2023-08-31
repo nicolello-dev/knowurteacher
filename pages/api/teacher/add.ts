@@ -18,7 +18,7 @@ export default async function addTeacher(req: APIRequest, res: NextApiResponse<A
         res.status(405).json({
             success: false,
             data: null,
-            error: "Wrong method! Please only use POST methods for this route."
+            message: "Wrong method! Please only use POST methods for this route."
         });
         return;
     }
@@ -28,7 +28,7 @@ export default async function addTeacher(req: APIRequest, res: NextApiResponse<A
         res.status(401).json({
             success: false,
             data: null,
-            error: "Not authenticated. Please sign in and retry."
+            message: "Not authenticated. Please sign in and retry."
         });
     }
 
@@ -38,7 +38,7 @@ export default async function addTeacher(req: APIRequest, res: NextApiResponse<A
         res.status(400).json({
             success: false,
             data: null,
-            error: "The data passed is invalid or inexistent. Please try again."
+            message: "The data passed is invalid or inexistent. Please try again."
         });
         return;
     }
@@ -52,13 +52,13 @@ export default async function addTeacher(req: APIRequest, res: NextApiResponse<A
         res.status(200).json({
             success: true,
             data: null,
-            error: null
+            message: null
         })
     } catch (err) {
         res.status(500).json({
             success: false,
             data: null,
-            error: "An unexpected error occurred (likely the teacher already exists). If that isn't the case, please contact support."
+            message: "An unexpected error occurred (likely the teacher already exists). If that isn't the case, please contact support."
         });
         return;
     }

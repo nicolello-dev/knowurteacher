@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
 import homeStyles from "@/styles/HomeStyles.module.css";
@@ -6,10 +5,23 @@ import Link from "next/link";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 
-interface TeacherSuggestion {
-  name: string;
-  school: string;
-}
+import type { APIResponse } from "@/types/api";
+import type { TeacherSuggestion } from "@/types/api/teacher/suggest";
+
+const faqs = [
+    {
+        question: "Are reviews anonymous?",
+        answer: "Yes, all reviews are anonymous. We won't disclose the author of reviews to anyone, including third parties. More information about your data can be found in the terms of service"
+    },
+    {
+        question: "How do I rate a teacher?",
+        answer: "Search your teacher in the bar above, then you can write your own review. Please note that you need to log in to submit it."
+    },
+    {
+        question: "Can I report a review?",
+        answer: "Yes! There's a button for that under every review. All reported reviews will be blurred by default and it's up to the user's discretion to unblur them. We will personally fetch reported reviews and delete them if necessary."
+    }
+];
 
 export default function Home() {
     const router = useRouter();
@@ -17,23 +29,12 @@ export default function Home() {
     const [name, setName] = useState<string>("");
     const [recommendedTeachers, setRecommendedTeachers] = useState<TeacherSuggestion[]>([]);
 
-	const faqs = [
-		{
-			question: "Are reviews anonymous?",
-			answer: "Yes, all reviews are anonymous. We will not disclose the author of reviews to anyone, including third parties. More information about your data can be found in the terms of service"
-		},
-		{
-			question: "How do I rate a teacher?",
-			answer: "Search your teacher in the bar above; below them, you can add labels and submit your opinion."
-		}
-	]
-
     function search() {
         if(name.trim() == "") {
             alert("Name must not be empty!");
             return false;
         }
-        router.push(`/search/${name}`);
+        router.push(`/search/${encodeURIComponent(name)}`);
         return false;
     }
 
@@ -46,9 +47,9 @@ export default function Home() {
         setRecommendedTeachers([]);
         return;
       }
-      fetch(`/api/suggest?name=${encodeURIComponent(name)}`)
+      fetch(`/api/teacher/suggest?name=${encodeURIComponent(name)}`)
         .then((response) => response.json())
-        .then(r => setRecommendedTeachers(r));
+        .then((r: APIResponse<TeacherSuggestion[]>) => r.data && setRecommendedTeachers(r.data));
     }, [name]);
 
     return (
@@ -64,7 +65,7 @@ export default function Home() {
           </h3>
           <form className="p-6" onSubmit={(e: any) => {e.preventDefault(); search()}}>
             <div className="relative flex items-stretch w-full mb-3">
-              <input autoComplete="yes" type="text" name="name" className="w-full py-1 px-2 mb-1 bg-white text-gray-800 border border-primary rounded rounded-r-none" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
+              <input autoComplete="yes" type="text" name="name" className="w-full p-2 mb-1 bg-white text-gray-800 border border-primary rounded rounded-r-none text-lg" placeholder="ex: John Doe" onChange={(e: any) => setName(e.target.value)}/>
               <button className="text-white dark:text-darktext bg-primary rounded rounded-l-none py-1 px-2 mb-1" type="button" onClick={search}>Search</button>
             </div>
             <div className={`m-0 text-black absolute ${homeStyles.absoluteContainer}`}>

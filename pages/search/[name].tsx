@@ -8,9 +8,6 @@ import { useRouter } from "next/router";
 // React
 import { useEffect, useState } from "react";
 
-// Styles
-import ss from "@/styles/Search.module.css"; // Search Styles
-
 // Components
 import TeacherProfilePreview from "@/components/view/TeacherProfilePreview";
 import Header from "@/components/header";
@@ -78,11 +75,13 @@ export default function SearchByName() {
 	            }
 	        </div>
             {
-                shownTeachers.length < count && <ul className={`pagination ${ss.pagination}`}>
-                    <li className="page-item"><button className="page-link btn" onClick={_ => getPrevResults()}>Previous</button></li>
-                    <li className="page-item"><p className="page-link">{shownTeachers.length > 1 ? `${cursor + 1}-${cursor + shownTeachers.length }` : cursor + 1}</p></li>
-                    <li className="page-item"><button className="page-link btn" onClick={_ => getNextResults()}>Next</button></li>
-                </ul>
+                shownTeachers.length < count && <div className="w-full flex flex-row space-around">
+                    <ul className="flex flex-row mx-auto gap-4 items-baseline">
+                        <li className="page-item"><button className="bg-secondary p-2" onClick={_ => getPrevResults()}>Prev.</button></li>
+                        <li className="page-item"><p className="page-link">{shownTeachers.length > 1 ? `${cursor + 1}-${cursor + shownTeachers.length }` : cursor + 1}</p></li>
+                        <li className="page-item"><button className="bg-secondary p-2" onClick={_ => getNextResults()}>Next</button></li>
+                    </ul>
+                </div>
             }
         </section>
         <section className="p-8 pb-4 flex flex-col items-center dark:text-white">

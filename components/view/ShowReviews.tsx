@@ -16,8 +16,8 @@ function refetchReviews(teacherId: string, setIsLoading: StateFunction<boolean>,
     teacherId && fetch(`/api/teacher/review/get?teacherID=${teacherId}`)
             .then(r => r.json())
             .then((r: APIResponse<Review[]>) => {
-                if(!r.data) {
-                    throw new Error(r.error || "");
+                if(!r.success) {
+                    throw new Error(r.message!);
                 }
                 setReviews(r.data);
                 setSuccess(true);
@@ -45,15 +45,15 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
     }, [teacherId]);
 
     if (!success) {
-        return <h1 className="text-center text-3xl">Something went wrong! Please try again</h1>
+        return <h1 className="text-center text-3xl dark:text-darktext">Something went wrong! Please try again</h1>
     }
 
     if (isLoading || reviews == null) {
-        return <h1 className="text-center text-3xl">Loading reviews...</h1>;
+        return <h1 className="text-center text-3xl dark:text-darktext">Loading reviews...</h1>;
     }
 
     if (reviews.length == 0) {
-        return <p className="mx-auto text-center m-6 text-xl">No comments yet! Be the first one!</p>
+        return <p className="mx-auto text-center m-6 text-xl dark:text-darktext">No comments yet! Be the first one!</p>
     }
 
     return <>
@@ -75,7 +75,7 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
                     <p>{review.general}</p>
                 </div>
                 {
-                    blur && <div className="mx-auto absolute w-full text-center top-0 bottom-0 translate-y-1/2">
+                    blur && review.reports > 0 && <div className="mx-auto absolute w-full text-center top-0 bottom-0 translate-y-1/2">
                         <p>This review was flagged by the community as being harmful</p>
                         <button className="bg-primary text-white p-3 m-2 rounded-3xl" onClick={() => setBlur(false)}>Proceed and unblur</button>
                     </div>

@@ -13,7 +13,7 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
         res.status(405).json({
             success: false,
             data: null,
-            error: "Wrong method! Please use POST requests for this."
+            message: "Wrong method! Please use POST requests for this."
         })
     }
 
@@ -23,7 +23,7 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
         res.status(400).json({
             success: false,
             data: null,
-            error: "ID is undefined. Please try again or contact support."
+            message: "ID is undefined. Please try again or contact support."
         })
     }
 
@@ -38,16 +38,9 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
         }
     });
 
-    console.log("Reported! Total reports: ", await prisma.review.findUnique({
-        where: { id },
-        select: {
-            reports: true
-        }
-    }));
-
     res.status(200).json({
         success: true,
         data: null,
-        error: null
+        message: null
     })
 }

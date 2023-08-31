@@ -13,25 +13,25 @@ interface APIRequest extends NextApiRequest {
 
 export default async function findTeacher(req: APIRequest, res: NextApiResponse<APIResponse<Teacher>>) {
 
-    if(req.method !== "GET") {
+    if (req.method !== "GET") {
         res.status(405).json({
             success: false,
             data: null,
-            error: "Wrong method. Please only use GET requests for this route."
+            message: "Wrong method. Please only use GET requests for this route."
         });
     }
 
     const nameInput: string | null = req.query.name || null;
     const schoolInput: string | null = req.query.school || null;
-    if(nameInput == null || nameInput.length < 3 || schoolInput == null) {
+    if (nameInput == null || nameInput.length < 3 || schoolInput == null) {
         res.status(400).json({
             success: false,
             data: null,
-            error: "Input either inexistent or invalid. Please check you've compiled correctly all parts."
+            message: "Input either inexistent or invalid. Please check you've compiled correctly all parts."
         });
         return;
     }
-    const teacher =  await prisma.teacher.findFirst({
+    const teacher = await prisma.teacher.findFirst({
         where: {
             name: {
                 equals: nameInput
@@ -44,7 +44,7 @@ export default async function findTeacher(req: APIRequest, res: NextApiResponse<
     res.status(200).json({
         success: true,
         data: teacher,
-        error: null
+        message: null
     });
     return;
 }

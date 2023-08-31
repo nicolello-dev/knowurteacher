@@ -32,7 +32,7 @@ export default function ViewTeacherReviews() {
             .then((t: APIResponse<Teacher>) => {
 				setLoading(false);
                 if(!t.success) {
-                    console.error("An error occurred trying to get teacher information!", t.error);
+                    console.error("An error occurred trying to get teacher information!", t.message);
                     return;
                 }
 				setTeacher(t.data);
@@ -70,7 +70,6 @@ export default function ViewTeacherReviews() {
 				<title>View teacher | Knowurteacher</title>
 			</Head>
 	        <Header/>
-            <h1 className="text-3xl text-center font-bold m-12">Teacher details:</h1>
             <TeacherProfilePreview teacher={teacher} button={false}/>
             <NewReview teacherId={teacher.id}/>
             <ShowReviews teacherId={teacher.id}/>

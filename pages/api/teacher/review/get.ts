@@ -17,7 +17,7 @@ export default async function Handler(req: APIRequest, res: NextApiResponse<APIR
         res.status(405).json({
             success: false,
             data: null,
-            error: "Invalid method! Please use GET for this request."
+            message: "Invalid method! Please use GET for this request."
         });
     }
 
@@ -27,7 +27,7 @@ export default async function Handler(req: APIRequest, res: NextApiResponse<APIR
         res.status(400).json({
             success: false,
             data: null,
-            error: "TeacherID is undefined. Please request a valid teacher ID."
+            message: "TeacherID is undefined. Please request a valid teacher ID."
         });
         return;
     }
@@ -37,13 +37,16 @@ export default async function Handler(req: APIRequest, res: NextApiResponse<APIR
             teacherID: {
                 equals: req.query.teacherID
             }
+        },
+        orderBy: {
+            points: 'desc'
         }
     });
 
     res.status(200).json({
         success: true,
         data: reviews,
-        error: null
+        message: null
     });
     return;
 }
