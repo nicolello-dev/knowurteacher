@@ -30,6 +30,7 @@ export default async function addTeacher(req: APIRequest, res: NextApiResponse<A
             data: null,
             message: "Not authenticated. Please sign in and retry."
         });
+        return;
     }
 
     const { name, school } = JSON.parse(req.body)
