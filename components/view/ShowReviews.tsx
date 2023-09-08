@@ -58,7 +58,7 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
 
     return <>
         {
-            reviews.map((review: Review, i: number) => <article key={i} className="mx-auto p-5 m-5 bg-white container rounded-xl relative">
+            reviews.map((review: Review, i: number) => <article key={i} className="mx-auto p-5 pt-1 m-5 bg-white container rounded-xl relative">
                 <div className="my-2 flex flex-row flex-wrap justify-between items-center">
                     <p className="text-gray-700">
                         Reviewed <span>{getRelativeTime(review.createdAt)}</span>,
@@ -67,12 +67,7 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
                     <VotingComponent review={review} refetchReviews={refetchReviewsWithArguments}/>
                 </div>
                 <div className={`${review.reports > 0 && blur ? "blur" : ""}`}>
-                    <h2 className="font-bold text-lg">Teaching: </h2>
-                    <p>{review.teaching}</p>
-                    <h2 className="font-bold text-lg">Fairness: </h2>
-                    <p>{review.fairness}</p>
-                    <h2 className="font-bold text-lg">General: </h2>
-                    <p>{review.general}</p>
+                    <p>{review.text}</p>
                 </div>
                 {
                     blur && review.reports > 0 && <div className="mx-auto absolute w-full text-center top-0 bottom-0 translate-y-1/2">

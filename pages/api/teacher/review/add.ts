@@ -31,9 +31,9 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
         return
     }
     
-    const { teaching, fairness, general, teacherId } = JSON.parse(req.body);
+    const { text, teacherId } = JSON.parse(req.body);
 
-    if([teaching, fairness, general, teacherId].some(e => e == undefined)) {
+    if([text, teacherId].some(e => e == undefined)) {
         res.status(400).json({
             success: false,
             data: null,
@@ -50,9 +50,7 @@ export default async function Handler(req: Request, res: NextApiResponse<APIResp
             data: {
                 Reviews: {
                     create: {
-                        teaching,
-                        fairness,
-                        general,
+                        text,
                         teacherID: teacherId
                     }
                 }

@@ -1,11 +1,11 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("POSTGREDB_URL")
-}
-
 generator client {
   provider   = "prisma-client-js"
   engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGREDB_URL")
 }
 
 model Teacher {
@@ -36,15 +36,13 @@ model Review {
   id        String   @id @default(uuid()) @db.Uuid
   createdAt DateTime @default(now()) @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
-  author    User     @relation(fields: [authorID], references: [id])
   authorID  String
-  teacher   Teacher  @relation(fields: [teacherID], references: [id])
   teacherID String
-  teaching  String   @db.Text
-  fairness  String   @db.Text
-  general   String   @db.Text
+  text      String
   reports   Int      @default(0)
   points    Int      @default(0)
+  author    User     @relation(fields: [authorID], references: [id])
+  teacher   Teacher  @relation(fields: [teacherID], references: [id])
 
   @@unique([authorID, teacherID])
 }

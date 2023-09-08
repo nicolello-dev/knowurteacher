@@ -12,7 +12,7 @@ export default function TeacherProfilePreview({ teacher, button=false }: { teach
             <p className="mb-0 text-center dark:text-darktext">
                 {teacher.school}
             </p>
-            {button && <a href={`/view/${teacher.school}/${teacher.name}`} className="inline-block align-middle text-center select-none font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white m-2 mt-6 bg-primary dark:bg-darkprimary">View profile</a>}
+            {button && <a href={`/view/${teacher.school}/${teacher.name}`} className="inline-block align-middle text-center select-none font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-white m-2 mt-6 bg-primary dark:bg-darkprimary">View profile</a>}
         </div>
     </div>
 }
