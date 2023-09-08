@@ -10,16 +10,20 @@ import type { TeacherSuggestion } from "@/types/api/teacher/suggest";
 
 const faqs = [
     {
-        question: "Are reviews anonymous?",
-        answer: "Yes, all reviews are anonymous. We won't disclose the author of reviews to anyone, including third parties. More information about your data can be found in the terms of service"
+        question: "Are comments anonymous?",
+        answer: "Yes, all comments are anonymous. We won't disclose the author of comments to anyone, including third parties. More information about your data can be found in the terms of service"
     },
     {
-        question: "How do I rate a teacher?",
-        answer: "Search your teacher in the bar above, then you can write your own review. Please note that you need to log in to submit it."
+        question: "My whole school is missing but I don't want to add all teachers. What can I do?",
+        answer: "That's okay! We'd really appreciate it if you sent us your school via email at nicolamigone179@gmail.com, we will later scrape all available data about it"
     },
     {
-        question: "Can I report a review?",
-        answer: "Yes! There's a button for that under every review. All reported reviews will be blurred by default and it's up to the user's discretion to unblur them. We will personally fetch reported reviews and delete them if necessary."
+        question: "How do I comment on a teacher?",
+        answer: "Search your teacher in the bar above, then write your comment. Please note that you need to log in to submit it."
+    },
+    {
+        question: "Can I report a comment?",
+        answer: "Yes! There's a button for that atop every comment. All reported comments will be blurred by default and it's up you to unblur them. Reported comments will be manually checked by a human before being deleted."
     }
 ];
 
@@ -90,10 +94,10 @@ export default function Home() {
         <h1 className="text-5xl ml-8 text-primary font-serif dark:text-darkaccent">
           FAQ
         </h1>
-        <div className="flex flex-wrap justify-around mt-12">
+        <div className="flex flex-wrap justify-around mt-12 gap-12">
 			{
 				faqs.map((f, i) => {
-					return <div key={i} className="w-5/12 min-w-[250px] mx-8 my-3 dark:text-darktext">
+					return <div key={i} className="w-5/12 min-w-[250px] dark:text-darktext">
 						<h1 className="text-2xl mb-4">
 							{f.question}
 						</h1>
