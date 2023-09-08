@@ -61,7 +61,7 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
             reviews.map((review: Review, i: number) => <article key={i} className="mx-auto p-5 pt-1 m-5 bg-white container rounded-xl relative">
                 <div className="my-2 flex flex-row flex-wrap justify-between items-center">
                     <p className="text-gray-700">
-                        Reviewed <span>{getRelativeTime(review.createdAt)}</span>,
+                        Commented <span>{getRelativeTime(review.createdAt)}</span>,
                         last updated <span>{getRelativeTime(review.updatedAt)}</span>
                     </p>
                     <VotingComponent review={review} refetchReviews={refetchReviewsWithArguments}/>

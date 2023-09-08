@@ -77,5 +77,3 @@ export default function ViewTeacherReviews() {
         </>
     );
 }
-
-// TODO: Change it so that instead of getting all the reviews, it only gives the average rating for each

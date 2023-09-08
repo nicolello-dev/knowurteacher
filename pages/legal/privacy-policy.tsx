@@ -46,7 +46,7 @@ Information that you directly submit to us through our Services may include:
 <ul>
     <li>
         <p>
-            Your reviews, including the teacher you reviewed and the grade for each section.
+            Your comments, including the teacher you commented on and its text.
         </p>
     </li>
 </ul>
@@ -73,7 +73,7 @@ How We Use Your Personal Information
 <ul>
     <li>
         <p>
-         To save your user information in a database, and to ensure all the reviews come from genuine people, avoiding mass negative reviews of teachers.
+         To save your user information in a database, and to ensure all the comments come from genuine people, avoiding mass negative comments of teachers.
         </p>
     </li>
 </ul>
