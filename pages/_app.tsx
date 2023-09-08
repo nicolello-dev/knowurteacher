@@ -3,7 +3,11 @@ import '@/styles/globals.css'
 
 import { Analytics } from '@vercel/analytics/react';
 
-import { SessionProvider } from 'next-auth/react'
+import { SessionProvider } from 'next-auth/react';
+
+import { ToastContainer } from 'react-toastify';
+
+import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, pageProps, session }: {Component: any, pageProps: any, session: any }) {
   return (
@@ -27,6 +31,7 @@ function MyApp({ Component, pageProps, session }: {Component: any, pageProps: an
         <meta name="google-site-verification" content="KgI7QxovzGjE_f_S2u1LvlUqJSTrmVAuiwFfImkhEXU" />
       </Head>
       <SessionProvider session={session}>
+        <ToastContainer position="bottom-right" pauseOnFocusLoss={false}/>
         <Component {...pageProps} />
       </SessionProvider>
       <Analytics />

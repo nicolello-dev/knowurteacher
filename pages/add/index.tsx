@@ -4,12 +4,14 @@ import { useState } from "react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
+import { toast } from "react-toastify";
+
 export default function AddTeacher() {
 
     const [name, setName] = useState("");
     const [school, setSchool] = useState("");
 
-    function addTeacher() {
+    async function addTeacher() {
         if (!name || !school) {
             return;
         }
@@ -17,10 +19,21 @@ export default function AddTeacher() {
             name: name,
             school: school
         }
-        fetch(`/api/teacher/add`, {
-            method: "POST",
-            body: JSON.stringify(body)
-        })
+
+        await toast.promise(fetch(`/api/teacher/add`, {
+                method: "POST",
+                body: JSON.stringify(body)
+            }).then(r => {
+                if(r.ok) {
+                    return r.json();
+                }
+                throw new Error("");
+            }).catch(), {
+                pending: "Loading response from server...",
+                error: "Couldn't add teacher. Please check that you're logged in and the teacher doesn't already exist.",
+                success: "Teacher added successfully!"
+            }
+        ).catch(err => console.error(err));
     }
 
     return (<>
