@@ -15,7 +15,7 @@ export default function NewReview({ teacherId } : { teacherId: string }) {
                 setShow(false);
             }
         })
-    }, [])
+    }, [teacherId])
 
     function handleOnSubmit(e: any) {
         e.preventDefault();

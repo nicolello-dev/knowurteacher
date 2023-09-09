@@ -44,11 +44,11 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
     const session = useSession();
     const email = session.data?.user?.email;
 
-    email && useEffect(() => {
-        fetch(`/api/user/getId?email=${email}`)
+    useEffect(() => {
+        email && fetch(`/api/user/getId?email=${email}`)
             .then(r => r.json())
             .then((r: APIResponse<string>) => r.data && setUserId(r.data))
-    }, []);
+    }, [email]);
     
     useEffect(() => {
         refetchReviews(teacherId, setIsLoading, setReviews, setSuccess);
