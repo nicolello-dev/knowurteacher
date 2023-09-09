@@ -46,11 +46,12 @@ function handleRemoveReview() {
 
 type Layout = {
     classNameExtras: string,
+    ariaLabel: string,
     onClick: (...args: any) => any,
     button: true
     content: React.ReactNode
 } | {
-    classNameExtras: string,
+    classNameExtras: string
     onClick: () => void,
     button: false,
 }
@@ -58,6 +59,7 @@ type Layout = {
 export const reviewLayouts: Layout[] = [
     {
         classNameExtras: "bg-primary flex flex-row gap-x-2",
+        ariaLabel: "Report",
         onClick: (id: string) => reportReview(id),
         button: true,
         content: <div className="flex flex-row items-center gap-2">
@@ -66,6 +68,7 @@ export const reviewLayouts: Layout[] = [
     },
     {
         classNameExtras: "",
+        ariaLabel: "Downvote",
         onClick: (id: string, refetchReviews: () => any) => {
             downVoteReview(id, refetchReviews);
         },
@@ -73,12 +76,13 @@ export const reviewLayouts: Layout[] = [
         content: svgs.downvote(18, 18, "#000")
     },
     {
-        classNameExtras: "w-[18px] text-center",
+        classNameExtras: "w-[18px] text-center text-black",
         onClick: () => {},
         button: false
     },
     {
         classNameExtras: "",
+        ariaLabel: "upvote",
         onClick: (id: string, refetchReviews: () => any) => {
             upVoteReview(id, refetchReviews);
         },
@@ -101,7 +105,8 @@ export default function VotingComponent({ review, refetchReviews, userId }: { re
                     return <button
                         key={i}
                         className={`text-white p-2 rounded ${element.classNameExtras}`}
-                        onClick={() => element.onClick(review.id, refetchReviews)}>
+                        onClick={() => element.onClick(review.id, refetchReviews)}
+                        aria-label={element.ariaLabel}>
 
                         {element.content}
 

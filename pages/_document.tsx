@@ -23,7 +23,7 @@ export default function Document() {
             `}
           </Script>
       </Head>
-      <body className="bg-bg dark:bg-[#130316]">
+      <body className="bg-bg dark:bg-[#130316] dark:text-white">
         <Main />
         <NextScript nonce={nonce} />
       </body>
