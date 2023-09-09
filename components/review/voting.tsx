@@ -2,11 +2,12 @@ import { svgs } from "@/components/svgs";
 import { Review } from "@prisma/client";
 import { toast } from "react-toastify";
 
-function reportReview(id: string) {
+function reportReview(id: string, refetch: () => any) {
     fetch('/api/teacher/review/report', {
         method: "POST",
         body: JSON.stringify({ id })
     })
+    .finally(() => refetch())
 }
 
 function downVoteReview(id: string, refetch: () => any) {
@@ -25,7 +26,7 @@ function upVoteReview(id: string, refetch: () => any) {
     .finally(() => refetch())
 }
 
-function handleRemoveReview() {
+function handleRemoveReview(refetch: () => any) {
     toast.promise(
         fetch('/api/teacher/review/remove', {
             method: 'POST'
@@ -35,7 +36,8 @@ function handleRemoveReview() {
                 return r.json();
             }
             throw new Error('');
-        }),
+        })
+        .finally(() => refetch()),
         {
             pending: "Waiting for server response...",
             success: "Successfully deleted your review",
@@ -60,7 +62,7 @@ export const reviewLayouts: Layout[] = [
     {
         classNameExtras: "bg-primary flex flex-row gap-x-2",
         ariaLabel: "Report",
-        onClick: (id: string) => reportReview(id),
+        onClick: (id: string, refetchReviews: () => any) => reportReview(id, refetchReviews),
         button: true,
         content: <div className="flex flex-row items-center gap-2">
                     {svgs.attention(18, 18, "#FFF")} Report
@@ -97,7 +99,7 @@ export default function VotingComponent({ review, refetchReviews, userId }: { re
         {
             review.authorID == userId && <button
                 className="p-2"
-                onClick={() => handleRemoveReview()}>{svgs.trash(18, 18)}</button>
+                onClick={() => handleRemoveReview(refetchReviews)}>{svgs.trash(18, 18)}</button>
         }
         {
             reviewLayouts.map((element, i) => {

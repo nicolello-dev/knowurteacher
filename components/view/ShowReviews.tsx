@@ -2,7 +2,7 @@ import type { Review } from "@prisma/client";
 
 import type { APIResponse } from "@/types/api";
 
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect } from "react";
 
 import { getRelativeTime } from "@/lib/time";
 
@@ -76,15 +76,19 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
                     </p>
                     <VotingComponent review={review} refetchReviews={refetchReviewsWithArguments} userId={userId}/>
                 </div>
-                <div className={`${review.reports > 0 && blur ? "blur" : ""}`}>
-                    <p>{review.text}</p>
-                </div>
-                {
-                    blur && review.reports > 0 && <div className="mx-auto absolute w-full text-center top-0 bottom-0 translate-y-1/2">
-                        <p>This review was flagged by the community as being harmful</p>
-                        <button className="bg-primary text-white p-3 m-2 rounded-3xl" onClick={() => setBlur(false)}>Proceed and unblur</button>
+                <div className="relative">
+                    <div className={`${review.reports > 0 && blur ? "blur" : ""}`}>
+                        <p className="text-black">{review.text}</p>
                     </div>
-                }
+                    {
+                        blur && review.reports > 0 && <div className="mx-auto w-full text-center">
+                            <button className="bg-primary text-white p-3 m-2 rounded-3xl" onClick={() => setBlur(false)}>Comment reported. Unblur?</button>
+                        </div>
+                    }
+                </div>
+                <p className="mt-8">
+                    <span className="text-gray-700">Reports: {review.reports}</span>
+                </p>
             </article>)
         }
     </>
