@@ -1,5 +1,6 @@
 import { svgs } from "@/components/svgs";
 import { Review } from "@prisma/client";
+import { toast } from "react-toastify";
 
 function reportReview(id: string) {
     fetch('/api/teacher/review/report', {
@@ -24,6 +25,25 @@ function upVoteReview(id: string, refetch: () => any) {
     .finally(() => refetch())
 }
 
+function handleRemoveReview() {
+    toast.promise(
+        fetch('/api/teacher/review/remove', {
+            method: 'POST'
+        })
+        .then(r => {
+            if(r.ok) {
+                return r.json();
+            }
+            throw new Error('');
+        }),
+        {
+            pending: "Waiting for server response...",
+            success: "Successfully deleted your review",
+            error: "Error occurred. Are you sure you're signed in?"
+        }
+    );
+}
+
 type Layout = {
     classNameExtras: string,
     onClick: (...args: any) => any,
@@ -37,7 +57,7 @@ type Layout = {
 
 export const reviewLayouts: Layout[] = [
     {
-        classNameExtras: "flex flex-row gap-x-2",
+        classNameExtras: "bg-primary flex flex-row gap-x-2",
         onClick: (id: string) => reportReview(id),
         button: true,
         content: <div className="flex flex-row items-center gap-2">
@@ -50,7 +70,7 @@ export const reviewLayouts: Layout[] = [
             downVoteReview(id, refetchReviews);
         },
         button: true,
-        content: svgs.downvote(18, 18, "#FFF")
+        content: svgs.downvote(18, 18, "#000")
     },
     {
         classNameExtras: "w-[18px] text-center",
@@ -63,19 +83,24 @@ export const reviewLayouts: Layout[] = [
             upVoteReview(id, refetchReviews);
         },
         button: true,
-        content: svgs.upvote(18, 18, "#FFF")
+        content: svgs.upvote(18, 18, "#000")
     }
 ]
 
-export default function VotingComponent({ review, refetchReviews }: { review: Review, refetchReviews: () => any }) {
+export default function VotingComponent({ review, refetchReviews, userId }: { review: Review, refetchReviews: () => any, userId: string }) {
     
     return <div className="flex flex-row gap-x-2 items-center">
+        {
+            review.authorID == userId && <button
+                className="p-2"
+                onClick={() => handleRemoveReview()}>{svgs.trash(18, 18)}</button>
+        }
         {
             reviewLayouts.map((element, i) => {
                 if (element.button) {
                     return <button
                         key={i}
-                        className={`bg-primary text-white p-2 rounded ${element.classNameExtras}`}
+                        className={`text-white p-2 rounded ${element.classNameExtras}`}
                         onClick={() => element.onClick(review.id, refetchReviews)}>
 
                         {element.content}

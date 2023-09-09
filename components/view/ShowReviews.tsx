@@ -7,6 +7,7 @@ import { useState, useEffect, createContext } from "react";
 import { getRelativeTime } from "@/lib/time";
 
 import VotingComponent from "@/components/review/voting";
+import { useSession } from "next-auth/react";
 
 // For ease of readability
 type StateFunction<T> = React.Dispatch<React.SetStateAction<T>>;
@@ -32,13 +33,22 @@ function refetchReviews(teacherId: string, setIsLoading: StateFunction<boolean>,
 }
 
 export default function ShowReviews({ teacherId }: { teacherId: string }) {
-
+    const [userId, setUserId] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [success, setSuccess] = useState<boolean | null>(null);
     const [reviews, setReviews] = useState<Review[] | null>(null);
     const [blur, setBlur] = useState<boolean>(true);
 
     const refetchReviewsWithArguments = () => refetchReviews(teacherId, setIsLoading, setReviews, setSuccess);
+
+    const session = useSession();
+    const email = session.data?.user?.email;
+
+    email && useEffect(() => {
+        fetch(`/api/user/getId?email=${email}`)
+            .then(r => r.json())
+            .then((r: APIResponse<string>) => r.data && setUserId(r.data))
+    }, []);
     
     useEffect(() => {
         refetchReviews(teacherId, setIsLoading, setReviews, setSuccess);
@@ -64,7 +74,7 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
                         Commented <span>{getRelativeTime(review.createdAt)}</span>,
                         last updated <span>{getRelativeTime(review.updatedAt)}</span>
                     </p>
-                    <VotingComponent review={review} refetchReviews={refetchReviewsWithArguments}/>
+                    <VotingComponent review={review} refetchReviews={refetchReviewsWithArguments} userId={userId}/>
                 </div>
                 <div className={`${review.reports > 0 && blur ? "blur" : ""}`}>
                     <p>{review.text}</p>

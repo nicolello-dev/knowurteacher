@@ -21,7 +21,7 @@ import Head from "next/head";
 export default function ViewTeacherReviews() {
 
     const [teacher, setTeacher] = useState<Teacher | null>(null);
-	const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const router = useRouter();
     const { name, school } = router.query;
@@ -30,24 +30,24 @@ export default function ViewTeacherReviews() {
         name && school && fetch(`/api/teacher/find?name=${name}&school=${school}`)
             .then(r => r.json())
             .then((t: APIResponse<Teacher>) => {
-				setLoading(false);
+                setLoading(false);
                 if(!t.success) {
                     console.error("An error occurred trying to get teacher information!", t.message);
                     return;
                 }
-				setTeacher(t.data);
-			});
+                setTeacher(t.data);
+            });
     }, [name, school])
 
-	if(loading) {
-		return <>
-			<Header/>
-			<Head>
-				<title>View teacher | Knowurteacher</title>
-			</Head>
-			<h1 className="mx-auto text-center text-xl p-5">Loading data, please wait...</h1>
-		</>
-	}
+    if(loading) {
+        return <>
+            <Header/>
+            <Head>
+                <title>View teacher | Knowurteacher</title>
+            </Head>
+            <h1 className="mx-auto text-center text-xl p-5">Loading data, please wait...</h1>
+        </>
+    }
 
     if(!teacher) {
         return <>
@@ -66,14 +66,14 @@ export default function ViewTeacherReviews() {
 
     return (
         <>
-			<Head>
-				<title>View teacher | Knowurteacher</title>
-			</Head>
-	        <Header/>
+            <Head>
+                <title>View teacher | Knowurteacher</title>
+            </Head>
+            <Header/>
             <TeacherProfilePreview teacher={teacher} button={false}/>
             <NewReview teacherId={teacher.id}/>
             <ShowReviews teacherId={teacher.id}/>
-	        <Footer/>
+            <Footer/>
         </>
     );
 }
