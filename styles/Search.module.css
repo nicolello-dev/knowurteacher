@@ -1,59 +1,59 @@
 .body {
-    background-color: #DEC9E9;
-    width: 100%;
-    height: 100%;
+  background-color: #dec9e9;
+  width: 100%;
+  height: 100%;
 }
 
 .navButtons {
-    display: flex;
-    align-items: center;
-    width: 40%;
-    margin: 0px auto;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  width: 40%;
+  margin: 0px auto;
+  justify-content: flex-end;
 }
 
 /* Bootstrap gives it 1rem */
 .navButtons p {
-    margin: 0px;
+  margin: 0px;
 }
 
 .form {
-    min-width: 300px;
-    max-width: 400px;
+  min-width: 300px;
+  max-width: 400px;
 }
 
 .form > * {
-    margin: 12px;
+  margin: 12px;
 }
 
 .button {
-    margin: 0px auto;
+  margin: 0px auto;
 }
 
 .pinkBG {
-    background-color: #DEC9E9;
+  background-color: #dec9e9;
 }
 
 .teachersWrapper {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .teachersWrapper > * {
-    padding: 20px;
+  padding: 20px;
 }
 
 .teachersWrapper > * {
-    background-color: #DEC9E9 !important;
+  background-color: #dec9e9 !important;
 }
 
 .pagination {
-    margin-right: 20px;
-    justify-content: flex-end;
+  margin-right: 20px;
+  justify-content: flex-end;
 }
 
 .card-img-top {
-    position: relative;
-    height: 200px;
+  position: relative;
+  height: 200px;
 }

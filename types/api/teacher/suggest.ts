@@ -1,4 +1,4 @@
 export type TeacherSuggestion = {
-    name: string,
-    school: string
-}
+  name: string;
+  school: string;
+};
