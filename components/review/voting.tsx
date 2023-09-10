@@ -124,7 +124,7 @@ export default function VotingComponent({
             <button
               key={i}
               className={`text-white p-2 rounded ${element.classNameExtras} ${session.status == "authenticated" ? "" : "opacity-40 cursor-not-allowed"}`}
-              onClick={() => session.data?.user?.email && element.onClick(review.id, refetchReviews)}
+              onClick={() => session.data?.user?.email ? element.onClick(review.id, refetchReviews) : toast.error("Please log in")}
               aria-label={element.ariaLabel}
             >
               {element.content}
