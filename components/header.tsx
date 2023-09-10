@@ -28,13 +28,12 @@ export default function Header() {
           <h1 className="text-xl hidden mr-2 sm:block dark:text-darktext">
             Knowurteacher
           </h1>
-          <div className="relative h-8 aspect-square">
-            <Image
-              src="https://cdn.knowurteacher.com/logo.svg"
-              alt="logo"
-              fill={true}
-            />
-          </div>
+          <Image
+            src="https://cdn.knowurteacher.com/favicon-32x32.png"
+            alt="logo"
+            width={32}
+            height={32}
+          />
         </Link>
         <div className="flex flex-row text-black items-center font-sans dark:text-darktext">
           {session ? (
