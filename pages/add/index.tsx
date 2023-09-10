@@ -49,13 +49,7 @@ export default function AddTeacher() {
         Add a teacher:
       </h1>
       <div
-        className="relative flex flex-col min-w-0 rounded break-words border bg-white border-1 border-gray-300 dark:bg-[#26092a] dark:border-primary"
-        style={{
-          alignItems: "center",
-          width: "min-content",
-          minWidth: "270px",
-          margin: "100px auto",
-        }}
+        className="relative flex flex-col rounded bg-white dark:bg-[#26092a] items-center w-min my-[100px] mx-auto min-w-[270px]"
       >
         <div className="flex-auto p-6">
           <Image
