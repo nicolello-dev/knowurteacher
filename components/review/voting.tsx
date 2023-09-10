@@ -67,7 +67,7 @@ export const reviewLayouts: Layout[] = [
     button: true,
     content: (
       <div className="flex flex-row items-center gap-2">
-        {svgs.attention(18, 18, "#FFF")} Report
+        {svgs.attention(18, 18, "#FFF")} <span className="hidden sm:inline">Report</span>
       </div>
     ),
   },
