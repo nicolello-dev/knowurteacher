@@ -1,5 +1,6 @@
 import { svgs } from "@/components/svgs";
 import { Review } from "@prisma/client";
+import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 
 function reportReview(id: string, refetch: () => any) {
@@ -104,6 +105,9 @@ export default function VotingComponent({
   refetchReviews: () => any;
   userId: string;
 }) {
+
+  const session = useSession();
+
   return (
     <div className="flex flex-row gap-x-2 items-center">
       {review.authorID == userId && (
@@ -119,8 +123,8 @@ export default function VotingComponent({
           return (
             <button
               key={i}
-              className={`text-white p-2 rounded ${element.classNameExtras}`}
-              onClick={() => element.onClick(review.id, refetchReviews)}
+              className={`text-white p-2 rounded ${element.classNameExtras} ${session.status == "authenticated" ? "" : "opacity-40 cursor-not-allowed"}`}
+              onClick={() => session.data?.user?.email && element.onClick(review.id, refetchReviews)}
               aria-label={element.ariaLabel}
             >
               {element.content}
