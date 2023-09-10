@@ -66,7 +66,7 @@ export default function NewReview({ teacherId }: { teacherId: string }) {
           id="newCommentTextArea"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          className="h-32 p-2 text-black border border-black dark:bg-darksecondary dark:border-primary dark:text-white"
+          className="h-32 p-2 rounded-xl text-black border border-black dark:bg-darksecondary dark:text-white"
         ></textarea>
         <button
           type="submit"

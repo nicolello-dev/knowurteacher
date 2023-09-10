@@ -95,8 +95,7 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
         >
           <div className="my-2 flex flex-row flex-wrap justify-between items-center">
             <p className="text-gray-700 dark:text-gray-400">
-              Commented <span>{getRelativeTime(review.createdAt)}</span>, last
-              updated <span>{getRelativeTime(review.updatedAt)}</span>
+              Commented <span>{getRelativeTime(review.createdAt)}</span>
             </p>
             <VotingComponent
               review={review}

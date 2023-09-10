@@ -11,7 +11,7 @@ export default function TeacherProfilePreview({
 }) {
   return (
     <div
-      className="relative mx-auto my-6 flex flex-col min-w-0 rounded break-words border bg-white border-1 border-gray-300 dark:bg-darksecondary dark:border-primary"
+      className="relative mx-auto my-6 flex flex-col min-w-0 rounded-xl break-words bg-white dark:bg-darksecondary"
       style={{ alignItems: "center", maxWidth: "300px", height: "max-content" }}
     >
       <div className="flex flex-col items-center flex-auto p-6">
