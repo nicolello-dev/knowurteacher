@@ -71,8 +71,8 @@ export default function SearchByName() {
           <p className="mx-auto text-center">Loading data, please wait...</p>
         ) : (
           <p className="mt-4">
-            There are <b>{count || "no"}</b> teachers whose name contains{" "}
-            <b>{searched}</b>
+            There are <b>{count || "no"}</b> teacher{count == 1 ? "s" : ""}{" "}
+            whose name contains <b>{searched}</b>
           </p>
         )}
       </section>
@@ -129,7 +129,7 @@ export default function SearchByName() {
             <input
               type="text"
               name="school"
-              className="w-full p-2 dark:text-black"
+              className="w-full p-2 dark:text-white dark:bg-darksecondary"
               placeholder="CalTech"
               aria-label="school"
               value={schoolInput}

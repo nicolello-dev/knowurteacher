@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import homeStyles from "@/styles/HomeStyles.module.css";
 import Link from "next/link";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
@@ -91,7 +90,7 @@ export default function Home() {
                 autoComplete="yes"
                 type="text"
                 name="name"
-                className="w-full p-2 mb-1 bg-white text-gray-800 border border-primary rounded rounded-r-none text-lg"
+                className="w-full p-2 mb-1 bg-white text-gray-800 border border-primary rounded rounded-r-none text-lg dark:bg-darksecondary dark:text-white"
                 placeholder="ex: John Doe"
                 onChange={(e: any) => setName(e.target.value)}
               />
@@ -104,7 +103,7 @@ export default function Home() {
               </button>
             </div>
             <div
-              className={`m-0 text-black absolute ${homeStyles.absoluteContainer}`}
+              className="m-0 text-black absolute cursor-pointer rounded-xl z-10"
             >
               <ul className="bg-white dark:bg-darktext m-0 p-0 list-none">
                 {recommendedTeachers.map((t, key) => (

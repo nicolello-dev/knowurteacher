@@ -48,9 +48,7 @@ export default function AddTeacher() {
       <h1 className="text-center m-6 mt-8 text-4xl dark:text-darktext">
         Add a teacher:
       </h1>
-      <div
-        className="relative flex flex-col rounded bg-white dark:bg-[#26092a] items-center w-min my-[100px] mx-auto min-w-[270px]"
-      >
+      <div className="relative flex flex-col rounded bg-white dark:bg-[#26092a] items-center w-min my-[100px] mx-auto min-w-[270px]">
         <div className="flex-auto p-6">
           <Image
             src={"https://cdn.knowurteacher.com/defaultpfp.png"}

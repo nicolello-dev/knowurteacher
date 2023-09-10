@@ -26,7 +26,6 @@ Before running the webapp locally, you should initiate a PostgreSQL database and
 npm i
 ```
 
-
 ##### Run locally
 
 To run the development server (locally), use
