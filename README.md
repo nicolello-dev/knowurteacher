@@ -2,7 +2,7 @@
 
 [https://knowurteacher.com](https://www.knowurteacher.com)
 
-A website where you can rate your teachers in regards to their teaching.
+A website where you can comment on your teachers and see what others think of them.
 
 ## For developers
 
@@ -20,7 +20,16 @@ This project makes use of various frameworks:
 
 Before running the webapp locally, you should initiate a PostgreSQL database and configure the .env as in the [.example.env](https://github.com/ilariiiiia/knowurteacher/blob/main/.example.env) file. You will also need to generate Google Client ID and Google Client Secret through Google Cloud for oAuth2.
 
-To run the development server (locally), run
+##### Install dependencies
+
+```bash
+npm i
+```
+
+
+##### Run locally
+
+To run the development server (locally), use
 
 ```bash
 npm run dev
@@ -28,19 +37,21 @@ npm run dev
 
 And open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-After you've ran the code on the development server, try building it with
+##### Production-like environment
+
+Run
 
 ```bash
 npm run build
 ```
 
-And, after it's done compiling, if it doesn't have any errors, run
+To build the application. Make sure to address any and all errors. Run
 
 ```bash
 npm run start
 ```
 
-And open [http://localhost:3000](http://localhost:3000) to test it in production mode.
+And open [http://localhost:3000](http://localhost:3000) to see it in production mode.
 
 ## Contributing
 
