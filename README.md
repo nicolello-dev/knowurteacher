@@ -2,7 +2,7 @@
 
 [https://knowurteacher.com](https://www.knowurteacher.com)
 
-A website where you can comment on your teachers and see what others think of them.
+A platform for students to exchange feedback on their teachers.
 
 ## For developers
 
