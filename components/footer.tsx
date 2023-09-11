@@ -28,7 +28,7 @@ export default function Footer() {
         },
         {
           name: "Source code",
-          link: "https://github.com/ilariiiiia/knowurteacher",
+          link: "https://github.com/nicolello-dev/knowurteacher",
         },
       ],
     },
