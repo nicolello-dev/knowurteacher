@@ -42,7 +42,6 @@ model Review {
   teacherID String
   text      String
   reports   Int      @default(0)
-  points    Int      @default(0)
   author    User     @relation(fields: [authorID], references: [id])
   teacher   Teacher  @relation(fields: [teacherID], references: [id])
   votes     Vote[]
@@ -51,8 +50,8 @@ model Review {
 }
 
 enum voteType {
-  upvote
-  downvote
+  up
+  down
 }
 
 model Vote {
@@ -64,4 +63,6 @@ model Vote {
   reviewId  String   @db.Uuid
   User      User     @relation(fields: [userId], references: [id])
   userId    String
+
+  @@unique([reviewId, userId])
 }

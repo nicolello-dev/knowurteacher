@@ -41,7 +41,9 @@ export default async function Handler(
       },
     },
     orderBy: {
-      points: "desc",
+      votes: {
+        _count: "desc"
+      }
     },
   });
 

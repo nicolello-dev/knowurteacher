@@ -11,16 +11,16 @@ function reportReview(id: string, refetch: () => any) {
 }
 
 function downVoteReview(id: string, refetch: () => any) {
-  fetch("/api/teacher/review/downvote", {
+  fetch("/api/teacher/review/vote/add", {
     method: "POST",
-    body: JSON.stringify({ id }),
+    body: JSON.stringify({ type: 'down', commentId: id }),
   }).finally(() => refetch());
 }
 
 function upVoteReview(id: string, refetch: () => any) {
-  fetch("/api/teacher/review/upvote", {
+  fetch("/api/teacher/review/vote/add", {
     method: "POST",
-    body: JSON.stringify({ id }),
+    body: JSON.stringify({ type: 'up', commentId: id }),
   }).finally(() => refetch());
 }
 
@@ -98,12 +98,14 @@ export const reviewLayouts: Layout[] = [
 
 export default function VotingComponent({
   review,
+  votes,
   refetchReviews,
   userId,
 }: {
-  review: Review;
-  refetchReviews: () => any;
-  userId: string;
+  review: Review,
+  votes: number,
+  refetchReviews: () => any,
+  userId: string
 }) {
 
   const session = useSession();
@@ -133,7 +135,7 @@ export default function VotingComponent({
         } else {
           return (
             <p key={i} className={element.classNameExtras}>
-              {review.points}
+              {votes}
             </p>
           );
         }

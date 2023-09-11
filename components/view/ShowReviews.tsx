@@ -38,12 +38,62 @@ function refetchReviews(
       });
 }
 
+function Review({ review, userId, refetchReviewsWithArguments }: { review: Review, userId: string, refetchReviewsWithArguments: () => void }) {
+
+  const [blur, setBlur] = useState<boolean>(true);
+  const [votes, setVotes] = useState<number>(0);
+
+  useEffect(() => {
+    fetch(`/api/teacher/review/vote/getVotes?reviewId=${review.id}`)
+    .then((r) => r.json()).then(r => setVotes(r.data));
+  }, [review.id]);
+
+  return <>
+  <article
+          className="mx-auto p-5 pt-1 m-5 bg-white container rounded-xl relative dark:bg-darksecondary"
+        >
+          <div className="my-2 flex flex-row flex-wrap justify-between items-center">
+            <p className="text-gray-700 dark:text-gray-400">
+              Commented <span>{getRelativeTime(review.createdAt)}</span>
+            </p>
+            <VotingComponent
+              review={review}
+              votes={votes}
+              refetchReviews={refetchReviewsWithArguments}
+              userId={userId}
+            />
+          </div>
+          <div className="relative">
+            <div className={`${review.reports > 0 && blur ? "blur" : ""}`}>
+              <p className="text-xl text-black dark:text-darktext">
+                {review.text}
+              </p>
+            </div>
+            {blur && review.reports > 0 && (
+              <div className="mx-auto w-full text-center">
+                <button
+                  className="bg-primary text-white p-3 m-2 rounded-3xl"
+                  onClick={() => setBlur(false)}
+                >
+                  Comment reported. Unblur?
+                </button>
+              </div>
+            )}
+          </div>
+          <p className="mt-8">
+            <span className="text-gray-700 dark:text-gray-400">
+              Reports: {review.reports}
+            </span>
+          </p>
+        </article>
+  </>
+}
+
 export default function ShowReviews({ teacherId }: { teacherId: string }) {
   const [userId, setUserId] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [success, setSuccess] = useState<boolean | null>(null);
   const [reviews, setReviews] = useState<Review[] | null>(null);
-  const [blur, setBlur] = useState<boolean>(true);
 
   const refetchReviewsWithArguments = () =>
     refetchReviews(teacherId, setIsLoading, setReviews, setSuccess);
@@ -89,43 +139,7 @@ export default function ShowReviews({ teacherId }: { teacherId: string }) {
   return (
     <>
       {reviews.map((review: Review, i: number) => (
-        <article
-          key={i}
-          className="mx-auto p-5 pt-1 m-5 bg-white container rounded-xl relative dark:bg-darksecondary"
-        >
-          <div className="my-2 flex flex-row flex-wrap justify-between items-center">
-            <p className="text-gray-700 dark:text-gray-400">
-              Commented <span>{getRelativeTime(review.createdAt)}</span>
-            </p>
-            <VotingComponent
-              review={review}
-              refetchReviews={refetchReviewsWithArguments}
-              userId={userId}
-            />
-          </div>
-          <div className="relative">
-            <div className={`${review.reports > 0 && blur ? "blur" : ""}`}>
-              <p className="text-xl text-black dark:text-darktext">
-                {review.text}
-              </p>
-            </div>
-            {blur && review.reports > 0 && (
-              <div className="mx-auto w-full text-center">
-                <button
-                  className="bg-primary text-white p-3 m-2 rounded-3xl"
-                  onClick={() => setBlur(false)}
-                >
-                  Comment reported. Unblur?
-                </button>
-              </div>
-            )}
-          </div>
-          <p className="mt-8">
-            <span className="text-gray-700 dark:text-gray-400">
-              Reports: {review.reports}
-            </span>
-          </p>
-        </article>
+        <Review key={i} review={review} userId={userId} refetchReviewsWithArguments={refetchReviewsWithArguments}/>
       ))}
     </>
   );
