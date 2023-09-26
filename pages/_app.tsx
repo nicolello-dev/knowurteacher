@@ -33,7 +33,7 @@ function MyApp({
           name="keywords"
           content="know ur teacher, know your teacher, teacher, exam, prepare, know, ur, school, tutoring"
         />
-        <meta name="author" content="Ilaria Migone" />
+        <meta name="author" content="Nicola Migone" />
         <meta charSet="UTF-8" />
         <title>Home | Know ur teacher</title>
         <link
