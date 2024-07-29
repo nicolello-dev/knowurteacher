@@ -35,7 +35,7 @@ export default function Header() {
             height={32}
           />
         </Link>
-        <div className="flex flex-row text-black items-center font-sans dark:text-darktext">
+        <div className="flex flex-row bg-black dark:bg-white text-white dark:text-black items-center font-sans p-2 rounded-xl">
           {session ? (
             <>
               <button
