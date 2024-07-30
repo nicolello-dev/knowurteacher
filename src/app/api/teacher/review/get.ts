@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import type { APIResponse } from "@/types/api";
 
-import prisma from "@/prisma/prisma";
+import prisma from @/../prisma/prisma";
 import type { Review } from "@prisma/client";
 
 interface APIRequest extends NextApiRequest {

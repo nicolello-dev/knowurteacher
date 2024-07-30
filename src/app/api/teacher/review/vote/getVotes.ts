@@ -1,4 +1,4 @@
-import prisma from "@/prisma/prisma";
+import prisma from @/../prisma/prisma";
 import { APIResponse } from "@/types/api";
 import { NextApiRequest, NextApiResponse } from "next";
 

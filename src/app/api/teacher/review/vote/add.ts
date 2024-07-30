@@ -1,5 +1,5 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import prisma from "@/prisma/prisma";
+import prisma from @/../prisma/prisma";
 import { APIResponse } from "@/types/api";
 import { voteType } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";

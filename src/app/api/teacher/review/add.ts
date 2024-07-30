@@ -2,8 +2,8 @@ import { APIResponse } from "@/types/api";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import prisma from "@/prisma/prisma";
+import { auth } from "@/auth";
+import prisma from "@/../prisma/prisma";
 
 interface Request extends NextApiRequest {
   body: string;
@@ -11,7 +11,7 @@ interface Request extends NextApiRequest {
 
 export default async function Handler(
   req: Request,
-  res: NextApiResponse<APIResponse>,
+  res: NextApiResponse<APIResponse>
 ) {
   if (req.method != "POST") {
     res.status(405).json({
@@ -21,7 +21,7 @@ export default async function Handler(
     });
   }
 
-  const session = await getServerSession(req, res, authOptions);
+  const session = await getServerSession(auth);
 
   if (!session) {
     res.status(401).json({
